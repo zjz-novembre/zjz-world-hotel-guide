@@ -1,0 +1,23 @@
+name: HotelGuide
+options:
+  bundleIdPrefix: world.zjz
+settings:
+  base:
+    DEVELOPMENT_TEAM: BAFB8AR23V
+    CODE_SIGN_STYLE: Automatic
+targets:
+  HotelGuide:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: HotelGuide
+      - path: WebAssets
+        type: folder
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: world.zjz.HotelGuide
+        INFOPLIST_FILE: HotelGuide/Info.plist
+        TARGETED_DEVICE_FAMILY: "1"
+        SUPPORTS_MACCATALYST: false

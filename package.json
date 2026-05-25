@@ -1,0 +1,30 @@
+{
+  "name": "hotel-guide",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "data:accor:links": "node scripts/fetch-accor-greater-china-links.mjs",
+    "data:accor": "node scripts/fetch-accor-china-data.mjs",
+    "data:hotel-rates": "node scripts/fetch-hotel-official-rate-window-snapshots.mjs",
+    "data:hotel-names": "node scripts/enrich-hotel-names.mjs",
+    "data:lhw-images": "node scripts/fetch-lhw-official-images.mjs",
+    "data:hotel-web": "node scripts/build-hotel-web-data.mjs",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "playwright": "^1.60.0"
+  }
+}

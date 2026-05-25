@@ -1,0 +1,2252 @@
+{
+  "metadata": {
+    "source": "all_accor_official_greater_china_destination_pages",
+    "source_urls": [
+      {
+        "key": "mainland_china",
+        "label": "Mainland China",
+        "url": "https://all.accor.com/a/en/destination/country/hotels-china-pcn.html"
+      },
+      {
+        "key": "hong_kong",
+        "label": "Hong Kong",
+        "url": "https://all.accor.com/a/en/destination/city/hotels-hong-kong-v7750.html"
+      },
+      {
+        "key": "macau",
+        "label": "Macau",
+        "url": "https://all.accor.com/a/en/destination/city/hotels-macau-v178205.html"
+      },
+      {
+        "key": "taiwan",
+        "label": "Taiwan",
+        "url": "https://all.accor.com/a/en/destination/region/hotels-taiwan-ptw.html"
+      }
+    ],
+    "fetchedAt": "2026-05-25T06:10:09.268Z",
+    "pageReports": [
+      {
+        "destinationKey": "mainland_china",
+        "destinationLabel": "Mainland China",
+        "source": "recovered_from_complete_detail_snapshot",
+        "count": 300,
+        "added": 300,
+        "total": 300,
+        "url": "https://all.accor.com/a/en/destination/country/hotels-china-pcn.html"
+      },
+      {
+        "destinationKey": "hong_kong",
+        "destinationLabel": "Hong Kong",
+        "status": 200,
+        "count": 6,
+        "added": 6,
+        "total": 306,
+        "title": "Accommodation Hong Kong: Book Hong Kong hotels with AccorHotels",
+        "url": "https://all.accor.com/a/en/destination/city/hotels-hong-kong-v7750.html"
+      },
+      {
+        "destinationKey": "macau",
+        "destinationLabel": "Macau",
+        "status": 200,
+        "count": 3,
+        "added": 3,
+        "total": 309,
+        "title": "Hotels in Macao - Book on all.accor.com",
+        "url": "https://all.accor.com/a/en/destination/city/hotels-macau-v178205.html"
+      },
+      {
+        "destinationKey": "taiwan",
+        "destinationLabel": "Taiwan",
+        "status": 403,
+        "count": 0,
+        "added": 0,
+        "total": 309,
+        "title": "",
+        "url": "https://all.accor.com/a/en/destination/region/hotels-taiwan-ptw.html"
+      },
+      {
+        "destinationKey": "hong_kong",
+        "destinationLabel": "Hong Kong",
+        "source": "official_hotel_page_extra",
+        "status": 200,
+        "count": 1,
+        "added": 1,
+        "total": 310,
+        "title": "The Silveri Hotel Hong Kong - MGallery Collection - ALL",
+        "url": "https://all.accor.com/hotel/A4A4/index.en.shtml"
+      }
+    ]
+  },
+  "hotels": [
+    {
+      "code": "2197",
+      "name_en_list": "Sofitel Zhengzhou International",
+      "propertySiteURL_en": "https://all.accor.com/hotel/2197/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "3562",
+      "name_en_list": "Novotel Century Hong Kong",
+      "propertySiteURL_en": "https://all.accor.com/hotel/3562/index.en.shtml",
+      "destinationKey": "hong_kong",
+      "destinationLabel": "Hong Kong"
+    },
+    {
+      "code": "3563",
+      "name_en_list": "ibis Hong Kong North Point",
+      "propertySiteURL_en": "https://all.accor.com/hotel/3563/index.en.shtml",
+      "destinationKey": "hong_kong",
+      "destinationLabel": "Hong Kong"
+    },
+    {
+      "code": "5444",
+      "name_en_list": "ibis Tianjing Teda",
+      "propertySiteURL_en": "https://all.accor.com/hotel/5444/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "5564",
+      "name_en_list": "ibis Chengdu Yongfeng",
+      "propertySiteURL_en": "https://all.accor.com/hotel/5564/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "5949",
+      "name_en_list": "Sofitel Xian on Renmin Square",
+      "propertySiteURL_en": "https://all.accor.com/hotel/5949/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "5974",
+      "name_en_list": "Grand Mercure Xian Renmin Square",
+      "propertySiteURL_en": "https://all.accor.com/hotel/5974/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "6156",
+      "name_en_list": "Sofitel Legend Peoples Grand Hotel Xian",
+      "propertySiteURL_en": "https://all.accor.com/hotel/6156/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "6194",
+      "name_en_list": "ibis Wuhan Hankou",
+      "propertySiteURL_en": "https://all.accor.com/hotel/6194/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "6239",
+      "name_en_list": "Novotel Hong Kong Citygate",
+      "propertySiteURL_en": "https://all.accor.com/hotel/6239/index.en.shtml",
+      "destinationKey": "hong_kong",
+      "destinationLabel": "Hong Kong"
+    },
+    {
+      "code": "6450",
+      "name_en_list": "ibis Chengdu Kehua",
+      "propertySiteURL_en": "https://all.accor.com/hotel/6450/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "6466",
+      "name_en_list": "ibis Ya'an Langqiao",
+      "propertySiteURL_en": "https://all.accor.com/hotel/6466/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "6480",
+      "name_en_list": "Sofitel Macau at Ponte 16",
+      "propertySiteURL_en": "https://all.accor.com/hotel/6480/index.en.shtml",
+      "destinationKey": "macau",
+      "destinationLabel": "Macau"
+    },
+    {
+      "code": "6684",
+      "name_en_list": "Grand Mercure Beijing Central",
+      "propertySiteURL_en": "https://all.accor.com/hotel/6684/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "7025",
+      "name_en_list": "Pullman Beijing South",
+      "propertySiteURL_en": "https://all.accor.com/hotel/7025/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "7103",
+      "name_en_list": "ibis Styles Wuhan Optics Valley Square Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/7103/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "7231",
+      "name_en_list": "Pullman Lijiang Resort & Spa",
+      "propertySiteURL_en": "https://all.accor.com/hotel/7231/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "7468",
+      "name_en_list": "Pullman Linyi Lushang",
+      "propertySiteURL_en": "https://all.accor.com/hotel/7468/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "7565",
+      "name_en_list": "Mercure Beijing Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/7565/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "7606",
+      "name_en_list": "ibis Hong Kong Central & Sheung Wan",
+      "propertySiteURL_en": "https://all.accor.com/hotel/7606/index.en.shtml",
+      "destinationKey": "hong_kong",
+      "destinationLabel": "Hong Kong"
+    },
+    {
+      "code": "7934",
+      "name_en_list": "Pullman Zhangjiajie",
+      "propertySiteURL_en": "https://all.accor.com/hotel/7934/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8009",
+      "name_en_list": "ibis Beijing Dongdaqiao",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8009/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8032",
+      "name_en_list": "Novotel Guiyang Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8032/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8120",
+      "name_en_list": "Grand Mercure Jinan Sunshine",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8120/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8258",
+      "name_en_list": "Novotel Zhengzhou Convention Centre",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8258/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8275",
+      "name_en_list": "Pullman Guiyang",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8275/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8309",
+      "name_en_list": "Pullman Yueyang",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8309/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8475",
+      "name_en_list": "Pullman Taiyuan",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8475/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8509",
+      "name_en_list": "Pullman Kaifeng Jianye",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8509/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8529",
+      "name_en_list": "Sofitel Kunming",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8529/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8605",
+      "name_en_list": "ibis Beijing Dacheng Road",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8605/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8627",
+      "name_en_list": "Pullman Dali",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8627/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8860",
+      "name_en_list": "ibis Lanzhou Zhangye Road",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8860/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8873",
+      "name_en_list": "Sofitel Guiyang Hunter",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8873/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "8965",
+      "name_en_list": "ibis Bengbu Donghai Ave",
+      "propertySiteURL_en": "https://all.accor.com/hotel/8965/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "9043",
+      "name_en_list": "ibis Anyang Jiefang Ave",
+      "propertySiteURL_en": "https://all.accor.com/hotel/9043/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "9044",
+      "name_en_list": "ibis Leshan City Center",
+      "propertySiteURL_en": "https://all.accor.com/hotel/9044/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "9206",
+      "name_en_list": "ibis Xinzhou Qiyi Road",
+      "propertySiteURL_en": "https://all.accor.com/hotel/9206/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "9502",
+      "name_en_list": "ibis Tianjin Wuqing",
+      "propertySiteURL_en": "https://all.accor.com/hotel/9502/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "9567",
+      "name_en_list": "Sofitel Xining",
+      "propertySiteURL_en": "https://all.accor.com/hotel/9567/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "9683",
+      "name_en_list": "ibis Bengbu Huaihe Rd Railway Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/9683/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "9725",
+      "name_en_list": "Ibis Beijing Chaoyang Joy City Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/9725/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "9804",
+      "name_en_list": "THE SEBEL XI NING – Managed by Sofitel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/9804/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "9872",
+      "name_en_list": "Novotel Hefei Sunac",
+      "propertySiteURL_en": "https://all.accor.com/hotel/9872/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A0L0",
+      "name_en_list": "Novotel Zhengzhou Airport",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A0L0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A150",
+      "name_en_list": "Novotel Changsha International Exhibition Center",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A150/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A160",
+      "name_en_list": "ibis Styles Changsha International Exhibition Center",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A160/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A313",
+      "name_en_list": "ibis Dazhou Xuanhan Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A313/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A379",
+      "name_en_list": "ibis Chengdu Zoo Subway Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A379/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A381",
+      "name_en_list": "ibis Chengdu Dujiangyan Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A381/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A473",
+      "name_en_list": "Mercure Xian Hi Tech Zone",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A473/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A4A4",
+      "name_en_list": "The Silveri Hotel Hong Kong - MGallery Collection",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A4A4/index.en.shtml",
+      "destinationKey": "hong_kong",
+      "destinationLabel": "Hong Kong"
+    },
+    {
+      "code": "A5A1",
+      "name_en_list": "Swissôtel Beijing Hong Kong Macau Center",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A5A1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A5F9",
+      "name_en_list": "Fairmont Beijing",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A5F9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A5G6",
+      "name_en_list": "Mercure Hefei Sunac",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A5G6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A5H3",
+      "name_en_list": "ibis Xi'an High-Tech Zone",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A5H3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A5U5",
+      "name_en_list": "ibis Xuzhou East Huaihai",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A5U5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A7Z9",
+      "name_en_list": "Fairmont Wuhan",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A7Z9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A820",
+      "name_en_list": "Fairmont Chengdu",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A820/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A8F0",
+      "name_en_list": "ibis Styles Beijing Capital Airport Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A8F0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A8N9",
+      "name_en_list": "ibis Chengdu American Center Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A8N9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "A9P1",
+      "name_en_list": "Mercure Tianjin Wuqing",
+      "propertySiteURL_en": "https://all.accor.com/hotel/A9P1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B0E5",
+      "name_en_list": "ibis Styles Kunming Nanping Waliking Street",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B0E5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B0Y9",
+      "name_en_list": "Mercure Chengdu Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B0Y9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B0Z7",
+      "name_en_list": "ibis Huaibei Nanli Road Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B0Z7/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B0Z9",
+      "name_en_list": "ibis Lanzhou Peili Square Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B0Z9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B103",
+      "name_en_list": "ibis Xi'an North Railway Station Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B103/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B106",
+      "name_en_list": "ibis Chengdu SM Square Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B106/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B107",
+      "name_en_list": "ibis Chengdu Temple of Marquis",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B107/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B108",
+      "name_en_list": "Ibis Guangyuan City Square Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B108/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B170",
+      "name_en_list": "ibis Kunming Beijing Rd",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B170/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B171",
+      "name_en_list": "ibis Beijing Changying Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B171/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B1E3",
+      "name_en_list": "ibis Xi'an South Gate Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B1E3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B1E6",
+      "name_en_list": "ibis Yichang Bayi Rd",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B1E6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B1L0",
+      "name_en_list": "Novotel Xian Xixian",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B1L0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B1Q8",
+      "name_en_list": "ibis Xi'an Qinglong Temple Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B1Q8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B1R1",
+      "name_en_list": "Novotel Guiyang Panjiang",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B1R1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B1U0",
+      "name_en_list": "Banyan Tree Macau",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B1U0/index.en.shtml",
+      "destinationKey": "macau",
+      "destinationLabel": "Macau"
+    },
+    {
+      "code": "B1U5",
+      "name_en_list": "Banyan Tree Tianjin Riverside",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B1U5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B1V0",
+      "name_en_list": "Banyan Tree Ringha",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B1V0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B1V6",
+      "name_en_list": "Banyan Tree Lijiang",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B1V6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B1V8",
+      "name_en_list": "Banyan Tree Jiuzhaigou",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B1V8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B1X5",
+      "name_en_list": "Angsana Xi'an Lintong",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B1X5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B1Y3",
+      "name_en_list": "Mercure Chengdu Chunxi Taikoo Li",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B1Y3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B253",
+      "name_en_list": "ibis Beijing Sanlitun Tuanjie Lake Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B253/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B255",
+      "name_en_list": "ibis Chengdu Chunxi Road Shudu Mansion Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B255/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B2H5",
+      "name_en_list": "Ibis Pingliang Kongtong West road Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B2H5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B2J1",
+      "name_en_list": "ibis Weinan Normal University Chaoyang Street Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B2J1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B2N3",
+      "name_en_list": "ibis xi'an North Second Ring Weiyang Rd Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B2N3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B2T5",
+      "name_en_list": "Ocean Spring Resort Chengdu - MGallery Collection",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B2T5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B2X4",
+      "name_en_list": "Mercure Taiyuan Changfeng Street",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B2X4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B2X9",
+      "name_en_list": "ibis Lanzhou Dongfanghong Plaza Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B2X9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B2Y0",
+      "name_en_list": "ibis Zhengzhou Longhai Road",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B2Y0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B2Y6",
+      "name_en_list": "Ibis Lanzhou Customs House Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B2Y6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B2Y7",
+      "name_en_list": "ibis Xi'an Lintong Huaqing Hot Spring Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B2Y7/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B311",
+      "name_en_list": "Grand Mercure Shiyan Dajia",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B311/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B314",
+      "name_en_list": "Ibis Baoji Hi-Tech Zone Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B314/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B320",
+      "name_en_list": "Grand Mercure Wuhan Qiaokou",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B320/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B325",
+      "name_en_list": "Mercure Yinchuan Xinhua",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B325/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B330",
+      "name_en_list": "Mercure Chongqing Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B330/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B338",
+      "name_en_list": "Mercure Chengdu Huapaifang",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B338/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B341",
+      "name_en_list": "Ibis Taiyuan Qinxian Street Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B341/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B371",
+      "name_en_list": "Mercure Taiyuan Jinyang",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B371/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B375",
+      "name_en_list": "ibis Chengdu East Railway Station Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B375/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B378",
+      "name_en_list": "Ibis Shangqiu Railway Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B378/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B3B9",
+      "name_en_list": "Mercure Lanzhou Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B3B9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B3C8",
+      "name_en_list": "Ibis Xi an Shanxi Province People Hospital Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B3C8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B3F2",
+      "name_en_list": "Ibis Dazhou Dazhu Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B3F2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B3W1",
+      "name_en_list": "Mercure Wuhan Optics Valley",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B3W1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B3W2",
+      "name_en_list": "Mercure Jinan Pingyin",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B3W2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B493",
+      "name_en_list": "Mercure Xian Qujiang",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B493/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B496",
+      "name_en_list": "IBIS LANZHOU NEW AREAPCR",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B496/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B4A0",
+      "name_en_list": "ibis Wuhan Hubu Alley Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B4A0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B4A2",
+      "name_en_list": "Mercure Ordos Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B4A2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B4B4",
+      "name_en_list": "Ibis Zhangjiakou Zhangbei County Coach Station Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B4B4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B4D5",
+      "name_en_list": "Mercure Xi'an Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B4D5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B4D9",
+      "name_en_list": "Mercure Kaifeng North",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B4D9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B4E3",
+      "name_en_list": "Mercure Anshun Railway Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B4E3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B4E9",
+      "name_en_list": "IBIS Tianjin Ancient Cultural Street Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B4E9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B4L0",
+      "name_en_list": "Mövenpick Enshi",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B4L0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B4R9",
+      "name_en_list": "Mercure Hohhot Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B4R9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B4S3",
+      "name_en_list": "Ibis Chengdu Hi-Tech Zone Longhu Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B4S3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B4Z5",
+      "name_en_list": "Mercure Beijing Chang An West",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B4Z5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B4Z7",
+      "name_en_list": "Mercure Beijing Zhongguancun",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B4Z7/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B4Z8",
+      "name_en_list": "Mercure Xian Dayan Pagoda",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B4Z8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B512",
+      "name_en_list": "Ibis Tianjin Railway Station North Square Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B512/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B514",
+      "name_en_list": "Ibis Lanzhou West Railway Station Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B514/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B516",
+      "name_en_list": "Ibis Jiayuguan Railway Station Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B516/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B517",
+      "name_en_list": "Ibis Xian Xingqing Palace Park Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B517/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B518",
+      "name_en_list": "Ibis Xi?an Bell and Drum Tower Square Muslim Quarter Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B518/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B569",
+      "name_en_list": "Ibis Styles Xi 'an Daxing New District G park Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B569/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B571",
+      "name_en_list": "Ibis Beijing Changping Metro Station Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B571/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B575",
+      "name_en_list": "Mercure Chengdu Xindu",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B575/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B577",
+      "name_en_list": "Ibis Lanzhou Xigu Yumen Street Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B577/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B583",
+      "name_en_list": "Ibis Chongqing Jiefangbei Pedestrian Street Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B583/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5G6",
+      "name_en_list": "Ibis Kunming Yunda West Rosd",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5G6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5G8",
+      "name_en_list": "Ibis Styles Xuzhou Jiawang Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5G8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5H8",
+      "name_en_list": "Ibis Xi an Jianzhang Road Fengdong New Area Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5H8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5L5",
+      "name_en_list": "AKI Hotel Hong Kong - MGallery Collection",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5L5/index.en.shtml",
+      "destinationKey": "hong_kong",
+      "destinationLabel": "Hong Kong"
+    },
+    {
+      "code": "B5M1",
+      "name_en_list": "Mercure Wuhan Yangluo",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5M1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5M2",
+      "name_en_list": "Mercure Tianjin Tanggu",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5M2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5P7",
+      "name_en_list": "Ibis Chengdu Broad and Narrow Alley West Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5P7/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5R3",
+      "name_en_list": "Mercure Taiyuan E Tech",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5R3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5R5",
+      "name_en_list": "Mercure Xi an North",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5R5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5R6",
+      "name_en_list": "Mercure Shijiazhuang Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5R6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5S0",
+      "name_en_list": "Ibis Lanzhou Railway Bureau Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5S0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5S2",
+      "name_en_list": "Ibis Taiyuan SX Hospital Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5S2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5T1",
+      "name_en_list": "Ibis Chengdu Hi-tech Tianfu",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5T1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5T6",
+      "name_en_list": "Ibis Datong Nanhuan Road Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5T6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5X2",
+      "name_en_list": "Novotel Huashan",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5X2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5Y5",
+      "name_en_list": "ibis Styles Lanzhou Wulipu",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5Y5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5Y6",
+      "name_en_list": "Mercure Yan'an Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5Y6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5Y9",
+      "name_en_list": "Mercure Jinan West Railway Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5Y9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5Z0",
+      "name_en_list": "Mercure Xian City Centre",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5Z0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B5Z2",
+      "name_en_list": "Ibis Tianjin Jinwan Plaza Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B5Z2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B622",
+      "name_en_list": "IBIS Kangding Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B622/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B628",
+      "name_en_list": "Sofitel Beijing Central",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B628/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B644",
+      "name_en_list": "Ibis Lanzhou East Market Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B644/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B645",
+      "name_en_list": "Ibis Lanzhou Square west entrance Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B645/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B654",
+      "name_en_list": "DongFengYun Hotel Mi'Le - MGallery Collection",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B654/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B697",
+      "name_en_list": "Novotel Tianjin Meijiang",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B697/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B698",
+      "name_en_list": "Mercure Xining Haihu CBD",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B698/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6B3",
+      "name_en_list": "Mercure Shijiazhuang People Square",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6B3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6B4",
+      "name_en_list": "Mercure Taiyuan Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6B4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6B9",
+      "name_en_list": "Ibis Xi'an Bell Tower East Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6B9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6C4",
+      "name_en_list": "IBIS Beijing Guloudajie Metro Station Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6C4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6C6",
+      "name_en_list": "Ibis Taiyuan South Railway Station Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6C6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6C9",
+      "name_en_list": "Ibis Styles Mianyang Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6C9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6D3",
+      "name_en_list": "Mercure Xi'an High-tech Zone Center",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6D3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6D4",
+      "name_en_list": "Ibis Styles Kaifeng Millennium City Park Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6D4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6D6",
+      "name_en_list": "ibis Nanyang Xixia County Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6D6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6D8",
+      "name_en_list": "Ibis Styles Xi'ning Railway Sta",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6D8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6E5",
+      "name_en_list": "Ibis Jiuquan East Bus Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6E5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6E8",
+      "name_en_list": "Ibis Ankang Hanbin Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6E8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6K3",
+      "name_en_list": "Ibis Zhengzhou Dongming Rd Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6K3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6K7",
+      "name_en_list": "Novotel Xian The Bell Tower",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6K7/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6K8",
+      "name_en_list": "Ibis Yongcheng Jinboda Plaza Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6K8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6Q9",
+      "name_en_list": "Mercure Hefei Huaihe Road",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6Q9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6R1",
+      "name_en_list": "Mercure Xi'an The Bell Tower",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6R1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6R2",
+      "name_en_list": "Mercure Hefei City Hall Square",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6R2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6R4",
+      "name_en_list": "Novotel Tianjin Drum Tower",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6R4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6U2",
+      "name_en_list": "Mercure Tianjin Eco Oriental",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6U2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6U7",
+      "name_en_list": "Ibis Styles Kunming Hi-tech Zone Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6U7/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6U8",
+      "name_en_list": "Novotel Shanxi Yuncheng",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6U8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6V1",
+      "name_en_list": "Mercure Anyang Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6V1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B6V2",
+      "name_en_list": "Mercure Xinyang East Railway Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B6V2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B705",
+      "name_en_list": "Mercure Chengdu Jinniu Wanda Plaza",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B705/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B708",
+      "name_en_list": "Ibis Longnan Railway Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B708/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B765",
+      "name_en_list": "Ibis Xianyang Normal University Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B765/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B7D4",
+      "name_en_list": "Mercure Chengdu Jiuyanqiao",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B7D4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B7D6",
+      "name_en_list": "Mercure Lanzhou Zhengning Road",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B7D6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B7J3",
+      "name_en_list": "Mondrian Hong Kong",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B7J3/index.en.shtml",
+      "destinationKey": "hong_kong",
+      "destinationLabel": "Hong Kong"
+    },
+    {
+      "code": "B7L0",
+      "name_en_list": "ibis Chongqing Jiangbei Airport Shuanglong Avenue Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B7L0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B7S4",
+      "name_en_list": "Mercure Lanzhou Dongfanghong",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B7S4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B7T3",
+      "name_en_list": "Ibis Jinan East Wenhua Rd Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B7T3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B7Z7",
+      "name_en_list": "Ibis Taiyuan Economic Zone",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B7Z7/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B824",
+      "name_en_list": "Raffles at Galaxy Macau",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B824/index.en.shtml",
+      "destinationKey": "macau",
+      "destinationLabel": "Macau"
+    },
+    {
+      "code": "B828",
+      "name_en_list": "Mercure Xichang Qionghai Wetland",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B828/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B847",
+      "name_en_list": "Ibis Zhoukou Daqing Road",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B847/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B8N3",
+      "name_en_list": "Mercure Shijiazhuang East Yuhua Road",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B8N3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B8T3",
+      "name_en_list": "Mercure Tianshui Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B8T3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B8T8",
+      "name_en_list": "Ibis Chengdu China Lane Central",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B8T8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B8U6",
+      "name_en_list": "Novotel Xi'an Aden",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B8U6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B8X4",
+      "name_en_list": "Grand Mercure Yichang Waitan",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B8X4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B8X6",
+      "name_en_list": "Mercure Chengdu Kuanzhai Alley West",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B8X6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B8X7",
+      "name_en_list": "Mercure Chengdu Shuangliu",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B8X7/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B8Y3",
+      "name_en_list": "Sofitel Xiong An",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B8Y3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B900",
+      "name_en_list": "Mercure Beijing Anzhen Olympic Center",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B900/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B926",
+      "name_en_list": "Ibis Changzhi Wanda Plaza",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B926/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B9A6",
+      "name_en_list": "Novotel Kunming City Center",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B9A6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B9B2",
+      "name_en_list": "Mercure Taiyuan Yingze",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B9B2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B9P0",
+      "name_en_list": "Mercure Xi'an History Museum",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B9P0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B9P5",
+      "name_en_list": "Mercure Chengdu Longtan",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B9P5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B9Q2",
+      "name_en_list": "Mercure KunMing Airport",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B9Q2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B9Q8",
+      "name_en_list": "Garrya Xi'an Lintong",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B9Q8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B9T5",
+      "name_en_list": "Swissôtel Hefei Grand Park",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B9T5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "B9W2",
+      "name_en_list": "Mercure Beijing City Center",
+      "propertySiteURL_en": "https://all.accor.com/hotel/B9W2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C006",
+      "name_en_list": "Pullman Yuxi",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C006/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C010",
+      "name_en_list": "Mercure Beijing Tongzhou Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C010/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C011",
+      "name_en_list": "Mercure Chongqing Jiefangbei Hongya Cave",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C011/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C017",
+      "name_en_list": "Novotel Jinan North Down Town",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C017/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C020",
+      "name_en_list": "Mercure Huhhot Economic Zone",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C020/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C023",
+      "name_en_list": "Ibis Styles CS Railway Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C023/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C050",
+      "name_en_list": "Mercure Hefei South Railway Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C050/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C053",
+      "name_en_list": "Mercure Xian Gaoxin Dazhai Road",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C053/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C060",
+      "name_en_list": "Mercure Chengdu Wuhou Temple",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C060/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C070",
+      "name_en_list": "Novotel Linfen Mount Yun",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C070/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0B5",
+      "name_en_list": "Novotel Living Chengdu Tianfu",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0B5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0B6",
+      "name_en_list": "Grand Mercure Chengdu East",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0B6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0C5",
+      "name_en_list": "Mercure Taiyuan City Centre",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0C5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0C6",
+      "name_en_list": "Mercure Chengdu Shuangliu International Airport",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0C6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0E4",
+      "name_en_list": "Mercure Xi'an International Airport",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0E4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0G4",
+      "name_en_list": "Mercure Lanzhou West",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0G4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0J1",
+      "name_en_list": "Novotel Zibo New Hongcheng",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0J1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0J3",
+      "name_en_list": "Mercure Linfen West Railway Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0J3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0K1",
+      "name_en_list": "Ibis Jincheng Pedestrian Street",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0K1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0K3",
+      "name_en_list": "Ibis Xianyang Qidi Science Park",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0K3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0K6",
+      "name_en_list": "Ibis Beijing Beiqijia Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0K6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0K8",
+      "name_en_list": "Ibis KM South Railway Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0K8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0L0",
+      "name_en_list": "Ibis Deyang Wuzhou Plaza Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0L0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0L2",
+      "name_en_list": "Ibis Lijiang Qixing Street Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0L2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0M2",
+      "name_en_list": "Mercure Xi'an Stadium Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0M2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0M4",
+      "name_en_list": "Novotel Kunming Yunjin",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0M4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0Q1",
+      "name_en_list": "Angsana Chengdu Wenjiang",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0Q1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0Q2",
+      "name_en_list": "Dhawa Jinan Daming Lake",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0Q2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0R7",
+      "name_en_list": "MERCURE JINAN HANYU FINANCIAL BUSINESS CENTRE",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0R7/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0X1",
+      "name_en_list": "Ibis Xi'an Baqiao Hongqing",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0X1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0X5",
+      "name_en_list": "Ibis Xi'an Huimin Street Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0X5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0Y3",
+      "name_en_list": "Mercure Beijing Qianmen",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0Y3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C0Z9",
+      "name_en_list": "Dhawa Xi'an Chanba",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C0Z9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C106",
+      "name_en_list": "Mercure Xi'an Chanba",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C106/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C107",
+      "name_en_list": "Mercure Beijing Universal Resort",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C107/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C1C3",
+      "name_en_list": "Mercure Chengdu Chenghua",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C1C3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C1J9",
+      "name_en_list": "Ibis Styles Taiyuan Liuxiang",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C1J9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C1M9",
+      "name_en_list": "Ibis Styles Yinchuan Ningda",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C1M9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C1S1",
+      "name_en_list": "Mercure Xi'an Daming Palace",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C1S1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C1S9",
+      "name_en_list": "Ibis Beijing Tiananmen Square Hotel",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C1S9/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C1W6",
+      "name_en_list": "Pullman Renhuai Chuangmeng",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C1W6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C1X5",
+      "name_en_list": "Mercure Chengdu West Expo City",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C1X5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C206",
+      "name_en_list": "Mercure Golmud Sports Center",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C206/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C221",
+      "name_en_list": "Novotel Living Yunnan Dianchi Times",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C221/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C228",
+      "name_en_list": "Mercure Beijing Future Science City",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C228/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C244",
+      "name_en_list": "Mercure Lanzhou University Tianshui",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C244/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C245",
+      "name_en_list": "Mercure Beijing Advanced Business Park",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C245/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C261",
+      "name_en_list": "Mercure Datong Railway Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C261/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C262",
+      "name_en_list": "Mercure Taiyuan Shanxi Museum",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C262/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C272",
+      "name_en_list": "Novotel Yinchuan Lanxigu",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C272/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C294",
+      "name_en_list": "Mercure Jinandong Railway Station",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C294/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C297",
+      "name_en_list": "Novotel Yangquan High-Tech Zone",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C297/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C2A6",
+      "name_en_list": "Chengdu Expo Waterfall Hotel - MGallery Collection",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C2A6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C2C1",
+      "name_en_list": "JO&JOE Chengdu Dujiangyan",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C2C1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C2D2",
+      "name_en_list": "Mercure Luoyang Downtown",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C2D2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C2G5",
+      "name_en_list": "Pullman Chongqing Xiyue",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C2G5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C2I5",
+      "name_en_list": "Mercure Chengdu Chunxi Road Tianfu Square",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C2I5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C2I8",
+      "name_en_list": "Novotel Xi'an Xinxing",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C2I8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C2J6",
+      "name_en_list": "Novotel Chengdu Lige",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C2J6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C2L0",
+      "name_en_list": "Grand Mercure Wuhan Hanyang",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C2L0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C2R5",
+      "name_en_list": "Mercure Xinyang City Center",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C2R5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C2R7",
+      "name_en_list": "Mercure Chongqing Times Paradise Walk",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C2R7/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C2U1",
+      "name_en_list": "Mövenpick by Accor Kuanzhai Alley Chengdu",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C2U1/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C2X0",
+      "name_en_list": "Swissôtel Xi'an Xinxing Hot Spring",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C2X0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C2Z8",
+      "name_en_list": "Grand Mercure Kunming South",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C2Z8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C309",
+      "name_en_list": "Mercure Beijing The Grand Canal CBD",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C309/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C330",
+      "name_en_list": "Mercure Tai'an Centre",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C330/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C373",
+      "name_en_list": "Mövenpick by Accor Neijiang",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C373/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C385",
+      "name_en_list": "Mercure Jinan Beiyuan Street",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C385/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C386",
+      "name_en_list": "Mercure Xi'an New Software City",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C386/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C390",
+      "name_en_list": "Mercure Beijing Baiziwan CBD",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C390/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C3A2",
+      "name_en_list": "Financial City Hotel Chengdu-MGallery Collection (Opening Soon)",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C3A2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C3D0",
+      "name_en_list": "Novotel Yinchuan Huirong",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C3D0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C3D3",
+      "name_en_list": "Mercure Chengdu Tianfu Square",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C3D3/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C3D4",
+      "name_en_list": "Mercure Zhangjiajie Tianmen Mountain",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C3D4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C3N8",
+      "name_en_list": "Mövenpick By Accor Guizhou Tianyan",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C3N8/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C3T0",
+      "name_en_list": "Mercure Lijiang Old Town",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C3T0/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C3T5",
+      "name_en_list": "Novotel Luoyang Hongden",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C3T5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C3Y4",
+      "name_en_list": "Mercure Guiyang Exhibition Center",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C3Y4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C420",
+      "name_en_list": "Novotel Jinan Airport",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C420/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C447",
+      "name_en_list": "Mercure Kunming Wujiaba",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C447/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C4A2",
+      "name_en_list": "Mercure Pingyao Ancient City",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C4A2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C4F6",
+      "name_en_list": "Mövenpick by Accor Kaifeng West Lake",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C4F6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C4N4",
+      "name_en_list": "Mercure Dali Ancient City",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C4N4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C4W4",
+      "name_en_list": "Novotel Jiuzhaigou",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C4W4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C4X6",
+      "name_en_list": "Novotel HanDan Congtai",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C4X6/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C502",
+      "name_en_list": "Mercure Chengdu Global Center",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C502/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C508",
+      "name_en_list": "Mercure Beijing Dongzhimen",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C508/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C577",
+      "name_en_list": "Mercure Beijing Lize Road",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C577/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C5B2",
+      "name_en_list": "Novotel Wuhan Optics Valley",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C5B2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C5B5",
+      "name_en_list": "Novotel ChengDu Chunxi Road",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C5B5/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C6G4",
+      "name_en_list": "Novotel Xuzhou Tongshan",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C6G4/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    },
+    {
+      "code": "C6H2",
+      "name_en_list": "BANYAN TREE MOUNT EMEI",
+      "propertySiteURL_en": "https://all.accor.com/hotel/C6H2/index.en.shtml",
+      "destinationKey": "mainland_china",
+      "destinationLabel": "Mainland China"
+    }
+  ]
+}
