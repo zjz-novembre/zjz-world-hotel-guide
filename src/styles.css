@@ -719,12 +719,33 @@
 
 @media (max-width: 760px), (max-width: 960px) and (max-height: 520px) {
   .app-shell[data-guide="hotel"] .hotel-filters {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.42rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .filter-slot--chain,
   .filter-slot--brand {
     grid-column: auto;
+  }
+
+  .hotel-filters .filter-control__button {
+    min-height: 3.25rem;
+    padding-left: 0.54rem;
+    padding-right: 0.54rem;
+  }
+
+  .hotel-filters .filter-control__icon,
+  .hotel-filters .filter-control__image {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .hotel-filters .filter-control__label {
+    font-size: 0.68rem;
+  }
+
+  .hotel-filters .filter-control__value {
+    font-size: 0.78rem;
   }
 
   .hotel-list__head {

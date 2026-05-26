@@ -18,8 +18,7 @@ struct NativeHotelPreview: View {
         GeometryReader { proxy in
             ZStack {
                 Rectangle()
-                    .fill(.regularMaterial)
-                    .opacity(appeared ? 0.84 : 0)
+                    .fill(.black.opacity(appeared ? 0.08 : 0))
                     .ignoresSafeArea()
                     .onTapGesture {
                         dismiss()
@@ -147,7 +146,6 @@ struct NativeHotelPreview: View {
         }
         .frame(width: maxWidth)
         .hotelGlass(cornerRadius: 30, interactive: true)
-        .shadow(color: .black.opacity(0.15), radius: 24, y: 18)
     }
 
     private var actionStrip: some View {
@@ -462,10 +460,8 @@ private extension View {
     @ViewBuilder
     func hotelGlass(cornerRadius: CGFloat, interactive: Bool) -> some View {
         if #available(iOS 26.0, *) {
-            glassEffect(
-                interactive ? Glass.regular.tint(.white.opacity(0.06)).interactive() : Glass.regular.tint(.white.opacity(0.06)),
-                in: .rect(cornerRadius: cornerRadius)
-            )
+            let glass = interactive ? Glass.clear.interactive() : Glass.clear
+            glassEffect(glass, in: .rect(cornerRadius: cornerRadius))
         } else {
             background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
         }
@@ -474,7 +470,7 @@ private extension View {
     @ViewBuilder
     func hotelGlassButtonStyle() -> some View {
         if #available(iOS 26.0, *) {
-            buttonStyle(.glass)
+            buttonStyle(.glass(.clear))
         } else {
             buttonStyle(.borderless)
         }
