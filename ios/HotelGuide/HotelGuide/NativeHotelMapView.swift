@@ -1,4 +1,3 @@
-#if !targetEnvironment(simulator)
 import CoreLocation
 import MAMapKit
 import SwiftUI
@@ -37,26 +36,27 @@ struct NativeHotelMapView: UIViewRepresentable {
 
     private func configureCustomStyle(on mapView: MAMapView) {
         let options = MAMapCustomStyleOptions()
-        if let styleURL = Bundle.main.url(
-            forResource: "style",
-            withExtension: "data",
-            subdirectory: "MapStyle"
-        ),
-           let styleData = try? Data(contentsOf: styleURL) {
+        if let styleData = bundledMapStyleData(named: "style") {
             options.styleData = styleData
         }
 
-        if let extraURL = Bundle.main.url(
-            forResource: "style_extra",
-            withExtension: "data",
-            subdirectory: "MapStyle"
-        ),
-           let extraData = try? Data(contentsOf: extraURL) {
+        if let extraData = bundledMapStyleData(named: "style_extra") {
             options.styleExtraData = extraData
         }
 
         mapView.setCustomMapStyleOptions(options)
         mapView.customMapStyleEnabled = true
+    }
+
+    private func bundledMapStyleData(named resourceName: String) -> Data? {
+        let urls = [
+            Bundle.main.url(forResource: resourceName, withExtension: "data", subdirectory: "MapStyle"),
+            Bundle.main.url(forResource: resourceName, withExtension: "data"),
+        ]
+
+        return urls.compactMap { url in
+            url.flatMap { try? Data(contentsOf: $0) }
+        }.first
     }
 
     final class Coordinator: NSObject, MAMapViewDelegate {
@@ -519,4 +519,3 @@ private final class NativeHotelLogoCache {
         return image
     }
 }
-#endif

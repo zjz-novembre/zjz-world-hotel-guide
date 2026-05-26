@@ -341,7 +341,7 @@ private struct HotelPreviewDivider: View {
     }
 }
 
-private struct HotelPreviewImage: View {
+struct HotelPreviewImage: View {
     let source: String?
     let fallbackText: String
 
@@ -381,7 +381,7 @@ private struct HotelPreviewImage: View {
     }
 }
 
-private enum HotelPreviewImageLoader {
+enum HotelPreviewImageLoader {
     private static let cache = NSCache<NSString, UIImage>()
 
     static func localImage(for source: String?) -> UIImage? {

@@ -21,5 +21,3 @@ targets:
         INFOPLIST_FILE: HotelGuide/Info.plist
         TARGETED_DEVICE_FAMILY: "1"
         SUPPORTS_MACCATALYST: false
-        OTHER_LDFLAGS[sdk=iphonesimulator*]: ""
-        OTHER_MODULE_VERIFIER_FLAGS[sdk=iphonesimulator*]: ""

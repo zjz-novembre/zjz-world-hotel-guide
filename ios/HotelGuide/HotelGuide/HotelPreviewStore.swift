@@ -127,6 +127,13 @@ struct PreviewAnchor: Equatable {
         self.width = CGFloat(width)
         self.height = CGFloat(height)
     }
+
+    init(rect: CGRect) {
+        self.x = rect.minX
+        self.y = rect.minY
+        self.width = rect.width
+        self.height = rect.height
+    }
 }
 
 @MainActor

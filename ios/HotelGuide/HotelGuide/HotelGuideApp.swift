@@ -1,17 +1,13 @@
 import SwiftUI
-#if !targetEnvironment(simulator)
 import AMapFoundationKit
 import MAMapKit
-#endif
 
 @main
 struct HotelGuideApp: App {
     init() {
-        #if !targetEnvironment(simulator)
         MAMapView.updatePrivacyShow(.didShow, privacyInfo: .didContain)
         MAMapView.updatePrivacyAgree(.didAgree)
         AMapServices.shared().apiKey = "8924dbb00daef3035dc6a5872f425efb"
-        #endif
     }
 
     var body: some Scene {
@@ -23,17 +19,15 @@ struct HotelGuideApp: App {
 
 struct HotelGuideRootView: View {
     @StateObject private var mapStore = NativeHotelMapStore()
+    @StateObject private var guideStore = NativeHotelGuideStore()
     @StateObject private var previewStore = HotelPreviewStore()
 
     var body: some View {
         ZStack {
-            #if !targetEnvironment(simulator)
             NativeHotelMapView(mapStore: mapStore)
                 .ignoresSafeArea()
-            #endif
 
-            HotelGuideWebView(mapStore: mapStore, previewStore: previewStore)
-                .ignoresSafeArea()
+            NativeHotelGuideChromeView(store: guideStore, previewStore: previewStore)
 
             if let preview = previewStore.preview {
                 NativeHotelPreview(hotel: preview) {
@@ -42,6 +36,21 @@ struct HotelGuideRootView: View {
                 .id(preview.id)
                 .transition(.opacity.combined(with: .scale(scale: 0.96)))
             }
+        }
+        .task {
+            await guideStore.load()
+            guideStore.requestUserLocation()
+        }
+        .onAppear {
+            mapStore.onSelectHotel = { hotelId in
+                guideStore.selectHotel(hotelId)
+            }
+            mapStore.onClearSelection = {
+                guideStore.clearSelection()
+            }
+        }
+        .onReceive(guideStore.$mapPayload) { payload in
+            mapStore.setPayload(payload)
         }
         .animation(.spring(response: 0.34, dampingFraction: 0.86), value: previewStore.preview?.id)
     }

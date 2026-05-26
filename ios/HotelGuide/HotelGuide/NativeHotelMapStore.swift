@@ -1,27 +1,15 @@
 import CoreGraphics
 import CoreLocation
 import Foundation
-import WebKit
 
 @MainActor
 final class NativeHotelMapStore: ObservableObject {
     @Published private(set) var payload: NativeHotelMapPayload?
 
-    private weak var webView: WKWebView?
+    var onSelectHotel: ((String) -> Void)?
+    var onClearSelection: (() -> Void)?
 
-    func attach(webView: WKWebView?) {
-        self.webView = webView
-    }
-
-    func update(from message: Any) {
-        guard
-            JSONSerialization.isValidJSONObject(message),
-            let data = try? JSONSerialization.data(withJSONObject: message),
-            let payload = try? JSONDecoder().decode(NativeHotelMapPayload.self, from: data)
-        else {
-            return
-        }
-
+    func setPayload(_ payload: NativeHotelMapPayload?) {
         self.payload = payload
     }
 
@@ -31,7 +19,7 @@ final class NativeHotelMapStore: ObservableObject {
             payload = nextPayload
         }
 
-        evaluateMapCallback(name: "__HOTEL_GUIDE_NATIVE_MAP_SELECT__", argument: hotelId)
+        onSelectHotel?(hotelId)
     }
 
     func clearSelection() {
@@ -41,24 +29,13 @@ final class NativeHotelMapStore: ObservableObject {
             payload = nextPayload
         }
 
-        webView?.evaluateJavaScript("window.__HOTEL_GUIDE_NATIVE_MAP_CLEAR__?.();")
+        onClearSelection?()
     }
 
     func shouldRouteTouchToNativeMap(at point: CGPoint) -> Bool {
         guard let layout = payload?.layout else { return false }
         guard layout.mapRect.cgRect.contains(point) else { return false }
         return !layout.blockedRects.contains { $0.cgRect.contains(point) }
-    }
-
-    private func evaluateMapCallback(name: String, argument: String) {
-        guard
-            let data = try? JSONEncoder().encode(argument),
-            let literal = String(data: data, encoding: .utf8)
-        else {
-            return
-        }
-
-        webView?.evaluateJavaScript("window.\(name)?.(\(literal));")
     }
 }
 
