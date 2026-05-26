@@ -1,84 +1,49 @@
 import SwiftUI
+import UIKit
 
 struct NativeHotelGuideChromeView: View {
     @ObservedObject var store: NativeHotelGuideStore
     @ObservedObject var previewStore: HotelPreviewStore
+    @State private var showsPriceEditor = false
 
     var body: some View {
         GeometryReader { proxy in
-            ZStack(alignment: .top) {
-                VStack(spacing: NativeHotelGuideToken.filterRowGap) {
+            VStack(spacing: NativeHotelGuideToken.topStackGap) {
+                VStack(spacing: NativeHotelGuideToken.controlStackGap) {
+                    NativeHotelGroupLogoStrip(store: store)
                     filterRow
-                        .padding(.horizontal, NativeHotelGuideToken.screenPadding)
-                        .padding(.top, proxy.safeAreaInsets.top + NativeHotelGuideToken.topPadding)
-
-                    Spacer(minLength: 0)
-
-                    NativeHotelBottomList(
-                        store: store,
-                        previewStore: previewStore,
-                        maxHeight: bottomListHeight(in: proxy)
-                    )
-                    .padding(.horizontal, NativeHotelGuideToken.screenPadding)
-                    .padding(.bottom, max(proxy.safeAreaInsets.bottom, NativeHotelGuideToken.bottomPadding))
                 }
+                .padding(.horizontal, NativeHotelGuideToken.screenPadding)
+                .padding(.top, proxy.safeAreaInsets.top + NativeHotelGuideToken.topPadding)
 
-                if let activeFilter = store.activeFilter {
-                    Color.black.opacity(0.001)
-                        .ignoresSafeArea()
-                        .onTapGesture {
-                            withAnimation(.spring(response: 0.24, dampingFraction: 0.9)) {
-                                store.activeFilter = nil
-                            }
-                        }
+                Spacer(minLength: 0)
 
-                    NativeHotelFilterMenu(kind: activeFilter, store: store)
-                        .frame(
-                            width: min(proxy.size.width - NativeHotelGuideToken.screenPadding * 2, NativeHotelGuideToken.menuMaxWidth),
-                            alignment: .top
-                        )
-                        .padding(.top, proxy.safeAreaInsets.top + NativeHotelGuideToken.menuTopPadding)
-                        .transition(.opacity.combined(with: .scale(scale: 0.98, anchor: .top)))
-                }
+                NativeHotelBottomList(
+                    store: store,
+                    previewStore: previewStore,
+                    maxHeight: bottomListHeight(in: proxy)
+                )
+                .padding(.horizontal, NativeHotelGuideToken.screenPadding)
+                .padding(.bottom, max(proxy.safeAreaInsets.bottom, NativeHotelGuideToken.bottomPadding))
             }
         }
-        .animation(.spring(response: 0.28, dampingFraction: 0.88), value: store.activeFilter?.id)
+        .sheet(isPresented: $showsPriceEditor) {
+            NativeHotelPriceEditorSheet(store: store)
+                .presentationDetents([.height(NativeHotelGuideToken.priceSheetHeight)])
+                .presentationDragIndicator(.visible)
+        }
         .animation(.spring(response: 0.32, dampingFraction: 0.9), value: store.isListExpanded)
     }
 
     private var filterRow: some View {
-        HStack(spacing: NativeHotelGuideToken.filterRowGap) {
-            NativeHotelFilterChip(
-                title: store.provinceLabel,
-                systemImage: "map",
-                isActive: store.activeFilter == .province
-            ) {
-                store.activeFilter = store.activeFilter == .province ? nil : .province
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: NativeHotelGuideToken.filterRowGap) {
+                NativeHotelProvinceMenu(store: store)
+                NativeHotelPriceMenu(store: store, showsPriceEditor: $showsPriceEditor)
+                NativeHotelChainMenu(store: store)
+                NativeHotelBrandMenu(store: store)
             }
-
-            NativeHotelFilterChip(
-                title: store.priceLabel,
-                systemImage: "yensign",
-                isActive: store.activeFilter == .price
-            ) {
-                store.activeFilter = store.activeFilter == .price ? nil : .price
-            }
-
-            NativeHotelFilterChip(
-                title: store.chainLabel,
-                systemImage: "diamond",
-                isActive: store.activeFilter == .chain
-            ) {
-                store.activeFilter = store.activeFilter == .chain ? nil : .chain
-            }
-
-            NativeHotelFilterChip(
-                title: store.brandLabel,
-                systemImage: "tag",
-                isActive: store.activeFilter == .brand
-            ) {
-                store.activeFilter = store.activeFilter == .brand ? nil : .brand
-            }
+            .padding(.vertical, NativeHotelGuideToken.filterRowVerticalPadding)
         }
     }
 
@@ -89,214 +54,252 @@ struct NativeHotelGuideChromeView: View {
     }
 }
 
+private struct NativeHotelGroupLogoStrip: View {
+    @ObservedObject var store: NativeHotelGuideStore
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: NativeHotelGuideToken.logoGap) {
+                ForEach(featuredChains) { chain in
+                    Button {
+                        store.toggleChain(chain.value)
+                    } label: {
+                        NativeHotelGroupLogoCircle(
+                            chain: chain,
+                            isSelected: store.filters.chains.contains(chain.value)
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.vertical, NativeHotelGuideToken.logoRowVerticalPadding)
+        }
+        .frame(height: NativeHotelGuideToken.logoRowHeight)
+    }
+
+    private var featuredChains: [NativeChainOption] {
+        let order = NativeHotelGroupLogoAsset.displayOrder
+        return store.dataset.chains
+            .filter { NativeHotelGroupLogoAsset.fileName(for: $0.value) != nil }
+            .sorted { lhs, rhs in
+                (order[lhs.value] ?? Int.max, lhs.displayLabel) < (order[rhs.value] ?? Int.max, rhs.displayLabel)
+            }
+    }
+}
+
+private struct NativeHotelGroupLogoCircle: View {
+    let chain: NativeChainOption
+    let isSelected: Bool
+
+    var body: some View {
+        ZStack {
+            Circle()
+                .fill(Color.white.opacity(isSelected ? 0.92 : 0.78))
+                .overlay(
+                    Circle()
+                        .strokeBorder(Color.primary.opacity(isSelected ? 0.78 : 0.16), lineWidth: isSelected ? 1.4 : 0.8)
+                )
+
+            if let image = NativeHotelGroupLogoAsset.image(for: chain.value) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFit()
+                    .padding(NativeHotelGroupLogoAsset.padding(for: chain.value))
+            } else {
+                Text(String(chain.displayLabel.prefix(1)))
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(.primary)
+            }
+        }
+        .frame(width: NativeHotelGuideToken.logoSize, height: NativeHotelGuideToken.logoSize)
+        .shadow(color: .black.opacity(isSelected ? 0.14 : 0.07), radius: isSelected ? 10 : 7, y: 4)
+        .scaleEffect(isSelected ? 1.04 : 1)
+        .hotelGuideGlass(cornerRadius: NativeHotelGuideToken.logoSize / 2, interactive: true)
+        .accessibilityLabel(chain.displayLabel)
+    }
+}
+
+private struct NativeHotelProvinceMenu: View {
+    @ObservedObject var store: NativeHotelGuideStore
+
+    var body: some View {
+        Menu {
+            ForEach(store.dataset.provinces) { province in
+                Button {
+                    store.setProvince(province.value)
+                } label: {
+                    NativeHotelMenuLabel(title: province.label, isSelected: store.filters.province == province.value)
+                }
+            }
+        } label: {
+            NativeHotelFilterChip(title: store.provinceLabel, systemImage: "map")
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+private struct NativeHotelPriceMenu: View {
+    @ObservedObject var store: NativeHotelGuideStore
+    @Binding var showsPriceEditor: Bool
+
+    var body: some View {
+        Menu {
+            ForEach(NativeHotelPriceBand.allCases) { band in
+                if band == .custom {
+                    Button {
+                        store.setPriceBand(.custom)
+                        showsPriceEditor = true
+                    } label: {
+                        NativeHotelMenuLabel(title: band.title, isSelected: store.filters.priceBand == band)
+                    }
+                } else {
+                    Button {
+                        store.setPriceBand(band)
+                    } label: {
+                        NativeHotelMenuLabel(title: band.title, isSelected: store.filters.priceBand == band)
+                    }
+                }
+            }
+        } label: {
+            NativeHotelFilterChip(title: store.priceLabel, systemImage: "yensign.circle")
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+private struct NativeHotelChainMenu: View {
+    @ObservedObject var store: NativeHotelGuideStore
+
+    var body: some View {
+        Menu {
+            ForEach(store.dataset.chains) { chain in
+                Toggle(
+                    isOn: Binding(
+                        get: { store.filters.chains.contains(chain.value) },
+                        set: { _ in store.toggleChain(chain.value) }
+                    )
+                ) {
+                    Text(chain.displayLabel)
+                }
+            }
+        } label: {
+            NativeHotelFilterChip(title: store.chainLabel, systemImage: "building.2")
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+private struct NativeHotelBrandMenu: View {
+    @ObservedObject var store: NativeHotelGuideStore
+
+    var body: some View {
+        Menu {
+            ForEach(store.visibleBrands) { brand in
+                Toggle(
+                    isOn: Binding(
+                        get: { store.filters.brands.contains(brand.value) },
+                        set: { _ in store.toggleBrand(brand.value) }
+                    )
+                ) {
+                    Text(brand.displayLabel)
+                }
+            }
+        } label: {
+            NativeHotelFilterChip(title: store.brandLabel, systemImage: "seal")
+        }
+        .buttonStyle(.plain)
+    }
+}
+
 private struct NativeHotelFilterChip: View {
     let title: String
     let systemImage: String
-    let isActive: Bool
-    let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
-            HStack(spacing: NativeHotelGuideToken.chipInnerGap) {
-                Image(systemName: systemImage)
-                    .font(.system(size: NativeHotelGuideToken.chipIconSize, weight: .semibold))
-                    .frame(width: NativeHotelGuideToken.chipIconFrame, height: NativeHotelGuideToken.chipIconFrame)
+        HStack(spacing: NativeHotelGuideToken.chipInnerGap) {
+            Image(systemName: systemImage)
+                .font(.system(size: NativeHotelGuideToken.chipIconSize, weight: .semibold))
+                .frame(width: NativeHotelGuideToken.chipIconFrame, height: NativeHotelGuideToken.chipIconFrame)
 
-                Text(title)
-                    .font(.system(size: NativeHotelGuideToken.chipFontSize, weight: .semibold))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.68)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .foregroundStyle(isActive ? Color.primary : Color.primary.opacity(0.9))
-            .padding(.horizontal, NativeHotelGuideToken.chipHorizontalPadding)
-            .frame(height: NativeHotelGuideToken.chipHeight)
-            .contentShape(.rect)
+            Text(title)
+                .font(.system(size: NativeHotelGuideToken.chipFontSize, weight: .semibold))
+                .lineLimit(1)
+                .minimumScaleFactor(0.72)
         }
-        .buttonStyle(.plain)
-        .frame(maxWidth: .infinity)
+        .foregroundStyle(Color.primary.opacity(0.94))
+        .padding(.horizontal, NativeHotelGuideToken.chipHorizontalPadding)
+        .frame(height: NativeHotelGuideToken.chipHeight)
+        .contentShape(.rect)
+        .fixedSize(horizontal: true, vertical: false)
         .hotelGuideGlass(cornerRadius: NativeHotelGuideToken.chipRadius, interactive: true)
     }
 }
 
-private struct NativeHotelFilterMenu: View {
-    let kind: NativeHotelFilterKind
-    @ObservedObject var store: NativeHotelGuideStore
-    @FocusState private var customPriceFocused: Bool
-
-    var body: some View {
-        VStack(spacing: 0) {
-            switch kind {
-            case .province:
-                provinceMenu
-            case .price:
-                priceMenu
-            case .chain:
-                multiSelectMenu(options: store.dataset.chains, selected: store.filters.chains) { option in
-                    store.toggleChain(option.value)
-                }
-            case .brand:
-                multiSelectMenu(options: store.visibleBrands, selected: store.filters.brands) { option in
-                    store.toggleBrand(option.value)
-                }
-            }
-        }
-        .padding(.vertical, NativeHotelGuideToken.menuVerticalPadding)
-        .frame(maxHeight: NativeHotelGuideToken.menuMaxHeight)
-        .hotelGuideGlass(cornerRadius: NativeHotelGuideToken.menuRadius, interactive: true)
-    }
-
-    private var provinceMenu: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVStack(spacing: NativeHotelGuideToken.optionGap) {
-                ForEach(store.dataset.provinces) { province in
-                    NativeHotelOptionButton(
-                        title: province.label,
-                        isSelected: store.filters.province == province.value
-                    ) {
-                        store.setProvince(province.value)
-                        store.activeFilter = nil
-                    }
-                }
-            }
-            .padding(.horizontal, NativeHotelGuideToken.menuHorizontalPadding)
-        }
-    }
-
-    private var priceMenu: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVStack(spacing: NativeHotelGuideToken.optionGap) {
-                ForEach(NativeHotelPriceBand.allCases) { band in
-                    if band == .custom {
-                        NativeHotelCustomPriceRow(
-                            isSelected: store.filters.priceBand == .custom,
-                            minText: Binding(
-                                get: { store.filters.customPriceMin },
-                                set: { store.setCustomPriceMin($0) }
-                            ),
-                            maxText: Binding(
-                                get: { store.filters.customPriceMax },
-                                set: { store.setCustomPriceMax($0) }
-                            ),
-                            isFocused: $customPriceFocused
-                        ) {
-                            store.setPriceBand(.custom)
-                            customPriceFocused = true
-                        }
-                    } else {
-                        NativeHotelOptionButton(
-                            title: band.title,
-                            isSelected: store.filters.priceBand == band
-                        ) {
-                            store.setPriceBand(band)
-                            store.activeFilter = nil
-                        }
-                    }
-                }
-            }
-            .padding(.horizontal, NativeHotelGuideToken.menuHorizontalPadding)
-        }
-    }
-
-    private func multiSelectMenu<Option: NativeHotelMenuOption>(
-        options: [Option],
-        selected: Set<String>,
-        action: @escaping (Option) -> Void
-    ) -> some View {
-        ScrollView(showsIndicators: false) {
-            LazyVStack(spacing: NativeHotelGuideToken.optionGap) {
-                ForEach(options) { option in
-                    NativeHotelOptionButton(
-                        title: option.displayLabel,
-                        isSelected: selected.contains(option.value)
-                    ) {
-                        action(option)
-                    }
-                }
-            }
-            .padding(.horizontal, NativeHotelGuideToken.menuHorizontalPadding)
-        }
-    }
-}
-
-private struct NativeHotelOptionButton: View {
+private struct NativeHotelMenuLabel: View {
     let title: String
     let isSelected: Bool
-    let action: () -> Void
 
     var body: some View {
-        Button(action: action) {
-            HStack(spacing: NativeHotelGuideToken.optionInnerGap) {
-                Text(title)
-                    .font(.system(size: NativeHotelGuideToken.optionFontSize, weight: .medium))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.78)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
-                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                    .font(.system(size: NativeHotelGuideToken.optionCheckSize, weight: .semibold))
-                    .foregroundStyle(isSelected ? Color.primary : Color.primary.opacity(0.34))
-            }
-            .padding(.horizontal, NativeHotelGuideToken.optionHorizontalPadding)
-            .frame(height: NativeHotelGuideToken.optionHeight)
-            .contentShape(.rect)
+        if isSelected {
+            Label(title, systemImage: "checkmark")
+        } else {
+            Text(title)
         }
-        .buttonStyle(.plain)
-        .background(
-            Color.primary.opacity(isSelected ? 0.055 : 0.025),
-            in: RoundedRectangle(cornerRadius: NativeHotelGuideToken.optionRadius, style: .continuous)
-        )
     }
 }
 
-private struct NativeHotelCustomPriceRow: View {
-    let isSelected: Bool
-    @Binding var minText: String
-    @Binding var maxText: String
-    var isFocused: FocusState<Bool>.Binding
-    let action: () -> Void
+private struct NativeHotelPriceEditorSheet: View {
+    @ObservedObject var store: NativeHotelGuideStore
+    @Environment(\.dismiss) private var dismiss
+    @FocusState private var isFocused: Bool
 
     var body: some View {
-        Button(action: action) {
-            VStack(spacing: NativeHotelGuideToken.customPriceGap) {
-                HStack(spacing: NativeHotelGuideToken.optionInnerGap) {
-                    Text("价格")
-                        .font(.system(size: NativeHotelGuideToken.optionFontSize, weight: .medium))
-                        .frame(maxWidth: .infinity, alignment: .leading)
+        NavigationStack {
+            VStack(spacing: NativeHotelGuideToken.priceEditorGap) {
+                HStack(spacing: NativeHotelGuideToken.priceEditorFieldGap) {
+                    NativeHotelPriceField(title: "最低", text: Binding(
+                        get: { store.filters.customPriceMin },
+                        set: { store.setCustomPriceMin($0) }
+                    ))
+                    .focused($isFocused)
 
-                    Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
-                        .font(.system(size: NativeHotelGuideToken.optionCheckSize, weight: .semibold))
-                        .foregroundStyle(isSelected ? Color.primary : Color.primary.opacity(0.34))
+                    NativeHotelPriceField(title: "最高", text: Binding(
+                        get: { store.filters.customPriceMax },
+                        set: { store.setCustomPriceMax($0) }
+                    ))
+                    .focused($isFocused)
                 }
 
-                if isSelected {
-                    HStack(spacing: NativeHotelGuideToken.customFieldGap) {
-                        NativeHotelPriceField(title: "最低", text: $minText, isFocused: isFocused)
-                        NativeHotelPriceField(title: "最高", text: $maxText, isFocused: isFocused)
-                    }
+                Button {
+                    store.setPriceBand(.custom)
+                    dismiss()
+                } label: {
+                    Text("完成")
+                        .font(.system(size: NativeHotelGuideToken.doneButtonFontSize, weight: .semibold))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: NativeHotelGuideToken.doneButtonHeight)
                 }
+                .buttonStyle(.plain)
+                .hotelGuideGlass(cornerRadius: NativeHotelGuideToken.doneButtonHeight / 2, interactive: true)
             }
-            .padding(.horizontal, NativeHotelGuideToken.optionHorizontalPadding)
-            .padding(.vertical, isSelected ? NativeHotelGuideToken.customPricePadding : 0)
-            .frame(minHeight: NativeHotelGuideToken.optionHeight)
-            .contentShape(.rect)
+            .padding(.horizontal, NativeHotelGuideToken.priceEditorPadding)
+            .padding(.top, NativeHotelGuideToken.priceEditorTopPadding)
+            .navigationTitle("价格")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .buttonStyle(.plain)
-        .background(
-            Color.primary.opacity(isSelected ? 0.055 : 0.025),
-            in: RoundedRectangle(cornerRadius: NativeHotelGuideToken.optionRadius, style: .continuous)
-        )
+        .onAppear {
+            store.setPriceBand(.custom)
+            isFocused = true
+        }
     }
 }
 
 private struct NativeHotelPriceField: View {
     let title: String
     @Binding var text: String
-    var isFocused: FocusState<Bool>.Binding
 
     var body: some View {
         TextField(title, text: $text)
-            .focused(isFocused)
             .keyboardType(.numberPad)
             .textFieldStyle(.plain)
             .font(.system(size: NativeHotelGuideToken.priceFieldFontSize, weight: .semibold))
@@ -455,45 +458,96 @@ private struct NativeHotelCompactRow: View {
     }
 }
 
-private protocol NativeHotelMenuOption: Identifiable {
-    var value: String { get }
-    var displayLabel: String { get }
-}
+private enum NativeHotelGroupLogoAsset {
+    static let displayOrder: [String: Int] = [
+        "Marriott": 0,
+        "Hyatt": 1,
+        "Hilton": 2,
+        "IHG Hotels & Resorts": 3,
+        "Accor": 4,
+        "Four Seasons": 5,
+        "The Leading Hotels of the World": 6,
+    ]
 
-extension NativeChainOption: NativeHotelMenuOption {}
-extension NativeBrandOption: NativeHotelMenuOption {}
+    private static let fileNames: [String: String] = [
+        "Accor": "accor-1.png",
+        "Four Seasons": "four-seasons.png",
+        "Hilton": "hilton.png",
+        "Hyatt": "hyatt-3-mark.png",
+        "IHG Hotels & Resorts": "ihg-2.png",
+        "Marriott": "marriott-2-mark.png",
+        "The Leading Hotels of the World": "lhw.png",
+    ]
+
+    private static let cache = NSCache<NSString, UIImage>()
+
+    static func fileName(for chain: String) -> String? {
+        fileNames[chain]
+    }
+
+    static func image(for chain: String) -> UIImage? {
+        guard let fileName = fileName(for: chain) else { return nil }
+        if let cached = cache.object(forKey: fileName as NSString) { return cached }
+
+        let baseName = (fileName as NSString).deletingPathExtension
+        guard
+            let url = Bundle.main.url(
+                forResource: baseName,
+                withExtension: "png",
+                subdirectory: "WebAssets/logos/hotel-groups/native"
+            ),
+            let image = UIImage(contentsOfFile: url.path)
+        else {
+            return nil
+        }
+
+        cache.setObject(image, forKey: fileName as NSString)
+        return image
+    }
+
+    static func padding(for chain: String) -> CGFloat {
+        switch chain {
+        case "Hyatt":
+            return 6
+        case "Hilton", "Marriott":
+            return 7
+        case "The Leading Hotels of the World":
+            return 4
+        default:
+            return 8
+        }
+    }
+}
 
 private enum NativeHotelGuideToken {
     static let screenPadding: CGFloat = 12
     static let topPadding: CGFloat = 8
     static let bottomPadding: CGFloat = 10
-    static let filterRowGap: CGFloat = 7
-    static let chipHeight: CGFloat = 45
-    static let chipRadius: CGFloat = 22.5
-    static let chipHorizontalPadding: CGFloat = 10
-    static let chipInnerGap: CGFloat = 4
-    static let chipIconSize: CGFloat = 13
-    static let chipIconFrame: CGFloat = 15
-    static let chipFontSize: CGFloat = 13
-    static let menuTopPadding: CGFloat = 64
-    static let menuMaxWidth: CGFloat = 390
-    static let menuMaxHeight: CGFloat = 430
-    static let menuRadius: CGFloat = 28
-    static let menuVerticalPadding: CGFloat = 10
-    static let menuHorizontalPadding: CGFloat = 10
-    static let optionGap: CGFloat = 6
-    static let optionHeight: CGFloat = 44
-    static let optionRadius: CGFloat = 16
-    static let optionHorizontalPadding: CGFloat = 14
-    static let optionInnerGap: CGFloat = 10
-    static let optionFontSize: CGFloat = 15
-    static let optionCheckSize: CGFloat = 18
-    static let customPriceGap: CGFloat = 10
-    static let customFieldGap: CGFloat = 8
-    static let customPricePadding: CGFloat = 12
-    static let priceFieldHeight: CGFloat = 38
-    static let priceFieldRadius: CGFloat = 13
-    static let priceFieldFontSize: CGFloat = 15
+    static let topStackGap: CGFloat = 8
+    static let controlStackGap: CGFloat = 6
+    static let filterRowGap: CGFloat = 8
+    static let filterRowVerticalPadding: CGFloat = 2
+    static let logoRowHeight: CGFloat = 52
+    static let logoRowVerticalPadding: CGFloat = 3
+    static let logoGap: CGFloat = 10
+    static let logoSize: CGFloat = 44
+    static let chipHeight: CGFloat = 52
+    static let chipRadius: CGFloat = 26
+    static let chipHorizontalPadding: CGFloat = 14
+    static let chipInnerGap: CGFloat = 6
+    static let chipIconSize: CGFloat = 16
+    static let chipIconFrame: CGFloat = 18
+    static let chipFontSize: CGFloat = 14
+    static let priceSheetHeight: CGFloat = 236
+    static let priceEditorGap: CGFloat = 18
+    static let priceEditorFieldGap: CGFloat = 10
+    static let priceEditorPadding: CGFloat = 22
+    static let priceEditorTopPadding: CGFloat = 18
+    static let doneButtonHeight: CGFloat = 48
+    static let doneButtonFontSize: CGFloat = 16
+    static let priceFieldHeight: CGFloat = 48
+    static let priceFieldRadius: CGFloat = 16
+    static let priceFieldFontSize: CGFloat = 16
     static let listMaxHeight: CGFloat = 390
     static let collapsedListHeight: CGFloat = 58
     static let listRadius: CGFloat = 28

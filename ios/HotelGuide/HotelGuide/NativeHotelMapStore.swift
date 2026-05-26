@@ -8,6 +8,7 @@ final class NativeHotelMapStore: ObservableObject {
 
     var onSelectHotel: ((String) -> Void)?
     var onClearSelection: (() -> Void)?
+    var onPreviewHotel: ((String, PreviewAnchor?) -> Void)?
 
     func setPayload(_ payload: NativeHotelMapPayload?) {
         self.payload = payload
@@ -30,6 +31,16 @@ final class NativeHotelMapStore: ObservableObject {
         }
 
         onClearSelection?()
+    }
+
+    func previewHotel(_ hotelId: String, anchor: PreviewAnchor?) {
+        if var nextPayload = payload {
+            nextPayload.selectedId = hotelId
+            nextPayload.selectedMode = NativeHotelSelectionMode.small.rawValue
+            payload = nextPayload
+        }
+
+        onPreviewHotel?(hotelId, anchor)
     }
 
     func shouldRouteTouchToNativeMap(at point: CGPoint) -> Bool {

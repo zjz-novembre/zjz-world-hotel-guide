@@ -12,9 +12,16 @@ struct NativeHotelMapView: UIViewRepresentable {
 
     func makeUIView(context: Context) -> MAMapView {
         let mapView = MAMapView(frame: .zero)
+        mapView.overrideUserInterfaceStyle = .light
+        mapView.backgroundColor = .white
         mapView.delegate = context.coordinator
+        mapView.mapType = .standard
         mapView.showsCompass = false
         mapView.showsScale = false
+        mapView.isShowsBuildings = false
+        mapView.isShowsLabels = true
+        mapView.isShowTraffic = false
+        mapView.screenAnchor = CGPoint(x: 0.5, y: 0.5)
         mapView.isRotateEnabled = false
         mapView.isRotateCameraEnabled = false
         mapView.logoCenter = CGPoint(x: -1000, y: -1000)
@@ -64,6 +71,7 @@ struct NativeHotelMapView: UIViewRepresentable {
         private weak var mapView: MAMapView?
         private var hotelAnnotations: [String: NativeHotelAnnotation] = [:]
         private var hotelAnnotationKey = ""
+        private var cameraKey = ""
         private var currentSelectedId: String?
         private var userLocationAnnotation: NativeUserLocationAnnotation?
         private var isApplyingSelection = false
@@ -102,6 +110,12 @@ struct NativeHotelMapView: UIViewRepresentable {
                     hotel: hotelAnnotation.hotel,
                     selected: hotelAnnotation.hotel.id == currentSelectedId
                 )
+                annotationView.onLongPress = { [weak self] hotel, sourceView in
+                    let rect = sourceView.convert(sourceView.bounds, to: nil)
+                    Task { @MainActor in
+                        self?.mapStore.previewHotel(hotel.id, anchor: PreviewAnchor(rect: rect))
+                    }
+                }
                 return annotationView
             }
 
@@ -173,6 +187,10 @@ struct NativeHotelMapView: UIViewRepresentable {
         }
 
         private func syncCamera(_ camera: NativeHotelMapCamera, in mapView: MAMapView) {
+            let nextKey = "\(String(format: "%.6f", camera.center.first ?? 0)):\(String(format: "%.6f", camera.center.dropFirst().first ?? 0)):\(String(format: "%.2f", camera.zoom))"
+            guard nextKey != cameraKey else { return }
+            cameraKey = nextKey
+
             let nextZoom = CGFloat(camera.zoom)
             if abs(mapView.zoomLevel - nextZoom) > 0.01 {
                 mapView.setZoomLevel(nextZoom, animated: true)
@@ -190,12 +208,12 @@ struct NativeHotelMapView: UIViewRepresentable {
             defer { isApplyingSelection = false }
 
             hotelAnnotations.values.forEach { annotation in
-                guard annotation.hotel.id != selectedId else { return }
-                mapView.deselectAnnotation(annotation, animated: true)
+                if annotation.hotel.id != selectedId {
+                    mapView.deselectAnnotation(annotation, animated: false)
+                }
+                guard let view = mapView.view(for: annotation) as? NativeHotelAnnotationView else { return }
+                view.configure(hotel: annotation.hotel, selected: annotation.hotel.id == selectedId)
             }
-
-            guard let selectedId, let annotation = hotelAnnotations[selectedId] else { return }
-            mapView.selectAnnotation(annotation, animated: true)
         }
     }
 }
@@ -216,6 +234,7 @@ private final class NativeHotelAnnotationView: MAAnnotationView {
         rootView: NativeHotelMarkerHost(hotel: nil, selected: false)
     )
     private var currentHotel: NativeHotelMapHotel?
+    var onLongPress: ((NativeHotelMapHotel, UIView) -> Void)?
 
     override init!(annotation: MAAnnotation!, reuseIdentifier: String!) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
@@ -224,6 +243,7 @@ private final class NativeHotelAnnotationView: MAAnnotationView {
         hostingController.view.backgroundColor = .clear
         hostingController.view.isUserInteractionEnabled = false
         addSubview(hostingController.view)
+        addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:))))
     }
 
     required init?(coder: NSCoder) {
@@ -250,6 +270,11 @@ private final class NativeHotelAnnotationView: MAAnnotationView {
         if let currentHotel {
             configure(hotel: currentHotel, selected: selected)
         }
+    }
+
+    @objc private func handleLongPress(_ recognizer: UILongPressGestureRecognizer) {
+        guard recognizer.state == .began, let currentHotel else { return }
+        onLongPress?(currentHotel, self)
     }
 }
 
@@ -401,11 +426,11 @@ private struct NativeHotelPinBadge: View {
     private var logoScale: CGFloat {
         switch hotel.chain {
         case "The Leading Hotels of the World":
-            return 0.82
+            return 1.02
         case "Hilton":
             return 0.80
         case "Hyatt":
-            return 0.72
+            return 0.68
         case "Marriott":
             return 0.76
         default:

@@ -48,10 +48,17 @@ struct HotelGuideRootView: View {
             mapStore.onClearSelection = {
                 guideStore.clearSelection()
             }
+            mapStore.onPreviewHotel = { hotelId, anchor in
+                guideStore.selectHotel(hotelId)
+                if let payload = guideStore.previewPayload(forHotelId: hotelId, anchor: anchor) {
+                    previewStore.show(payload)
+                }
+            }
         }
         .onReceive(guideStore.$mapPayload) { payload in
             mapStore.setPayload(payload)
         }
+        .preferredColorScheme(.light)
         .animation(.spring(response: 0.34, dampingFraction: 0.86), value: previewStore.preview?.id)
     }
 }

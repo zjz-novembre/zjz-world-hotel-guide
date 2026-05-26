@@ -6,7 +6,6 @@ import SwiftUI
 final class NativeHotelGuideStore: NSObject, ObservableObject, CLLocationManagerDelegate {
     @Published private(set) var dataset = NativeHotelDataset.empty
     @Published var filters = NativeHotelFilters()
-    @Published var activeFilter: NativeHotelFilterKind?
     @Published var isListExpanded = true
     @Published private(set) var rankedHotels: [NativeRankedHotel] = []
     @Published private(set) var mapPayload: NativeHotelMapPayload?
@@ -140,6 +139,15 @@ final class NativeHotelGuideStore: NSObject, ObservableObject, CLLocationManager
         )
     }
 
+    func hotel(with id: String) -> NativeHotel? {
+        dataset.hotels.first { $0.id == id }
+    }
+
+    func previewPayload(forHotelId id: String, anchor: PreviewAnchor?) -> HotelPreviewPayload? {
+        guard let hotel = hotel(with: id) else { return nil }
+        return previewPayload(for: hotel, anchor: anchor)
+    }
+
     func rateText(for hotel: NativeHotel) -> String {
         guard let rate = hotel.averageRateTaxInclusiveLocal ?? hotel.averageRateLocal else {
             return "暂无"
@@ -255,14 +263,6 @@ final class NativeHotelGuideStore: NSObject, ObservableObject, CLLocationManager
     }
 
     private func makeMapPayload(province: NativeProvinceOption) -> NativeHotelMapPayload {
-        let selectedHotel = selectedId.flatMap { id in
-            rankedHotels.first(where: { $0.hotel.id == id })?.hotel
-        }
-        let cameraCenter = selectedMode == .small ? selectedHotel?.position ?? province.center : province.center
-        let cameraZoom = selectedMode == .small && selectedHotel?.position != nil
-            ? max(province.mapZoom, 14.8)
-            : province.mapZoom
-
         return NativeHotelMapPayload(
             hotels: rankedHotels.compactMap(\.hotel.mapHotel),
             province: NativeHotelMapProvince(
@@ -271,7 +271,7 @@ final class NativeHotelGuideStore: NSObject, ObservableObject, CLLocationManager
                 center: province.center,
                 zoom: province.mapZoom
             ),
-            camera: NativeHotelMapCamera(center: cameraCenter, zoom: cameraZoom),
+            camera: NativeHotelMapCamera(center: province.center, zoom: province.mapZoom),
             selectedId: selectedId,
             selectedMode: selectedMode?.rawValue,
             userLocation: userLocation.map { NativeHotelUserLocation(position: $0, heading: nil) },
@@ -522,22 +522,6 @@ enum NativeHotelPriceBand: String, CaseIterable, Identifiable {
             return "1000-1500"
         case .overFifteenHundred:
             return "1500+"
-        }
-    }
-}
-
-enum NativeHotelFilterKind: Identifiable {
-    case province
-    case price
-    case chain
-    case brand
-
-    var id: String {
-        switch self {
-        case .province: return "province"
-        case .price: return "price"
-        case .chain: return "chain"
-        case .brand: return "brand"
         }
     }
 }
