@@ -48,10 +48,16 @@ export type Hotel = {
   standardRoomImageUrl?: string;
   standardRoomAreaSqm?: number;
   standardRoomSourceUrl?: string;
+  standardBathroomName?: string;
+  standardBathroomImageUrl?: string;
+  standardBathroomSourceUrl?: string;
   suiteRoomName?: string;
   suiteRoomImageUrl?: string;
   suiteRoomAreaSqm?: number;
   suiteRoomSourceUrl?: string;
+  suiteBathroomName?: string;
+  suiteBathroomImageUrl?: string;
+  suiteBathroomSourceUrl?: string;
   sourceUrl?: string;
 };
 

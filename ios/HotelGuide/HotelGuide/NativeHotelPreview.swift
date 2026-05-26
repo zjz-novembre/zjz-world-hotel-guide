@@ -154,17 +154,34 @@ struct NativeHotelPreview: View {
         [
             HotelPreviewRoom(
                 id: "standard",
-                title: hotel.standardRoomName ?? "客房",
+                title: roomTitle(hotel.standardRoomName, fallback: "客房", imageUrl: hotel.standardRoomImageUrl, areaSqm: hotel.standardRoomAreaSqm),
                 imageUrl: hotel.standardRoomImageUrl,
                 areaSqm: hotel.standardRoomAreaSqm
             ),
             HotelPreviewRoom(
+                id: "standardBathroom",
+                title: roomTitle(hotel.standardBathroomName, fallback: "客房浴室", imageUrl: hotel.standardBathroomImageUrl, areaSqm: nil),
+                imageUrl: hotel.standardBathroomImageUrl,
+                areaSqm: nil
+            ),
+            HotelPreviewRoom(
                 id: "suite",
-                title: hotel.suiteRoomName ?? "套房",
+                title: roomTitle(hotel.suiteRoomName, fallback: "套房", imageUrl: hotel.suiteRoomImageUrl, areaSqm: hotel.suiteRoomAreaSqm),
                 imageUrl: hotel.suiteRoomImageUrl,
                 areaSqm: hotel.suiteRoomAreaSqm
             ),
+            HotelPreviewRoom(
+                id: "suiteBathroom",
+                title: roomTitle(hotel.suiteBathroomName, fallback: "套房浴室", imageUrl: hotel.suiteBathroomImageUrl, areaSqm: nil),
+                imageUrl: hotel.suiteBathroomImageUrl,
+                areaSqm: nil
+            ),
         ].filter { $0.imageUrl != nil || $0.areaSqm != nil || !$0.title.isEmpty }
+    }
+
+    private func roomTitle(_ title: String?, fallback: String, imageUrl: String?, areaSqm: Double?) -> String {
+        if let title, !title.isEmpty { return title }
+        return imageUrl != nil || areaSqm != nil ? fallback : ""
     }
 
     private func dismiss() {

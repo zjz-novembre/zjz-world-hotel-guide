@@ -12,6 +12,7 @@
     "data:hotel-rates": "node scripts/fetch-hotel-official-rate-window-snapshots.mjs",
     "data:hotel-names": "node scripts/enrich-hotel-names.mjs",
     "data:lhw-images": "node scripts/fetch-lhw-official-images.mjs",
+    "data:hotel-media": "node scripts/fetch-hotel-official-media.mjs",
     "data:hotel-web": "node scripts/build-hotel-web-data.mjs",
     "lint": "tsc --noEmit"
   },

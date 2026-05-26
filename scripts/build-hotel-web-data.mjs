@@ -8,6 +8,7 @@ const outputPath = join(publicDir, "hotels.json");
 const rateSnapshotPath = join(outputDir, "hotel-official-rate-window-snapshots.json");
 const nameOverridesPath = join(outputDir, "hotel-name-overrides.json");
 const lhwImagesPath = join(outputDir, "lhw-official-images.json");
+const officialMediaPath = join(outputDir, "hotel-official-media.json");
 
 const hotelSourceFiles = [
   "marriott-china-hong-kong-macau-taiwan-official-hotels.json",
@@ -481,6 +482,7 @@ const rateSnapshot = JSON.parse(readFileSync(rateSnapshotPath, "utf8"));
 const ratesByKey = new Map((rateSnapshot.rates ?? []).map((row) => [row.hotelKey, row]));
 const nameOverrides = loadNameOverrides();
 const lhwImagesByKey = loadLhwImageRecords();
+const officialMediaByKey = loadOfficialMediaRecords();
 const sourceHotels = loadSourceHotels();
 const hotels = sourceHotels.map(mapHotel).filter(Boolean).sort(compareHotels);
 assertCompleteHotelNames(hotels);
@@ -548,11 +550,18 @@ function loadLhwImageRecords() {
   return new Map(records.map((record) => [hotelKey(record), record]));
 }
 
+function loadOfficialMediaRecords() {
+  if (!existsSync(officialMediaPath)) return new Map();
+  const payload = JSON.parse(readFileSync(officialMediaPath, "utf8"));
+  const records = Array.isArray(payload.records) ? payload.records : [];
+  return new Map(records.map((record) => [record.hotelKey, record]));
+}
+
 function mapHotel(hotel) {
   const key = hotelKey(hotel);
   const nameOverride = nameOverrides.get(key) ?? {};
   const rate = ratesByKey.get(key);
-  const media = buildHotelMedia(hotel, lhwImagesByKey.get(key));
+  const media = buildHotelMedia(hotel, lhwImagesByKey.get(key), officialMediaByKey.get(key));
   const provinceName = resolveProvinceName(hotel);
   const provinceCode = provinceCodeByName[provinceName] ?? slugify(provinceName);
   const cityName = cleanText(hotel.city_zh) || cleanText(hotel.city_en) || provinceName;
@@ -650,10 +659,16 @@ function mapHotel(hotel) {
     standardRoomImageUrl: media.standardRoomImageUrl,
     standardRoomAreaSqm: media.standardRoomAreaSqm,
     standardRoomSourceUrl: media.standardRoomSourceUrl,
+    standardBathroomName: media.standardBathroomName,
+    standardBathroomImageUrl: media.standardBathroomImageUrl,
+    standardBathroomSourceUrl: media.standardBathroomSourceUrl,
     suiteRoomName: media.suiteRoomName,
     suiteRoomImageUrl: media.suiteRoomImageUrl,
     suiteRoomAreaSqm: media.suiteRoomAreaSqm,
     suiteRoomSourceUrl: media.suiteRoomSourceUrl,
+    suiteBathroomName: media.suiteBathroomName,
+    suiteBathroomImageUrl: media.suiteBathroomImageUrl,
+    suiteBathroomSourceUrl: media.suiteBathroomSourceUrl,
     sourceUrl: resolveSourceUrl(hotel),
   });
 }
@@ -665,16 +680,20 @@ function resolveSourceUrl(hotel) {
   return enUrl || zhUrl || undefined;
 }
 
-function buildHotelMedia(hotel, lhwImages) {
+function buildHotelMedia(hotel, lhwImages, officialMedia) {
   const firstThumbnail = firstImageUrl(hotel.thumbnails) || cleanText(hotel.thumbnailUrl) || cleanText(hotel.imageUrl);
-  const hotelImage = lhwImages?.coverImage?.cachedPath || lhwImages?.coverImage?.url || firstThumbnail;
+  const hotelImage = imageUrl(officialMedia?.coverImage) || lhwImages?.coverImage?.cachedPath || lhwImages?.coverImage?.url || firstThumbnail;
   const standardRoom =
-    lhwImages?.standardRoom && !/suite|套房|villa|别墅/i.test(imageText(lhwImages.standardRoom.image) || lhwImages.standardRoom.name || "")
+    mediaRoom(officialMedia?.standardRoom) ||
+    (lhwImages?.standardRoom && !/suite|套房|villa|别墅/i.test(imageText(lhwImages.standardRoom.image) || lhwImages.standardRoom.name || "")
       ? lhwImages.standardRoom
-      : displayRoomFromLhwBase(lhwImages?.baseRoom);
-  const suiteRoom = lhwImages?.suiteRoom || chooseSuiteRoomFromLhwBase(lhwImages?.baseRoom, hotel.propertySiteURL_en);
-  const descriptionZh = cleanText(hotel.description_zh);
+      : displayRoomFromLhwBase(lhwImages?.baseRoom));
+  const suiteRoom = mediaRoom(officialMedia?.suiteRoom) || lhwImages?.suiteRoom || chooseSuiteRoomFromLhwBase(lhwImages?.baseRoom, hotel.propertySiteURL_en);
+  const standardBathroom = mediaRoom(officialMedia?.standardBathroom);
+  const suiteBathroom = mediaRoom(officialMedia?.suiteBathroom);
+  const descriptionZh = cleanText(officialMedia?.description?.textZh) || cleanText(hotel.description_zh);
   const descriptionEn =
+    cleanText(officialMedia?.description?.textEn) ||
     cleanText(lhwImages?.description?.text) ||
     cleanText(hotel.description_en) ||
     cleanText(hotel.raw_en?.item?.description) ||
@@ -683,19 +702,39 @@ function buildHotelMedia(hotel, lhwImages) {
   return {
     descriptionZh: descriptionZh || undefined,
     descriptionEn: descriptionEn || undefined,
-    descriptionSource: lhwImages?.description?.source || (descriptionZh || descriptionEn ? "official_source" : undefined),
+    descriptionSource: officialMedia?.description?.source || lhwImages?.description?.source || (descriptionZh || descriptionEn ? "official_source" : undefined),
     hotelImageUrl: hotelImage || undefined,
-    hotelImageAlt: lhwImages?.coverImage?.alt || lhwImages?.ogImage?.alt || hotel.name_en || undefined,
-    hotelImageSource: lhwImages?.coverImage?.source || (firstThumbnail ? "official_thumbnail" : undefined),
+    hotelImageAlt: officialMedia?.coverImage?.alt || lhwImages?.coverImage?.alt || lhwImages?.ogImage?.alt || hotel.name_en || undefined,
+    hotelImageSource: officialMedia?.coverImage?.source || lhwImages?.coverImage?.source || (firstThumbnail ? "official_thumbnail" : undefined),
     standardRoomName: cleanText(standardRoom?.name) || undefined,
-    standardRoomImageUrl: cleanText(standardRoom?.image?.cachedPath) || cleanText(standardRoom?.image?.url) || undefined,
+    standardRoomImageUrl: imageUrl(standardRoom?.image) || undefined,
     standardRoomAreaSqm: numberOrNull(standardRoom?.areaSqm) ?? undefined,
     standardRoomSourceUrl: cleanText(standardRoom?.sourceUrl) || undefined,
+    standardBathroomName: cleanText(standardBathroom?.name) || undefined,
+    standardBathroomImageUrl: imageUrl(standardBathroom?.image) || undefined,
+    standardBathroomSourceUrl: cleanText(standardBathroom?.sourceUrl) || undefined,
     suiteRoomName: cleanText(suiteRoom?.name) || undefined,
-    suiteRoomImageUrl: cleanText(suiteRoom?.image?.cachedPath) || cleanText(suiteRoom?.image?.url) || undefined,
+    suiteRoomImageUrl: imageUrl(suiteRoom?.image) || undefined,
     suiteRoomAreaSqm: numberOrNull(suiteRoom?.areaSqm) ?? undefined,
     suiteRoomSourceUrl: cleanText(suiteRoom?.sourceUrl) || undefined,
+    suiteBathroomName: cleanText(suiteBathroom?.name) || undefined,
+    suiteBathroomImageUrl: imageUrl(suiteBathroom?.image) || undefined,
+    suiteBathroomSourceUrl: cleanText(suiteBathroom?.sourceUrl) || undefined,
   };
+}
+
+function mediaRoom(room) {
+  if (!room) return null;
+  return {
+    name: room.name ?? room.image?.alt ?? null,
+    image: room.image ?? null,
+    areaSqm: room.areaSqm ?? null,
+    sourceUrl: room.sourceUrl ?? room.image?.sourceUrl ?? null,
+  };
+}
+
+function imageUrl(image) {
+  return cleanText(image?.cachedPath) || cleanText(image?.url);
 }
 
 function displayRoomFromLhwBase(baseRoom) {

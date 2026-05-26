@@ -14,9 +14,13 @@ struct HotelPreviewPayload: Equatable, Identifiable {
     let standardRoomName: String?
     let standardRoomImageUrl: String?
     let standardRoomAreaSqm: Double?
+    let standardBathroomName: String?
+    let standardBathroomImageUrl: String?
     let suiteRoomName: String?
     let suiteRoomImageUrl: String?
     let suiteRoomAreaSqm: Double?
+    let suiteBathroomName: String?
+    let suiteBathroomImageUrl: String?
     let sourceUrl: String?
     let anchor: PreviewAnchor?
 
@@ -32,9 +36,13 @@ struct HotelPreviewPayload: Equatable, Identifiable {
         standardRoomName: String?,
         standardRoomImageUrl: String?,
         standardRoomAreaSqm: Double?,
+        standardBathroomName: String?,
+        standardBathroomImageUrl: String?,
         suiteRoomName: String?,
         suiteRoomImageUrl: String?,
         suiteRoomAreaSqm: Double?,
+        suiteBathroomName: String?,
+        suiteBathroomImageUrl: String?,
         sourceUrl: String?,
         anchor: PreviewAnchor?
     ) {
@@ -53,9 +61,13 @@ struct HotelPreviewPayload: Equatable, Identifiable {
         self.standardRoomName = standardRoomName?.trimmedNilIfEmpty
         self.standardRoomImageUrl = standardRoomImageUrl?.trimmedNilIfEmpty
         self.standardRoomAreaSqm = standardRoomAreaSqm
+        self.standardBathroomName = standardBathroomName?.trimmedNilIfEmpty
+        self.standardBathroomImageUrl = standardBathroomImageUrl?.trimmedNilIfEmpty
         self.suiteRoomName = suiteRoomName?.trimmedNilIfEmpty
         self.suiteRoomImageUrl = suiteRoomImageUrl?.trimmedNilIfEmpty
         self.suiteRoomAreaSqm = suiteRoomAreaSqm
+        self.suiteBathroomName = suiteBathroomName?.trimmedNilIfEmpty
+        self.suiteBathroomImageUrl = suiteBathroomImageUrl?.trimmedNilIfEmpty
         self.sourceUrl = sourceUrl?.trimmedNilIfEmpty
         self.anchor = anchor
     }
@@ -77,9 +89,13 @@ struct HotelPreviewPayload: Equatable, Identifiable {
             standardRoomName: dictionary.previewString("standardRoomName"),
             standardRoomImageUrl: dictionary.previewString("standardRoomImageUrl"),
             standardRoomAreaSqm: dictionary.previewDouble("standardRoomAreaSqm"),
+            standardBathroomName: dictionary.previewString("standardBathroomName"),
+            standardBathroomImageUrl: dictionary.previewString("standardBathroomImageUrl"),
             suiteRoomName: dictionary.previewString("suiteRoomName"),
             suiteRoomImageUrl: dictionary.previewString("suiteRoomImageUrl"),
             suiteRoomAreaSqm: dictionary.previewDouble("suiteRoomAreaSqm"),
+            suiteBathroomName: dictionary.previewString("suiteBathroomName"),
+            suiteBathroomImageUrl: dictionary.previewString("suiteBathroomImageUrl"),
             sourceUrl: dictionary.previewString("sourceUrl"),
             anchor: PreviewAnchor(message: dictionary["anchor"])
         )

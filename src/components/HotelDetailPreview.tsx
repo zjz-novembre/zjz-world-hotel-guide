@@ -25,10 +25,27 @@ export function HotelDetailPreview({ hotel, onClose }: HotelDetailPreviewProps) 
               <strong>{formatHotelRate(hotel)}</strong>
             </div>
             {Boolean(hotel.descriptionZh || hotel.descriptionEn) && <p className="hotel-preview__intro">{hotel.descriptionZh || hotel.descriptionEn}</p>}
-            {Boolean(hotel.standardRoomImageUrl || hotel.standardRoomName || hotel.suiteRoomImageUrl || hotel.suiteRoomName) && (
+            {Boolean(
+              hotel.standardRoomImageUrl ||
+                hotel.standardRoomName ||
+                hotel.standardBathroomImageUrl ||
+                hotel.standardBathroomName ||
+                hotel.suiteRoomImageUrl ||
+                hotel.suiteRoomName ||
+                hotel.suiteBathroomImageUrl ||
+                hotel.suiteBathroomName,
+            ) && (
               <div className="hotel-preview__rooms">
                 <RoomTile imageUrl={hotel.standardRoomImageUrl} name={hotel.standardRoomName} areaSqm={hotel.standardRoomAreaSqm} />
+                <RoomTile
+                  imageUrl={hotel.standardBathroomImageUrl}
+                  name={hotel.standardBathroomName || (hotel.standardBathroomImageUrl ? "客房浴室" : undefined)}
+                />
                 <RoomTile imageUrl={hotel.suiteRoomImageUrl} name={hotel.suiteRoomName} areaSqm={hotel.suiteRoomAreaSqm} />
+                <RoomTile
+                  imageUrl={hotel.suiteBathroomImageUrl}
+                  name={hotel.suiteBathroomName || (hotel.suiteBathroomImageUrl ? "套房浴室" : undefined)}
+                />
               </div>
             )}
           </div>

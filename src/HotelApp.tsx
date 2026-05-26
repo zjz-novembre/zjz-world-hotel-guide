@@ -28,9 +28,13 @@ type NativeHotelPreviewPayload = {
   standardRoomName?: string;
   standardRoomImageUrl?: string;
   standardRoomAreaSqm?: number;
+  standardBathroomName?: string;
+  standardBathroomImageUrl?: string;
   suiteRoomName?: string;
   suiteRoomImageUrl?: string;
   suiteRoomAreaSqm?: number;
+  suiteBathroomName?: string;
+  suiteBathroomImageUrl?: string;
   sourceUrl?: string;
   anchor?: PreviewAnchor;
 };
@@ -368,9 +372,13 @@ function postNativeHotelPreview(hotel: Hotel, anchor?: PreviewAnchor) {
     standardRoomName: hotel.standardRoomName,
     standardRoomImageUrl: hotel.standardRoomImageUrl,
     standardRoomAreaSqm: hotel.standardRoomAreaSqm,
+    standardBathroomName: hotel.standardBathroomName,
+    standardBathroomImageUrl: hotel.standardBathroomImageUrl,
     suiteRoomName: hotel.suiteRoomName,
     suiteRoomImageUrl: hotel.suiteRoomImageUrl,
     suiteRoomAreaSqm: hotel.suiteRoomAreaSqm,
+    suiteBathroomName: hotel.suiteBathroomName,
+    suiteBathroomImageUrl: hotel.suiteBathroomImageUrl,
     sourceUrl: hotel.sourceUrl,
     anchor,
   });
