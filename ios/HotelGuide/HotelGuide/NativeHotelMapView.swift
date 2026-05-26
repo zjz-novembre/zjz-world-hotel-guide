@@ -371,7 +371,7 @@ private struct NativeHotelPinBadge: View {
 
         ZStack {
             NativeHotelPinShape()
-                .fill(logo == nil ? Self.fallbackFill : Color(white: 0.99))
+                .fill(logo == nil ? Self.fallbackFill : pinFillColor)
                 .strokeBorder(Color.white.opacity(0.96), lineWidth: 1)
                 .frame(width: pinSize, height: pinSize)
                 .rotationEffect(.degrees(-45))
@@ -402,7 +402,11 @@ private struct NativeHotelPinBadge: View {
         case "The Leading Hotels of the World":
             return 0.82
         case "Hilton":
-            return 0.72
+            return 0.80
+        case "Hyatt":
+            return 0.70
+        case "Marriott":
+            return 0.76
         default:
             return 0.64
         }
@@ -410,6 +414,10 @@ private struct NativeHotelPinBadge: View {
 
     private var logoOffsetX: CGFloat {
         hotel.chain == "IHG Hotels & Resorts" ? 0.035 : 0
+    }
+
+    private var pinFillColor: Color {
+        hotel.chain == "Hyatt" ? Color(red: 0, green: 114.0 / 255.0, blue: 206.0 / 255.0) : Color(white: 0.99)
     }
 }
 

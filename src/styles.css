@@ -76,6 +76,7 @@
 }
 
 .hotel-map-marker {
+  --hotel-logo-pin-fill: var(--color-surface);
   --hotel-logo-offset-x: 0rem;
   --hotel-logo-scale: 1;
   align-items: center;
@@ -119,7 +120,7 @@
 }
 
 .hotel-map-marker__pin--logo::before {
-  background: var(--color-surface);
+  background: var(--hotel-logo-pin-fill);
   border-color: rgb(255 255 255 / 0.96);
 }
 
@@ -148,7 +149,16 @@
 }
 
 .hotel-marker-group--hilton {
-  --hotel-logo-scale: 1.1;
+  --hotel-logo-scale: 1.12;
+}
+
+.hotel-marker-group--hyatt {
+  --hotel-logo-pin-fill: #0072ce;
+  --hotel-logo-scale: 1.02;
+}
+
+.hotel-marker-group--marriott {
+  --hotel-logo-scale: 1.08;
 }
 
 .hotel-map-marker__tag {
@@ -221,7 +231,7 @@
 .hotel-map-marker--selected-small .hotel-map-marker__pin--logo::before,
 .hotel-map-marker:hover .hotel-map-marker__pin--logo::before,
 .hotel-map-marker:focus-visible .hotel-map-marker__pin--logo::before {
-  background: var(--color-surface);
+  background: var(--hotel-logo-pin-fill);
 }
 
 .hotel-list {
@@ -529,6 +539,7 @@
 }
 
 .offline-hotel-map__marker {
+  --hotel-logo-pin-fill: var(--color-surface);
   --hotel-logo-offset-x: 0rem;
   --hotel-logo-scale: 1;
   appearance: none;
@@ -577,7 +588,7 @@
 }
 
 .offline-hotel-map__pin--logo::before {
-  background: var(--color-surface);
+  background: var(--hotel-logo-pin-fill);
   border-color: rgb(255 255 255 / 0.96);
 }
 
@@ -645,7 +656,7 @@
 .offline-hotel-map__marker--active .offline-hotel-map__pin--logo::before,
 .offline-hotel-map__marker:hover .offline-hotel-map__pin--logo::before,
 .offline-hotel-map__marker:focus-visible .offline-hotel-map__pin--logo::before {
-  background: var(--color-surface);
+  background: var(--hotel-logo-pin-fill);
 }
 
 .offline-hotel-map__marker--active .offline-hotel-map__label,

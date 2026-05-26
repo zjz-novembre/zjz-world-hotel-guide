@@ -73,15 +73,17 @@ const hotelGroupLogoFileByChain: Record<string, string> = {
   Accor: "accor.svg",
   "Four Seasons": "four-seasons.svg",
   Hilton: "hilton.svg",
-  Hyatt: "hyatt-3.png",
+  Hyatt: "hyatt-3-mark.png",
   "IHG Hotels & Resorts": "ihg-2.svg",
-  Marriott: "marriott-2.png",
+  Marriott: "marriott-2-mark.png",
   "The Leading Hotels of the World": "lhw.svg",
 };
 
 const hotelGroupMarkerClassByChain: Record<string, string> = {
   Hilton: "hotel-marker-group--hilton",
+  Hyatt: "hotel-marker-group--hyatt",
   "IHG Hotels & Resorts": "hotel-marker-group--ihg",
+  Marriott: "hotel-marker-group--marriott",
   "The Leading Hotels of the World": "hotel-marker-group--lhw",
 };
 
