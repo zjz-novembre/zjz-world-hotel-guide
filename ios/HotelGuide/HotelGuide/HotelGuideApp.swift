@@ -1,7 +1,15 @@
+import AMapFoundationKit
+import MAMapKit
 import SwiftUI
 
 @main
 struct HotelGuideApp: App {
+    init() {
+        MAMapView.updatePrivacyShow(.didShow, privacyInfo: .didContain)
+        MAMapView.updatePrivacyAgree(.didAgree)
+        AMapServices.shared().apiKey = "8924dbb00daef3035dc6a5872f425efb"
+    }
+
     var body: some Scene {
         WindowGroup {
             HotelGuideRootView()
@@ -10,11 +18,15 @@ struct HotelGuideApp: App {
 }
 
 struct HotelGuideRootView: View {
+    @StateObject private var mapStore = NativeHotelMapStore()
     @StateObject private var previewStore = HotelPreviewStore()
 
     var body: some View {
         ZStack {
-            HotelGuideWebView(previewStore: previewStore)
+            NativeHotelMapView(mapStore: mapStore)
+                .ignoresSafeArea()
+
+            HotelGuideWebView(mapStore: mapStore, previewStore: previewStore)
                 .ignoresSafeArea()
 
             if let preview = previewStore.preview {

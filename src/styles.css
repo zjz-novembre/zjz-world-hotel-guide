@@ -86,16 +86,22 @@
 }
 
 .hotel-map-marker__pin {
+  display: block;
+  height: var(--size-hotel-pin);
+  position: relative;
+  width: var(--size-hotel-pin);
+}
+
+.hotel-map-marker__pin::before {
   background: var(--color-map-marker);
   border: 0.0625rem solid #fff;
   border-radius: 999px 999px 999px var(--radius-1);
   box-shadow: var(--shadow-hotel-pin);
-  display: block;
-  height: var(--size-hotel-pin);
+  content: "";
+  inset: 0;
   overflow: hidden;
-  position: relative;
+  position: absolute;
   transform: rotate(-45deg);
-  width: var(--size-hotel-pin);
 }
 
 .hotel-map-marker__pin::after {
@@ -110,7 +116,7 @@
   width: var(--size-hotel-pin-core);
 }
 
-.hotel-map-marker__pin--logo {
+.hotel-map-marker__pin--logo::before {
   background: var(--color-surface);
   border-color: rgb(255 255 255 / 0.96);
 }
@@ -127,8 +133,12 @@
   object-fit: contain;
   position: absolute;
   top: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%);
   width: var(--size-hotel-pin-logo);
+}
+
+.hotel-map-marker--ihg .hotel-map-marker__logo {
+  transform: translate(calc(-50% + 0.08rem), -50%);
 }
 
 .hotel-map-marker__tag {
@@ -187,16 +197,21 @@
 .hotel-map-marker--selected-small .hotel-map-marker__pin:not(.hotel-map-marker__pin--logo),
 .hotel-map-marker:hover .hotel-map-marker__pin:not(.hotel-map-marker__pin--logo),
 .hotel-map-marker:focus-visible .hotel-map-marker__pin:not(.hotel-map-marker__pin--logo) {
-  background: var(--color-map-marker);
+  background: transparent;
+}
+
+.hotel-map-marker--active .hotel-map-marker__pin::before,
+.hotel-map-marker--selected-small .hotel-map-marker__pin::before,
+.hotel-map-marker:hover .hotel-map-marker__pin::before,
+.hotel-map-marker:focus-visible .hotel-map-marker__pin::before {
   box-shadow: var(--shadow-hotel-pin-active);
 }
 
-.hotel-map-marker--active .hotel-map-marker__pin--logo,
-.hotel-map-marker--selected-small .hotel-map-marker__pin--logo,
-.hotel-map-marker:hover .hotel-map-marker__pin--logo,
-.hotel-map-marker:focus-visible .hotel-map-marker__pin--logo {
+.hotel-map-marker--active .hotel-map-marker__pin--logo::before,
+.hotel-map-marker--selected-small .hotel-map-marker__pin--logo::before,
+.hotel-map-marker:hover .hotel-map-marker__pin--logo::before,
+.hotel-map-marker:focus-visible .hotel-map-marker__pin--logo::before {
   background: var(--color-surface);
-  box-shadow: var(--shadow-hotel-pin-active);
 }
 
 .hotel-list {
@@ -517,18 +532,24 @@
 }
 
 .offline-hotel-map__pin {
+  display: block;
+  height: var(--size-hotel-pin);
+  left: var(--offset-hotel-pin);
+  position: absolute;
+  top: var(--offset-hotel-pin);
+  width: var(--size-hotel-pin);
+}
+
+.offline-hotel-map__pin::before {
   background: var(--color-map-marker);
   border: 0.0625rem solid #fff;
   border-radius: 999px 999px 999px var(--radius-1);
   box-shadow: var(--shadow-hotel-pin);
-  display: block;
-  height: var(--size-hotel-pin);
-  left: var(--offset-hotel-pin);
+  content: "";
+  inset: 0;
   overflow: hidden;
   position: absolute;
-  top: var(--offset-hotel-pin);
   transform: rotate(-45deg);
-  width: var(--size-hotel-pin);
 }
 
 .offline-hotel-map__pin::after {
@@ -543,7 +564,7 @@
   width: var(--size-hotel-pin-core);
 }
 
-.offline-hotel-map__pin--logo {
+.offline-hotel-map__pin--logo::before {
   background: var(--color-surface);
   border-color: rgb(255 255 255 / 0.96);
 }
@@ -560,8 +581,12 @@
   object-fit: contain;
   position: absolute;
   top: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%);
   width: var(--size-hotel-pin-logo);
+}
+
+.offline-hotel-map__marker--ihg .offline-hotel-map__logo {
+  transform: translate(calc(-50% + 0.08rem), -50%);
 }
 
 .offline-hotel-map__label {
@@ -600,14 +625,19 @@
 .offline-hotel-map__marker--active .offline-hotel-map__pin:not(.offline-hotel-map__pin--logo),
 .offline-hotel-map__marker:hover .offline-hotel-map__pin:not(.offline-hotel-map__pin--logo),
 .offline-hotel-map__marker:focus-visible .offline-hotel-map__pin:not(.offline-hotel-map__pin--logo) {
-  background: var(--color-map-marker);
+  background: transparent;
 }
 
-.offline-hotel-map__marker--active .offline-hotel-map__pin--logo,
-.offline-hotel-map__marker:hover .offline-hotel-map__pin--logo,
-.offline-hotel-map__marker:focus-visible .offline-hotel-map__pin--logo {
-  background: var(--color-surface);
+.offline-hotel-map__marker--active .offline-hotel-map__pin::before,
+.offline-hotel-map__marker:hover .offline-hotel-map__pin::before,
+.offline-hotel-map__marker:focus-visible .offline-hotel-map__pin::before {
   box-shadow: var(--shadow-hotel-pin-active);
+}
+
+.offline-hotel-map__marker--active .offline-hotel-map__pin--logo::before,
+.offline-hotel-map__marker:hover .offline-hotel-map__pin--logo::before,
+.offline-hotel-map__marker:focus-visible .offline-hotel-map__pin--logo::before {
+  background: var(--color-surface);
 }
 
 .offline-hotel-map__marker--active .offline-hotel-map__label,

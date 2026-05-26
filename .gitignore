@@ -5,6 +5,7 @@ database/
 output/playwright/
 output/reference-video/
 ios/HotelGuide/DerivedData/
+ios/HotelGuide/Pods/
 *.xcuserstate
 *.xcuserdata/
 *.xcscmblueprint

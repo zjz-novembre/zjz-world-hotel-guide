@@ -1,0 +1,5 @@
+platform :ios, '17.0'
+
+target 'HotelGuide' do
+  pod 'AMap3DMap', '~> 11.1'
+end

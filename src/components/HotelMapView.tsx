@@ -18,7 +18,48 @@ type HotelMapViewProps = {
   userLocation: UserLocation | null;
 };
 
-type MapStatus = "missing-key" | "loading" | "ready" | "failed" | "offline";
+type MapStatus = "missing-key" | "loading" | "ready" | "failed" | "offline" | "native";
+
+type NativeHotelMapRect = {
+  height: number;
+  width: number;
+  x: number;
+  y: number;
+};
+
+type NativeHotelMapPayload = {
+  camera: {
+    center: [number, number];
+    zoom: number;
+  };
+  hotels: Array<{
+    brandZh: string;
+    chain: string;
+    chainZh: string;
+    id: string;
+    logoFile: string | null;
+    name: string;
+    nameEn: string;
+    nameZh: string;
+    position: [number, number];
+  }>;
+  layout: {
+    blockedRects: NativeHotelMapRect[];
+    mapRect: NativeHotelMapRect;
+  };
+  province: {
+    center: [number, number];
+    name: string;
+    value: string;
+    zoom: number;
+  };
+  selectedId: string | null;
+  selectedMode: "small" | "detail" | null;
+  userLocation: {
+    heading: number | null;
+    position: [number, number];
+  } | null;
+};
 
 const DEFAULT_AMAP_STYLE = "amap://styles/whitesmoke";
 const AMAP_FEATURES = ["bg", "road", "point"];
@@ -35,6 +76,8 @@ const hotelGroupLogoFileByChain: Record<string, string> = {
   "IHG Hotels & Resorts": "ihg-2.svg",
   "The Leading Hotels of the World": "lhw.svg",
 };
+
+const IHG_CHAIN_NAME = "IHG Hotels & Resorts";
 
 export function HotelMapView({
   hotels,
@@ -55,10 +98,18 @@ export function HotelMapView({
   const [mapReady, setMapReady] = useState(false);
   const [mapConfig, setMapConfig] = useState<RuntimeAmapConfig | null>(null);
   const [mapStatus, setMapStatus] = useState<MapStatus>("loading");
+  const [nativeMapEnabled, setNativeMapEnabled] = useState(false);
   const amapKey = mapConfig?.key?.trim();
   const amapStyle = mapConfig?.mapStyle?.trim() || DEFAULT_AMAP_STYLE;
   const amapSecurityCode = mapConfig?.securityCode?.trim();
   const hotelKey = useMemo(() => hotels.map((hotel) => hotel.id).join("|"), [hotels]);
+  const nativeHotelKey = useMemo(
+    () =>
+      hotels
+        .map((hotel) => `${hotel.id}:${hotel.position?.join(",") ?? "missing"}`)
+        .join("|"),
+    [hotels],
+  );
   const selectedHotel = useMemo(
     () => hotels.find((hotel) => hotel.id === selectedId) ?? null,
     [hotels, selectedId],
@@ -67,6 +118,20 @@ export function HotelMapView({
   useEffect(() => {
     provinceRef.current = province;
   }, [province]);
+
+  useEffect(() => {
+    const enabled = Boolean(window.__HOTEL_GUIDE_NATIVE_MAP__ && window.webkit?.messageHandlers?.hotelMap);
+    setNativeMapEnabled(enabled);
+    if (enabled) {
+      document.documentElement.dataset.nativeHotelMap = "true";
+    }
+
+    return () => {
+      if (enabled) {
+        delete document.documentElement.dataset.nativeHotelMap;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -80,6 +145,12 @@ export function HotelMapView({
   }, []);
 
   useEffect(() => {
+    if (nativeMapEnabled) {
+      setMapReady(false);
+      setMapStatus("native");
+      return;
+    }
+
     if (!mapConfig) {
       setMapReady(false);
       setMapStatus("loading");
@@ -173,9 +244,67 @@ export function HotelMapView({
       map.current = null;
       setMapReady(false);
     };
-  }, [amapKey, amapSecurityCode, amapStyle, mapConfig]);
+  }, [amapKey, amapSecurityCode, amapStyle, mapConfig, nativeMapEnabled]);
 
   useEffect(() => {
+    if (!nativeMapEnabled) return;
+
+    let syncFrame = 0;
+    const syncNativeMap = () => {
+      window.cancelAnimationFrame(syncFrame);
+      syncFrame = window.requestAnimationFrame(() => {
+        postNativeHotelMap(
+          createNativeHotelMapPayload({
+            hotels,
+            province,
+            selectedHotel,
+            selectedId,
+            selectedMode,
+            surfaceElement: surfaceNode.current,
+            userLocation,
+          }),
+        );
+      });
+    };
+
+    window.__HOTEL_GUIDE_NATIVE_MAP_SELECT__ = (hotelId: string) => onSelect(hotelId);
+    window.__HOTEL_GUIDE_NATIVE_MAP_CLEAR__ = () => onClearSelection();
+    syncNativeMap();
+
+    const observedElements = [
+      surfaceNode.current,
+      document.querySelector(".content-shell"),
+      document.querySelector(".chrome-layer"),
+      document.querySelector(".list-section"),
+    ].filter((element): element is Element => element instanceof Element);
+    const resizeObserver = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(syncNativeMap);
+    observedElements.forEach((element) => resizeObserver?.observe(element));
+    window.addEventListener("resize", syncNativeMap);
+    window.addEventListener("scroll", syncNativeMap, true);
+
+    return () => {
+      window.cancelAnimationFrame(syncFrame);
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", syncNativeMap);
+      window.removeEventListener("scroll", syncNativeMap, true);
+      delete window.__HOTEL_GUIDE_NATIVE_MAP_SELECT__;
+      delete window.__HOTEL_GUIDE_NATIVE_MAP_CLEAR__;
+    };
+  }, [
+    hotels,
+    nativeHotelKey,
+    nativeMapEnabled,
+    onClearSelection,
+    onSelect,
+    province,
+    selectedHotel,
+    selectedId,
+    selectedMode,
+    userLocation,
+  ]);
+
+  useEffect(() => {
+    if (nativeMapEnabled) return;
     if (!amapKey || !map.current || !window.AMap || !mapReady) return;
 
     const activeMap = map.current;
@@ -212,7 +341,7 @@ export function HotelMapView({
       });
     const userMarker = userLocation ? createUserLocationMarker(userLocation) : null;
     activeMap.add([provinceAnchor, ...nextMarkers, ...(userMarker ? [userMarker] : [])]);
-  }, [amapKey, hotelKey, hotels, mapReady, onSelect, province, userLocation]);
+  }, [amapKey, hotelKey, hotels, mapReady, nativeMapEnabled, onSelect, province, userLocation]);
 
   useEffect(() => {
     const element = surfaceNode.current;
@@ -229,6 +358,7 @@ export function HotelMapView({
   }, [onClearSelection]);
 
   useEffect(() => {
+    if (nativeMapEnabled) return;
     if (!map.current || !mapReady) return;
 
     const clearOnAmapClick = () => {
@@ -242,9 +372,10 @@ export function HotelMapView({
 
     map.current.on("click", clearOnAmapClick);
     return () => map.current?.off?.("click", clearOnAmapClick);
-  }, [mapReady, onClearSelection]);
+  }, [mapReady, nativeMapEnabled, onClearSelection]);
 
   useEffect(() => {
+    if (nativeMapEnabled) return;
     if (!map.current || !mapReady) return;
 
     let resizeFrame = 0;
@@ -261,9 +392,10 @@ export function HotelMapView({
       window.cancelAnimationFrame(resizeFrame);
       window.removeEventListener("resize", syncProvinceView);
     };
-  }, [mapReady, province]);
+  }, [mapReady, nativeMapEnabled, province]);
 
   useEffect(() => {
+    if (nativeMapEnabled) return;
     markers.current.forEach((item) => {
       item.setTop?.(false);
       item.setzIndex?.(HOTEL_MARKER_Z_INDEX);
@@ -280,15 +412,16 @@ export function HotelMapView({
     if (!marker) return;
     marker.setTop?.(true);
     marker.setzIndex?.(ACTIVE_HOTEL_MARKER_Z_INDEX);
-  }, [selectedId, selectedMode]);
+  }, [nativeMapEnabled, selectedId, selectedMode]);
 
   useEffect(() => {
+    if (nativeMapEnabled) return;
     if (!map.current || !mapReady || selectedMode !== "small" || !selectedHotel?.position) return;
 
     const zoom = Math.max(getVisibleProvinceZoom(province, mapNode.current), 14.8);
     const center = getVisibleCoordinateCenter(selectedHotel.position, mapNode.current, zoom);
     applyMapView(map.current, zoom, center);
-  }, [mapReady, province, selectedHotel, selectedMode]);
+  }, [mapReady, nativeMapEnabled, province, selectedHotel, selectedMode]);
 
   return (
     <div
@@ -297,11 +430,11 @@ export function HotelMapView({
       aria-label="高德地图"
       data-amap-status={mapStatus}
       data-map-province={province.value}
-      data-cached-map={mapStatus === "ready" ? "hidden" : "visible"}
+      data-cached-map={mapStatus === "ready" || mapStatus === "native" ? "hidden" : "visible"}
       style={{ "--map-marker-scale": 1 } as CSSProperties}
     >
       <div ref={mapNode} className="amap-live-layer" aria-hidden={mapStatus !== "ready"} />
-      {mapStatus !== "ready" && (
+      {mapStatus !== "ready" && mapStatus !== "native" && (
         <OfflineHotelMap
           hotels={hotels}
           onSelect={onSelect}
@@ -320,6 +453,108 @@ function hasLiveAmapDom(element: HTMLElement) {
       ".amap-maps, .amap-layer, .amap-layers, .amap-logo, .amap-copyright, canvas",
     ),
   );
+}
+
+function postNativeHotelMap(payload: NativeHotelMapPayload) {
+  const handler = window.webkit?.messageHandlers?.hotelMap;
+  if (!window.__HOTEL_GUIDE_NATIVE_MAP__ || !handler) return;
+  handler.postMessage(payload);
+}
+
+function createNativeHotelMapPayload({
+  hotels,
+  province,
+  selectedHotel,
+  selectedId,
+  selectedMode,
+  surfaceElement,
+  userLocation,
+}: {
+  hotels: Hotel[];
+  province: HotelProvinceOption;
+  selectedHotel: Hotel | null;
+  selectedId: string | null;
+  selectedMode: "small" | "detail" | null;
+  surfaceElement: HTMLElement | null;
+  userLocation: UserLocation | null;
+}): NativeHotelMapPayload {
+  const camera = getNativeMapCamera(province, selectedHotel, selectedMode, surfaceElement);
+  const zoom = getVisibleProvinceZoom(province, surfaceElement);
+
+  return {
+    camera,
+    hotels: hotels
+      .filter((hotel): hotel is Hotel & { position: [number, number] } => Boolean(hotel.position))
+      .map((hotel) => ({
+        brandZh: hotel.brandZh || hotel.brand,
+        chain: hotel.chain,
+        chainZh: hotel.chainZh || hotel.chain,
+        id: hotel.id,
+        logoFile: hotelGroupLogoFileByChain[hotel.chain] ?? null,
+        name: hotel.name,
+        nameEn: hotel.nameEn || hotel.name,
+        nameZh: hotel.nameZh || hotel.name,
+        position: hotel.position,
+      })),
+    layout: getNativeMapLayout(surfaceElement),
+    province: {
+      center: province.center,
+      name: province.provinceName,
+      value: province.value,
+      zoom,
+    },
+    selectedId,
+    selectedMode,
+    userLocation: userLocation
+      ? {
+          heading: userLocation.heading,
+          position: userLocation.position,
+        }
+      : null,
+  };
+}
+
+function getNativeMapCamera(
+  province: HotelProvinceOption,
+  selectedHotel: Hotel | null,
+  selectedMode: "small" | "detail" | null,
+  element: HTMLElement | null,
+) {
+  let zoom = getVisibleProvinceZoom(province, element);
+  let center = getVisibleProvinceCenter(province, element, zoom);
+
+  if (selectedMode === "small" && selectedHotel?.position) {
+    zoom = Math.max(zoom, 14.8);
+    center = getVisibleCoordinateCenter(selectedHotel.position, element, zoom);
+  }
+
+  return { center, zoom };
+}
+
+function getNativeMapLayout(surfaceElement: HTMLElement | null) {
+  const fallbackRect = new DOMRect(0, 0, window.innerWidth, window.innerHeight);
+  const mapRect = toNativeRect(surfaceElement?.getBoundingClientRect() ?? fallbackRect);
+  const blockedRects = [
+    document.querySelector(".chrome-layer"),
+    document.querySelector(".list-section"),
+    document.querySelector(".hotel-list-toggle"),
+    document.querySelector(".hotel-preview"),
+  ]
+    .filter((element): element is Element => element instanceof Element)
+    .map((element) => element.getBoundingClientRect())
+    .filter((rect) => rect.width > 0 && rect.height > 0)
+    .map(toNativeRect);
+
+  return { blockedRects, mapRect };
+}
+
+function toNativeRect(rect: DOMRect | DOMRectReadOnly): NativeHotelMapRect {
+  return {
+    height: rect.height,
+    width: rect.width,
+    x: rect.left,
+    y: rect.top,
+  };
 }
 
 function applyProvinceView(activeMap: AMapMap, province: HotelProvinceOption, element: HTMLElement | null) {
@@ -474,6 +709,7 @@ function createHotelMarkerContent(hotel: Hotel, onClick: () => void) {
   const logoSrc = getHotelGroupLogoSrc(hotel.chain);
   const marker = document.createElement("div");
   marker.className = logoSrc ? "hotel-map-marker hotel-map-marker--has-logo" : "hotel-map-marker";
+  marker.classList.toggle("hotel-map-marker--ihg", hotel.chain === IHG_CHAIN_NAME);
   marker.dataset.hotelId = hotel.id;
   marker.role = "button";
   marker.tabIndex = 0;
@@ -565,16 +801,18 @@ function OfflineHotelMap({
           if (!point) return null;
           const [x, y] = point;
           const logoSrc = getHotelGroupLogoSrc(hotel.chain);
+          const markerClasses = [
+            "offline-hotel-map__marker",
+            hotel.id === selectedId ? "offline-hotel-map__marker--active" : "",
+            logoSrc ? "offline-hotel-map__marker--has-logo" : "",
+            hotel.chain === IHG_CHAIN_NAME ? "offline-hotel-map__marker--ihg" : "",
+          ]
+            .filter(Boolean)
+            .join(" ");
           return (
             <button
               key={hotel.id}
-              className={
-                hotel.id === selectedId
-                  ? `offline-hotel-map__marker offline-hotel-map__marker--active ${
-                      logoSrc ? "offline-hotel-map__marker--has-logo" : ""
-                    }`
-                  : `offline-hotel-map__marker ${logoSrc ? "offline-hotel-map__marker--has-logo" : ""}`
-              }
+              className={markerClasses}
               style={{ left: `${x}%`, top: `${y}%` }}
               type="button"
               onClick={() => onSelect(hotel.id)}

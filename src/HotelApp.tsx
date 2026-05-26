@@ -43,8 +43,14 @@ declare global {
         hotelPreview?: {
           postMessage: (payload: NativeHotelPreviewPayload) => void;
         };
+        hotelMap?: {
+          postMessage: (payload: unknown) => void;
+        };
       };
     };
+    __HOTEL_GUIDE_NATIVE_MAP__?: boolean;
+    __HOTEL_GUIDE_NATIVE_MAP_CLEAR__?: () => void;
+    __HOTEL_GUIDE_NATIVE_MAP_SELECT__?: (hotelId: string) => void;
   }
 }
 

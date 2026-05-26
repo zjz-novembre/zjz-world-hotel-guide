@@ -88,8 +88,21 @@ html {
   letter-spacing: 0;
 }
 
+html[data-native-hotel-map="true"] {
+  background: transparent;
+}
+
 body {
   margin: 0;
+}
+
+html[data-native-hotel-map="true"] body,
+html[data-native-hotel-map="true"] .app-shell,
+html[data-native-hotel-map="true"] .content-shell,
+html[data-native-hotel-map="true"] .map-section,
+html[data-native-hotel-map="true"] .amap-surface,
+.amap-surface--native {
+  background: transparent;
 }
 
 button,
@@ -368,6 +381,11 @@ button {
 .amap-surface--ready .amap-live-layer {
   opacity: 1;
   visibility: visible;
+}
+
+.amap-surface--native .amap-live-layer {
+  opacity: 0;
+  visibility: hidden;
 }
 
 .amap-surface--missing-key::before,

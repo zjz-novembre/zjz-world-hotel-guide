@@ -2,10 +2,11 @@ import SwiftUI
 import WebKit
 
 struct HotelGuideWebView: UIViewRepresentable {
+    @ObservedObject var mapStore: NativeHotelMapStore
     @ObservedObject var previewStore: HotelPreviewStore
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(previewStore: previewStore)
+        Coordinator(previewStore: previewStore, mapStore: mapStore)
     }
 
     func makeUIView(context: Context) -> WKWebView {
@@ -15,21 +16,27 @@ struct HotelGuideWebView: UIViewRepresentable {
         configuration.setURLSchemeHandler(HotelGuideSchemeHandler(), forURLScheme: "hotelguide")
 
         let userContentController = WKUserContentController()
+        userContentController.add(context.coordinator, name: "hotelMap")
         userContentController.add(context.coordinator, name: "hotelPreview")
         userContentController.addUserScript(
             WKUserScript(
-                source: "window.__HOTEL_GUIDE_NATIVE_PREVIEW__ = true;",
+                source: """
+                window.__HOTEL_GUIDE_NATIVE_PREVIEW__ = true;
+                window.__HOTEL_GUIDE_NATIVE_MAP__ = true;
+                """,
                 injectionTime: .atDocumentStart,
                 forMainFrameOnly: true
             )
         )
         configuration.userContentController = userContentController
 
-        let webView = WKWebView(frame: .zero, configuration: configuration)
+        let webView = PassthroughHotelGuideWebView(frame: .zero, configuration: configuration)
+        webView.mapStore = mapStore
         webView.isOpaque = false
         webView.backgroundColor = .clear
         webView.scrollView.backgroundColor = .clear
         webView.scrollView.contentInsetAdjustmentBehavior = .never
+        mapStore.attach(webView: webView)
         webView.loadHotelGuide()
         return webView
     }
@@ -37,25 +44,53 @@ struct HotelGuideWebView: UIViewRepresentable {
     func updateUIView(_ webView: WKWebView, context: Context) {}
 
     static func dismantleUIView(_ uiView: WKWebView, coordinator: Coordinator) {
+        uiView.configuration.userContentController.removeScriptMessageHandler(forName: "hotelMap")
         uiView.configuration.userContentController.removeScriptMessageHandler(forName: "hotelPreview")
+        coordinator.detach()
     }
 
     final class Coordinator: NSObject, WKScriptMessageHandler {
+        private let mapStore: NativeHotelMapStore
         private let previewStore: HotelPreviewStore
 
-        init(previewStore: HotelPreviewStore) {
+        init(previewStore: HotelPreviewStore, mapStore: NativeHotelMapStore) {
             self.previewStore = previewStore
+            self.mapStore = mapStore
         }
 
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-            guard message.name == "hotelPreview", let preview = HotelPreviewPayload(message: message.body) else {
+            if message.name == "hotelMap" {
+                Task { @MainActor in
+                    mapStore.update(from: message.body)
+                }
                 return
             }
 
-            Task { @MainActor in
-                previewStore.show(preview)
+            if message.name == "hotelPreview", let preview = HotelPreviewPayload(message: message.body) {
+                Task { @MainActor in
+                    previewStore.show(preview)
+                }
             }
         }
+
+        func detach() {
+            Task { @MainActor in
+                mapStore.attach(webView: nil)
+            }
+        }
+    }
+}
+
+final class PassthroughHotelGuideWebView: WKWebView {
+    weak var mapStore: NativeHotelMapStore?
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let hitView = super.hitTest(point, with: event)
+        guard hitView != nil, mapStore?.shouldRouteTouchToNativeMap(at: point) == true else {
+            return hitView
+        }
+
+        return nil
     }
 }
 
