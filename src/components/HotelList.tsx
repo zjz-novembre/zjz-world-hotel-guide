@@ -5,7 +5,14 @@ type HotelListProps = {
   hotels: RankedHotel[];
   selectedId: string | null;
   onSelect: (hotelId: string) => void;
-  onPreview: (hotelId: string) => void;
+  onPreview: (hotelId: string, anchor?: PreviewAnchor) => void;
+};
+
+export type PreviewAnchor = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 };
 
 export function HotelList({ hotels, selectedId, onPreview, onSelect }: HotelListProps) {
@@ -17,12 +24,12 @@ export function HotelList({ hotels, selectedId, onPreview, onSelect }: HotelList
     longPressTimer.current = null;
   };
 
-  const startLongPress = (hotelId: string) => {
+  const startLongPress = (hotelId: string, anchor: PreviewAnchor) => {
     clearLongPress();
     longPressTriggered.current = false;
     longPressTimer.current = window.setTimeout(() => {
       longPressTriggered.current = true;
-      onPreview(hotelId);
+      onPreview(hotelId, anchor);
     }, 520);
   };
 
@@ -50,12 +57,12 @@ export function HotelList({ hotels, selectedId, onPreview, onSelect }: HotelList
             }}
             onContextMenu={(event) => {
               event.preventDefault();
-              onPreview(hotel.id);
+              onPreview(hotel.id, rectAnchor(event.currentTarget));
             }}
             onPointerCancel={clearLongPress}
             onPointerDown={(event) => {
               if (event.button !== 0) return;
-              startLongPress(hotel.id);
+              startLongPress(hotel.id, rectAnchor(event.currentTarget));
             }}
             onPointerLeave={clearLongPress}
             onPointerUp={clearLongPress}
@@ -83,6 +90,16 @@ export function HotelList({ hotels, selectedId, onPreview, onSelect }: HotelList
       </div>
     </div>
   );
+}
+
+function rectAnchor(element: HTMLElement): PreviewAnchor {
+  const rect = element.getBoundingClientRect();
+  return {
+    x: rect.x,
+    y: rect.y,
+    width: rect.width,
+    height: rect.height,
+  };
 }
 
 function formatRoomArea(areaSqm: number | undefined) {

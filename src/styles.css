@@ -207,6 +207,9 @@
   height: 100%;
   overflow: hidden;
   position: relative;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
   z-index: 2;
 }
 
@@ -252,6 +255,7 @@
   min-height: 3.4rem;
   padding: var(--space-3) var(--space-5);
   text-align: left;
+  touch-action: manipulation;
   width: 100%;
 }
 

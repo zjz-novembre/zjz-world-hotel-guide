@@ -2,10 +2,10 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { FilterControl } from "./components/FilterControl";
 import { AwardIcon, ChevronDownIcon, DiamondIcon, MapPinIcon, TagIcon } from "./components/icons";
 import { HotelDetailPreview } from "./components/HotelDetailPreview";
-import { HotelList } from "./components/HotelList";
+import { HotelList, type PreviewAnchor } from "./components/HotelList";
 import { HotelMapView } from "./components/HotelMapView";
 import { HotelPriceFilter } from "./components/HotelPriceFilter";
-import { filterAndRankHotels } from "./lib/hotel-filtering";
+import { filterAndRankHotels, formatHotelRate } from "./lib/hotel-filtering";
 import { loadHotels } from "./lib/hotels-api";
 import { wgs84ToGcj02 } from "./lib/coordinates";
 import type { Hotel, HotelBrandOption, HotelChainOption, HotelFilters, HotelProvinceOption, UserLocation } from "./types";
@@ -15,6 +15,38 @@ type SelectedMarker = {
   id: string;
   mode: "small" | "detail";
 };
+
+type NativeHotelPreviewPayload = {
+  id: string;
+  nameZh: string;
+  nameEn: string;
+  brand: string;
+  city: string;
+  priceText: string;
+  description: string;
+  hotelImageUrl?: string;
+  standardRoomName?: string;
+  standardRoomImageUrl?: string;
+  standardRoomAreaSqm?: number;
+  suiteRoomName?: string;
+  suiteRoomImageUrl?: string;
+  suiteRoomAreaSqm?: number;
+  sourceUrl?: string;
+  anchor?: PreviewAnchor;
+};
+
+declare global {
+  interface Window {
+    __HOTEL_GUIDE_NATIVE_PREVIEW__?: boolean;
+    webkit?: {
+      messageHandlers?: {
+        hotelPreview?: {
+          postMessage: (payload: NativeHotelPreviewPayload) => void;
+        };
+      };
+    };
+  }
+}
 
 const defaultFilters: HotelFilters = {
   province: "shanghai",
@@ -184,10 +216,15 @@ export function HotelApp() {
     );
   }, []);
 
-  const handlePreview = useCallback((hotelId: string) => {
+  const handlePreview = useCallback((hotelId: string, anchor?: PreviewAnchor) => {
+    const hotel = activeHotels.find((item) => item.id === hotelId);
     setPreviewHotelId(hotelId);
     setSelectedMarker({ id: hotelId, mode: "detail" });
-  }, []);
+
+    if (hotel && postNativeHotelPreview(hotel, anchor)) {
+      setPreviewHotelId(null);
+    }
+  }, [activeHotels]);
 
   const handleClearSelect = useCallback(() => {
     setSelectedMarker(null);
@@ -305,4 +342,32 @@ export function HotelApp() {
 
 function sanitizePriceInput(value: string) {
   return value.replace(/[^\d.]/g, "");
+}
+
+function postNativeHotelPreview(hotel: Hotel, anchor?: PreviewAnchor) {
+  const handler = window.webkit?.messageHandlers?.hotelPreview;
+  if (!window.__HOTEL_GUIDE_NATIVE_PREVIEW__ || !handler) return false;
+
+  handler.postMessage({
+    id: hotel.id,
+    nameZh: hotel.nameZh || hotel.name,
+    nameEn: hotel.nameEn || hotel.name,
+    brand: [hotel.chainZh || hotel.chainEn || hotel.chain, hotel.brandZh || hotel.brandEn || hotel.brand]
+      .filter(Boolean)
+      .join(" · "),
+    city: hotel.cityNameZh || hotel.cityName || hotel.provinceNameZh || hotel.provinceName,
+    priceText: formatHotelRate(hotel),
+    description: hotel.descriptionZh || hotel.descriptionEn || "",
+    hotelImageUrl: hotel.hotelImageUrl,
+    standardRoomName: hotel.standardRoomName,
+    standardRoomImageUrl: hotel.standardRoomImageUrl,
+    standardRoomAreaSqm: hotel.standardRoomAreaSqm,
+    suiteRoomName: hotel.suiteRoomName,
+    suiteRoomImageUrl: hotel.suiteRoomImageUrl,
+    suiteRoomAreaSqm: hotel.suiteRoomAreaSqm,
+    sourceUrl: hotel.sourceUrl,
+    anchor,
+  });
+
+  return true;
 }
