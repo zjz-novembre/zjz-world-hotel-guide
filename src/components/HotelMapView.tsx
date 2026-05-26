@@ -70,7 +70,7 @@ const MAP_TILE_SIZE = 256;
 const HOTEL_MARKER_Z_INDEX = 30;
 const ACTIVE_HOTEL_MARKER_Z_INDEX = 10000;
 const hotelGroupLogoFileByChain: Record<string, string> = {
-  Accor: "accor.svg",
+  Accor: "accor-1.svg",
   "Four Seasons": "four-seasons.svg",
   Hilton: "hilton.svg",
   Hyatt: "hyatt-3-mark.png",

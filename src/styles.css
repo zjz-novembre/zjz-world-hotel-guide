@@ -149,16 +149,16 @@
 }
 
 .hotel-marker-group--hilton {
-  --hotel-logo-scale: 1.12;
+  --hotel-logo-scale: 1.13;
 }
 
 .hotel-marker-group--hyatt {
   --hotel-logo-pin-fill: #0072ce;
-  --hotel-logo-scale: 1.02;
+  --hotel-logo-scale: 1.015;
 }
 
 .hotel-marker-group--marriott {
-  --hotel-logo-scale: 1.08;
+  --hotel-logo-scale: 1.07;
 }
 
 .hotel-map-marker__tag {

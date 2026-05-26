@@ -1,12 +1,12 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { env } from "node:process";
 import { hotelSourceDir } from "./paths.mjs";
 
 const outputDir = hotelSourceDir;
-const linkPath = join(outputDir, "accor-china-official-hotel-links.json");
 const outputJsonPath = join(outputDir, "accor-china-official-hotels.json");
-const userAgent = "michelin-list-personal-research/0.1 (+low-frequency official Accor hotel detail collection)";
+const hodContentUrl = "https://repos.accor.com/ota/content.xml";
+const userAgent = "michelin-list-personal-research/0.1 (+low-frequency official Accor HOD collection)";
+const greaterChinaCountryCodes = new Set(["CN", "HK", "MO", "TW"]);
 
 const brandZhByEn = {
   "Banyan Tree": "悦榕庄",
@@ -15,451 +15,638 @@ const brandZhByEn = {
   Fairmont: "费尔蒙",
   Garrya: "悦柳",
   "Grand Mercure": "美爵",
-  Ibis: "宜必思",
+  HOMM: "HOMM",
+  "Handwritten Collection": "翰悦阁精选",
   ibis: "宜必思",
-  "Ibis Styles": "宜必思尚品",
   "ibis Styles": "宜必思尚品",
+  "Jo&Joe": "JO&JOE",
   Mercure: "美居",
   MGallery: "美憬阁",
-  Mgallery: "美憬阁",
   Mondrian: "梦卓恩",
   Mövenpick: "瑞享",
   Novotel: "诺富特",
   "Novotel Living": "诺富特公寓",
+  "Novotel Suites": "诺富特套房",
+  "Other Brand": "其他品牌",
   Pullman: "铂尔曼",
   Raffles: "莱佛士",
   Sofitel: "索菲特",
   "Sofitel Legend": "索菲特传奇",
   Swissôtel: "瑞士酒店",
-  "Swissôtel Hotels & Resorts": "瑞士酒店",
+  "Swissôtel Living": "瑞士酒店公寓",
   "The Sebel": "诗铂",
-  "Jo&Joe": "JO&JOE",
-  TRIBE: "芮族",
 };
 
-const zhOverridesBySpiritCode = {
-  3562: { name_zh: "香港世纪诺富特酒店" },
-  3563: { name_zh: "宜必思香港北角酒店" },
-  6239: { name_zh: "香港诺富特东荟城酒店" },
-  6480: { name_zh: "澳门十六浦索菲特大酒店" },
-  7606: { name_zh: "宜必思香港中上环酒店" },
-  B1U0: { name_zh: "澳门悦榕庄" },
-  B5L5: { name_zh: "香港明怡美憬阁精选酒店" },
-  B7J3: { name_zh: "香港梦卓恩酒店" },
-  B824: { name_zh: "澳门银河莱佛士" },
-};
+let existingHotelsByCode = new Map();
 
-const officialDetailSupplementBySpiritCode = {
-  3562: {
-    name_en: "Novotel Century Hong Kong",
-    name_zh: "香港世纪诺富特酒店",
-    brand_en: "Novotel",
-    countryCode: "HK",
-    city_en: "Hong Kong",
-    address1_en: "238 Jaffe Road, WANCHAI",
-    latitude: 22.278836,
-    longitude: 114.176504,
-  },
-  3563: {
-    name_en: "ibis Hong Kong North Point",
-    name_zh: "宜必思香港北角酒店",
-    brand_en: "ibis",
-    countryCode: "HK",
-    city_en: "Hong Kong",
-    address1_en: "138 Java Road, NORTH POINT",
-    latitude: 22.292323,
-    longitude: 114.200432,
-    phone: "+852 2588 1111",
-    email: "h3563@accor.com",
-  },
-  6239: {
-    name_en: "Novotel Hong Kong Citygate",
-    name_zh: "香港诺富特东荟城酒店",
-    brand_en: "Novotel",
-    countryCode: "HK",
-    city_en: "Hong Kong",
-    address1_en: "51 Man Tung Road, Tung Chung",
-    latitude: 22.291456,
-    longitude: 113.943207,
-    phone: "+852 3602 8888",
-    email: "H6239@accor.com",
-  },
-  6480: {
-    name_en: "Sofitel Macau at Ponte 16",
-    name_zh: "澳门十六浦索菲特大酒店",
-    brand_en: "Sofitel",
-    countryCode: "MO",
-    city_en: "Macau",
-    address1_en: "Rua do Visconde Paco de Arcos",
-    latitude: 22.196944,
-    longitude: 113.535833,
-  },
-  7606: {
-    name_en: "ibis Hong Kong Central & Sheung Wan",
-    name_zh: "宜必思香港中上环酒店",
-    brand_en: "ibis",
-    countryCode: "HK",
-    city_en: "Hong Kong",
-    address1_en: "No 28 Des Voeux Road West, Sheung Wan",
-    latitude: 22.287697,
-    longitude: 114.147558,
-    phone: "+852 2252 2929",
-    email: "H7606-RE10@accor.com",
-  },
-  A4A4: {
-    name_en: "The Silveri Hotel Hong Kong - MGallery Collection",
-    name_zh: "香港银樾美憬阁精选酒店",
-    brand_en: "MGallery",
-    countryCode: "HK",
-    city_en: "Hong Kong",
-    address1_en: "16 Tat Tung Road, Tung Chung",
-    latitude: 22.290521,
-    longitude: 113.941118,
-    phone: "+852 3602 8989",
-    email: "ha4a4@accor.com",
-  },
-  B1U0: {
-    name_en: "Banyan Tree Macau",
-    name_zh: "澳门悦榕庄",
-    brand_en: "Banyan Tree",
-    countryCode: "MO",
-    city_en: "Macau",
-    address1_en: "Avenida Marginal Flor de Lotus, Cotai, Macau, China",
-    latitude: 22.148687,
-    longitude: 113.552715,
-    phone: "+853 8883 6888",
-    email: "macau@banyantree.com",
-  },
-  B5L5: {
-    name_en: "AKI Hotel Hong Kong - MGallery Collection",
-    name_zh: "香港明怡美憬阁精选酒店",
-    brand_en: "MGallery",
-    countryCode: "HK",
-    city_en: "Hong Kong",
-    address1_en: "239 Jaffe Road",
-    latitude: 22.279171,
-    longitude: 114.176875,
-    phone: "+852 2121 5000",
-    email: "HB5L5@accor.com",
-  },
-  B7J3: {
-    name_en: "Mondrian Hong Kong",
-    name_zh: "香港梦卓恩酒店",
-    brand_en: "Mondrian",
-    countryCode: "HK",
-    city_en: "Hong Kong",
-    address1_en: "8A Hart Avenue, Tsim Sha Tsui",
-    latitude: 22.297716,
-    longitude: 114.174763,
-    phone: "+852 3550 0388",
-    email: "hongkong@mondrianhotels.com",
-  },
-  B824: {
-    name_en: "Raffles at Galaxy Macau",
-    name_zh: "澳门银河莱佛士",
-    brand_en: "Raffles",
-    countryCode: "MO",
-    city_en: "Macau",
-    address1_en: "Galaxy Macau Estrada Da Baia, Da Nossa Senhora, Da Esperance Cotai",
-    latitude: 22.150363,
-    longitude: 113.553726,
-    phone: "+853 8886 3388",
-    email: "info@rafflesmacau.com",
-  },
-};
+async function main() {
+  existingHotelsByCode = existsSync(outputJsonPath)
+    ? new Map(JSON.parse(readFileSync(outputJsonPath, "utf8")).hotels.map((hotel) => [hotel.spiritCode, hotel]))
+    : new Map();
+  const hodXml = await fetchHodContentXml();
+  const sourceHotels = parseHodContent(hodXml);
+  const generatedAt = cleanText(hodXml.match(/<description>[\s\S]*?generated time ([\s\S]*?)<\/description>/i)?.[1]);
+  const hotels = sourceHotels
+    .filter((hotel) => greaterChinaCountryCodes.has(hotel.countryCode))
+    .filter((hotel) => hotel.hotelStatus === "Open")
+    .filter((hotel) => !isTestHotel(hotel))
+    .map(toAccorHotelRecord)
+    .sort((left, right) => left.spiritCode.localeCompare(right.spiritCode));
 
-const linksPayload = JSON.parse(readFileSync(linkPath, "utf8"));
-const links = [...(linksPayload.hotels ?? [])].sort((left, right) =>
-  left.code.localeCompare(right.code),
-);
-const existingHotelsByCode = env.ACCOR_USE_CACHE === "1" && existsSync(outputJsonPath)
-  ? new Map(JSON.parse(readFileSync(outputJsonPath, "utf8")).hotels.map((hotel) => [hotel.spiritCode, hotel]))
-  : new Map();
-const hotels = [];
-
-for (const [index, link] of links.entries()) {
-  const hotel = existingHotelsByCode.has(link.code)
-    ? normalizeCachedHotel(existingHotelsByCode.get(link.code))
-    : officialDetailSupplementBySpiritCode[link.code]
-      ? supplementHotel(link)
-      : await fetchHotel(link);
-  hotels.push(hotel);
-  console.log(`${index + 1}/${links.length} ${hotel.spiritCode} ${hotel.name_zh || hotel.name_en}`);
-  await sleep(120);
-}
-
-writeFileSync(
-  outputJsonPath,
-  `${JSON.stringify(
-    {
-      metadata: {
-        source: "accor_official_greater_china_destination_and_hotel_json_ld",
-        official_sites: linksPayload.metadata?.source_urls ?? {
-          list_en: "https://all.accor.com/a/en/destination/country/hotels-china-pcn.html",
+  writeFileSync(
+    outputJsonPath,
+    `${JSON.stringify(
+      {
+        metadata: {
+          source: "accor_official_hod_repository_content_xml",
+          source_url: hodContentUrl,
+          generatedAt: generatedAt || null,
+          fetchedAt: new Date().toISOString(),
+          hotel_status_included: ["Open"],
+          country_codes_included: [...greaterChinaCountryCodes],
+          source_hotel_count: sourceHotels.length,
+          greater_china_open_hotel_count: hotels.length,
         },
-        source_link_count: links.length,
-        fetchedAt: new Date().toISOString(),
+        hotels,
       },
-      hotels: hotels.sort((left, right) => left.spiritCode.localeCompare(right.spiritCode)),
-    },
-    null,
-    2,
-  )}\n`,
-);
+      null,
+      2,
+    )}\n`,
+  );
 
-console.log(`Wrote ${hotels.length} Accor hotels to ${outputJsonPath}`);
-
-async function fetchHotel(link) {
-  const code = link.code;
-  const propertySiteURL_en = `https://all.accor.com/hotel/${code}/index.en.shtml`;
-  const propertySiteURL_zh = `https://all.accor.com/hotel/${code}/index.zh.shtml`;
-  const isZhOptional = link.destinationKey === "hong_kong" || link.destinationKey === "macau" || link.destinationKey === "taiwan";
-  const [enPage, zhPage] = await Promise.all([
-    fetchHotelPage(propertySiteURL_en, "en-US,en;q=0.9", { optional: false }),
-    fetchHotelPage(propertySiteURL_zh, "zh-CN,zh;q=0.9", { optional: isZhOptional }),
-  ]);
-  const enHotel = enPage.hotel ?? {};
-  const zhHotel = zhPage.hotel ?? {};
-  const enBreadcrumb = enPage.breadcrumb?.itemListElement ?? [];
-  const zhBreadcrumb = zhPage.breadcrumb?.itemListElement ?? [];
-  const brandEn = cleanText(enHotel.brand?.name ?? zhHotel.brand?.name);
-  const latitude = numberOrNull(zhHotel.geo?.latitude ?? enHotel.geo?.latitude);
-  const longitude = numberOrNull(zhHotel.geo?.longitude ?? enHotel.geo?.longitude);
-  const countryCode = cleanText(zhHotel.address?.addressCountry ?? enHotel.address?.addressCountry) || "CN";
-  const region = regionForCountryCode(countryCode);
-  const zhOverride = zhOverridesBySpiritCode[code] ?? {};
-
-  return {
-    chain: "Accor",
-    chain_zh: "雅高集团",
-    source: "accor_official_greater_china_destination_and_hotel_json_ld",
-    official_locale_primary: "zh-CN",
-    official_locale_secondary: "en-US",
-    spiritCode: code,
-    name_en: normalizeAccorName(enHotel.legalName ?? enHotel.name ?? link.name_en_list),
-    name_zh: normalizeAccorName(zhHotel.legalName ?? zhHotel.name ?? zhOverride.name_zh ?? zhPage.h1),
-    brand_en: brandEn,
-    brand_zh: brandZhByEn[brandEn] ?? "",
-    brandKey: slugify(brandEn),
-    hotelStatus: "FULLY_BOOKABLE",
-    propertyType: "Hotel",
-    gpCategory: null,
-    city_en: titleCase(enHotel.address?.addressLocality ?? enBreadcrumb[4]?.name ?? ""),
-    city_zh: cleanText(zhHotel.address?.addressLocality ?? zhBreadcrumb[4]?.name) || region.city_zh,
-    province_en: cleanText(enBreadcrumb[3]?.name) || region.province_en,
-    province_zh: cleanText(zhBreadcrumb[3]?.name) || region.province_zh,
-    region_en: region.region_en,
-    region_zh: region.region_zh,
-    regionCode: region.regionCode,
-    subRegionCode: null,
-    subRegionLabel_en: null,
-    subRegionLabel_zh: null,
-    country_en: region.country_en,
-    country_zh: region.country_zh,
-    countryCode,
-    countryDisplay_en: region.countryDisplay_en,
-    countryDisplay_zh: region.countryDisplay_zh,
-    address1_en: cleanText(enHotel.address?.streetAddress),
-    address1_zh: cleanText(zhHotel.address?.streetAddress),
-    zipcode: cleanText(zhHotel.address?.postalCode ?? enHotel.address?.postalCode) || null,
-    latitude,
-    longitude,
-    phone: cleanText(zhHotel.telephone ?? enHotel.telephone) || null,
-    email: cleanText(zhHotel.email ?? enHotel.email) || null,
-    propertySiteURL_en,
-    propertySiteURL_zh: zhPage.hotel ? propertySiteURL_zh : null,
-    externalBookingURL_en: null,
-    externalBookingURL_zh: null,
-    bookableDate: null,
-    openDate: null,
-    checkinTime: zhHotel.checkinTime ?? enHotel.checkinTime ?? null,
-    checkoutTime: zhHotel.checkoutTime ?? enHotel.checkoutTime ?? null,
-    nonSmoking: null,
-    excludeFromBrandFilter: false,
-    showBrandLogo: true,
-    suppressBrandLogo: false,
-    description_en: cleanText(enHotel.description) || null,
-    description_zh: cleanText(zhHotel.description) || null,
-    amenities_en: [],
-    amenities_zh: [],
-    amenityKeys: [],
-    characteristics_en: [],
-    characteristics_zh: [],
-    thumbnails: [zhHotel.image ?? enHotel.image].filter(Boolean),
-    brandlogo: zhHotel.logo ?? enHotel.logo ?? enHotel.brand?.logo ?? zhHotel.brand?.logo ?? null,
-    flag: null,
-    verifiedRating: numberOrNull(zhHotel.aggregateRating?.ratingValue ?? enHotel.aggregateRating?.ratingValue),
-    verifiedNumReviews: numberOrNull(zhHotel.aggregateRating?.reviewCount ?? enHotel.aggregateRating?.reviewCount),
-    lastRenovationDate: null,
-    raw_en: enPage.raw,
-    raw_zh: zhPage.raw,
-  };
+  console.log(`Wrote ${hotels.length} Accor Greater China hotels to ${outputJsonPath}`);
 }
 
-function supplementHotel(link) {
-  const supplement = officialDetailSupplementBySpiritCode[link.code];
-  const region = regionForCountryCode(supplement.countryCode);
-  const brandEn = supplement.brand_en;
-
-  return {
-    chain: "Accor",
-    chain_zh: "雅高集团",
-    source: "accor_official_greater_china_public_page_supplement",
-    official_locale_primary: "en-US",
-    official_locale_secondary: null,
-    spiritCode: link.code,
-    name_en: supplement.name_en,
-    name_zh: supplement.name_zh,
-    brand_en: brandEn,
-    brand_zh: brandZhByEn[brandEn] ?? "",
-    brandKey: slugify(brandEn),
-    hotelStatus: "FULLY_BOOKABLE",
-    propertyType: "Hotel",
-    gpCategory: null,
-    city_en: supplement.city_en,
-    city_zh: region.city_zh,
-    province_en: region.province_en,
-    province_zh: region.province_zh,
-    region_en: region.region_en,
-    region_zh: region.region_zh,
-    regionCode: region.regionCode,
-    subRegionCode: null,
-    subRegionLabel_en: null,
-    subRegionLabel_zh: null,
-    country_en: region.country_en,
-    country_zh: region.country_zh,
-    countryCode: supplement.countryCode,
-    countryDisplay_en: region.countryDisplay_en,
-    countryDisplay_zh: region.countryDisplay_zh,
-    address1_en: supplement.address1_en,
-    address1_zh: "",
-    zipcode: null,
-    latitude: supplement.latitude,
-    longitude: supplement.longitude,
-    phone: supplement.phone ?? null,
-    email: supplement.email ?? null,
-    propertySiteURL_en: `https://all.accor.com/hotel/${link.code}/index.en.shtml`,
-    propertySiteURL_zh: null,
-    externalBookingURL_en: null,
-    externalBookingURL_zh: null,
-    bookableDate: null,
-    openDate: null,
-    checkinTime: null,
-    checkoutTime: null,
-    nonSmoking: null,
-    excludeFromBrandFilter: false,
-    showBrandLogo: true,
-    suppressBrandLogo: false,
-    description_en: null,
-    description_zh: null,
-    amenities_en: [],
-    amenities_zh: [],
-    amenityKeys: [],
-    characteristics_en: [],
-    characteristics_zh: [],
-    thumbnails: [],
-    brandlogo: null,
-    flag: null,
-    verifiedRating: null,
-    verifiedNumReviews: null,
-    lastRenovationDate: null,
-    raw_en: {
-      source_url: `https://all.accor.com/hotel/${link.code}/index.en.shtml`,
-      source: "official_public_page_supplement",
-    },
-    raw_zh: null,
-  };
-}
-
-function normalizeCachedHotel(hotel) {
-  const brandEn = cleanText(hotel.brand_en);
-  const region = regionForCountryCode(hotel.countryCode);
-
-  return {
-    ...hotel,
-    chain_zh: "雅高集团",
-    source: "accor_official_greater_china_destination_and_hotel_json_ld",
-    brand_zh: cleanText(hotel.brand_zh) || brandZhByEn[brandEn] || "",
-    region_en: hotel.region_en || region.region_en,
-    region_zh: hotel.region_zh || region.region_zh,
-    regionCode: hotel.regionCode || region.regionCode,
-    province_en: hotel.province_en || region.province_en,
-    province_zh: hotel.province_zh || region.province_zh,
-    city_zh: hotel.city_zh || region.city_zh,
-    country_en: hotel.country_en || region.country_en,
-    country_zh: hotel.country_zh || region.country_zh,
-    countryDisplay_en: hotel.countryDisplay_en || region.countryDisplay_en,
-    countryDisplay_zh: hotel.countryDisplay_zh || region.countryDisplay_zh,
-  };
-}
-
-async function fetchHotelPage(url, acceptLanguage, { optional }) {
-  const response = await fetch(url, {
+async function fetchHodContentXml() {
+  const response = await fetch(hodContentUrl, {
     headers: {
-      "accept-language": acceptLanguage,
-      ...(env.ACCOR_COOKIE ? { cookie: env.ACCOR_COOKIE } : {}),
+      "accept-language": "en-US,en;q=0.9",
       "user-agent": userAgent,
     },
   });
 
   if (!response.ok) {
-    if (optional) return { hotel: null, breadcrumb: null, h1: "", raw: { source_url: url, status: response.status } };
-    throw new Error(`Accor detail fetch failed ${response.status}: ${url}`);
+    throw new Error(`Accor HOD content fetch failed ${response.status}: ${hodContentUrl}`);
   }
 
-  const html = await response.text();
-  const jsonLd = [...html.matchAll(/<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)]
-    .map((match) => safeJson(match[1]))
-    .filter(Boolean);
-  const hotel = jsonLd.find((item) => item["@type"] === "Hotel") ?? null;
-  const breadcrumb = jsonLd.find((item) => item["@type"] === "BreadcrumbList") ?? null;
-  const h1 = cleanText(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1]?.replace(/<[^>]+>/g, " "));
+  return response.text();
+}
+
+function parseHodContent(xml) {
+  return [...xml.matchAll(/<hotel>([\s\S]*?)<\/hotel>/g)].map((match) => {
+    const block = match[1];
+    return {
+      hotelCode: tag(block, "hotelCode"),
+      hotelName: tag(block, "hotelName"),
+      file: tag(block, "file"),
+      lastModified: tag(block, "lastModified"),
+      creationTime: tag(block, "creationTime"),
+      latitude: numberOrNull(tag(block, "latitude")),
+      longitude: numberOrNull(tag(block, "longitude")),
+      brandCode: tag(block, "brandCode"),
+      brandName: tag(block, "brandName"),
+      cityName: normalizeCityName(tag(block, "cityName")),
+      countryCode: tag(block, "countryCode"),
+      countryName: tag(block, "countryName"),
+      hotelStatus: tag(block, "hotelStatus"),
+    };
+  });
+}
+
+function toAccorHotelRecord(summary) {
+  const existing = existingHotelsByCode.get(summary.hotelCode) ?? {};
+  const brandEn = normalizeBrandName(summary.brandName);
+  const brandZh = brandZhByEn[brandEn] ?? "";
+  const region = regionForCountryCode(summary.countryCode);
+  const cityEn = summary.cityName;
+  const cityZh = cityZhFor(cityEn, summary.countryCode);
+  const provinceZh = provinceZhFor(cityEn, summary.countryCode);
+  const nameEn = titleCaseHotelName(existing.name_en || summary.hotelName);
+  const nameZh = hasHan(existing.name_zh) ? existing.name_zh : "";
 
   return {
-    hotel,
-    breadcrumb,
-    h1,
-    raw: {
-      source_url: url,
-      status: response.status,
-      hotel,
-      breadcrumb,
+    chain: "Accor",
+    chain_zh: "雅高集团",
+    source: "accor_official_hod_repository_content_xml",
+    official_locale_primary: "en-US",
+    official_locale_secondary: null,
+    spiritCode: summary.hotelCode,
+    name_en: nameEn,
+    name_zh: nameZh,
+    brand_en: brandEn,
+    brand_zh: brandZh,
+    brandKey: slugify(brandEn),
+    hotelStatus: "FULLY_BOOKABLE",
+    propertyType: "Hotel",
+    gpCategory: null,
+    city_en: cityEn,
+    city_zh: cityZh,
+    province_en: region.province_en,
+    province_zh: provinceZh,
+    region_en: region.region_en,
+    region_zh: region.region_zh,
+    regionCode: region.regionCode,
+    subRegionCode: null,
+    subRegionLabel_en: null,
+    subRegionLabel_zh: null,
+    country_en: region.country_en,
+    country_zh: region.country_zh,
+    countryCode: summary.countryCode,
+    countryDisplay_en: region.countryDisplay_en,
+    countryDisplay_zh: region.countryDisplay_zh,
+    address1_en: cleanText(existing.address1_en),
+    address1_zh: cleanText(existing.address1_zh),
+    zipcode: existing.zipcode ?? null,
+    latitude: summary.latitude,
+    longitude: summary.longitude,
+    phone: cleanText(existing.phone) || null,
+    email: cleanText(existing.email) || null,
+    propertySiteURL_en: `https://all.accor.com/hotel/${summary.hotelCode}/index.en.shtml`,
+    propertySiteURL_zh: `https://all.accor.com/hotel/${summary.hotelCode}/index.zh.shtml`,
+    externalBookingURL_en: null,
+    externalBookingURL_zh: null,
+    bookableDate: null,
+    openDate: null,
+    checkinTime: existing.checkinTime ?? null,
+    checkoutTime: existing.checkoutTime ?? null,
+    nonSmoking: null,
+    excludeFromBrandFilter: false,
+    showBrandLogo: true,
+    suppressBrandLogo: false,
+    description_en: cleanText(existing.description_en) || null,
+    description_zh: cleanText(existing.description_zh) || null,
+    amenities_en: Array.isArray(existing.amenities_en) ? existing.amenities_en : [],
+    amenities_zh: Array.isArray(existing.amenities_zh) ? existing.amenities_zh : [],
+    amenityKeys: Array.isArray(existing.amenityKeys) ? existing.amenityKeys : [],
+    characteristics_en: Array.isArray(existing.characteristics_en) ? existing.characteristics_en : [],
+    characteristics_zh: Array.isArray(existing.characteristics_zh) ? existing.characteristics_zh : [],
+    thumbnails: Array.isArray(existing.thumbnails) ? existing.thumbnails : [],
+    brandlogo: existing.brandlogo ?? null,
+    flag: null,
+    verifiedRating: existing.verifiedRating ?? null,
+    verifiedNumReviews: existing.verifiedNumReviews ?? null,
+    lastRenovationDate: existing.lastRenovationDate ?? null,
+    raw_en: {
+      source_url: hodContentUrl,
+      file_url: `https://repos.accor.com/ota/${summary.file}`,
+      content_summary: summary,
     },
+    raw_zh: null,
   };
 }
 
-function safeJson(value) {
-  try {
-    return JSON.parse(value);
-  } catch {
-    return null;
-  }
+function tag(block, name) {
+  return decodeXml(block.match(new RegExp(`<${name}>([\\s\\S]*?)</${name}>`, "i"))?.[1] ?? "");
 }
 
-function normalizeAccorName(value) {
-  return cleanText(value)
-    .replace(/\s+-\s+ALL$/i, "")
-    .replace(/\s+\d+\s*星$/i, "")
-    .replace(/\s+\d+\s*stars?$/i, "")
+function decodeXml(value) {
+  return String(value)
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;|&apos;/g, "'")
     .trim();
 }
 
-function cleanText(value) {
-  if (typeof value !== "string") return "";
-  return value.replace(/\s+/g, " ").trim();
+function normalizeBrandName(value) {
+  const normalized = cleanText(decodeXml(value)).toLocaleUpperCase();
+  const brandMap = {
+    ANGSANA: "Angsana",
+    "BANYAN TREE": "Banyan Tree",
+    DHAWA: "Dhawa",
+    FAIRMONT: "Fairmont",
+    GARRYA: "Garrya",
+    "GRAND MERCURE": "Grand Mercure",
+    HANDWRITTEN: "Handwritten Collection",
+    HOMM: "HOMM",
+    "IBIS HOTELS": "ibis",
+    "IBIS STYLES": "ibis Styles",
+    "JO&JOE": "Jo&Joe",
+    MERCURE: "Mercure",
+    MGALLERY: "MGallery",
+    MONDRIAN: "Mondrian",
+    MOVENPICK: "Mövenpick",
+    NOVOTEL: "Novotel",
+    "NOVOTEL LIVING": "Novotel Living",
+    "NOVOTEL SUITES": "Novotel Suites",
+    PULLMAN: "Pullman",
+    RAFFLES: "Raffles",
+    SOFITEL: "Sofitel",
+    "SOFITEL LEGEND": "Sofitel Legend",
+    SWISSOTEL: "Swissôtel",
+    "SWISSOTEL LIVING": "Swissôtel Living",
+    "THE SEBEL": "The Sebel",
+  };
+  return brandMap[normalized] ?? titleCaseHotelName(normalized);
 }
 
-function numberOrNull(value) {
-  if (value === null || value === undefined || value === "") return null;
-  const number = Number(value);
-  return Number.isFinite(number) ? number : null;
+function normalizeCityName(value) {
+  const city = titleCaseHotelName(cleanText(value).replace(/\s+/g, " "));
+  const aliases = {
+    "Aba Sichuan Provice": "Aba",
+    "Guangdong Huizhou": "Huizhou",
+    "Haikou City Hainan Province": "Haikou",
+    "Hang Zhou": "Hangzhou",
+    Huaian: "Huai'an",
+    "Huai An": "Huai'an",
+    Huhhot: "Hohhot",
+    Jinan: "Jinan",
+    "Ji'Nan": "Jinan",
+    "Ji'Ning": "Jining",
+    "Jin Jiang": "Jinjiang",
+    "Jing Hong": "Jinghong",
+    Kangdingganzizhou: "Kangding",
+    "Li Jiang": "Lijiang",
+    "Shanghai City": "Shanghai",
+    Taian: "Tai'an",
+    "Tibetan Autonomous Prefecture": "Aba",
+    "Xi An": "Xi'an",
+    "Xi'An": "Xi'an",
+    Xian: "Xi'an",
+    "Ya'An": "Ya'an",
+    "Yan'An": "Yan'an",
+    Yongdengxianlanzhou: "Yongdeng",
+    Zhangbeixian: "Zhangbei",
+    Zhejiang: "Hangzhou",
+  };
+  return aliases[city] ?? city;
 }
 
-function titleCase(value) {
+function titleCaseHotelName(value) {
   return cleanText(value)
     .toLocaleLowerCase()
-    .replace(/\b\w/g, (character) => character.toLocaleUpperCase());
+    .split(/(\s+|-|')/)
+    .map((part) => (/^[a-z]/.test(part) ? part.charAt(0).toLocaleUpperCase() + part.slice(1) : part))
+    .join("")
+    .replace(/\bIbis\b/g, "ibis")
+    .replace(/\bMgallery\b/g, "MGallery")
+    .replace(/\bMovenpick\b/g, "Mövenpick")
+    .replace(/\bNovotel\b/g, "Novotel")
+    .replace(/\bSofitel\b/g, "Sofitel")
+    .replace(/\bSwissotel\b/g, "Swissôtel")
+    .replace(/\bNecc\b/g, "NECC")
+    .replace(/\bCbd\b/g, "CBD")
+    .replace(/\bCny\b/g, "CNY")
+    .replace(/\bHr\b/g, "HR")
+    .replace(/\bJw\b/g, "JW")
+    .replace(/\bR&f\b/gi, "R&F");
 }
+
+function cityZhFor(cityEn, countryCode) {
+  if (countryCode === "HK") return "香港";
+  if (countryCode === "MO") return "澳门";
+  if (countryCode === "TW") return cityZhByEn[cityEn] ?? "台湾";
+  return cityZhByEn[cityEn] ?? "";
+}
+
+function provinceZhFor(cityEn, countryCode) {
+  if (countryCode === "HK") return "香港";
+  if (countryCode === "MO") return "澳门";
+  if (countryCode === "TW") return "台湾";
+  return cityProvinceZhByEn[cityEn] ?? "";
+}
+
+const cityZhByEn = {
+  Aba: "阿坝",
+  Anji: "安吉",
+  Ankang: "安康",
+  Anqing: "安庆",
+  Anshan: "鞍山",
+  Anshun: "安顺",
+  Anxi: "安溪",
+  Anyang: "安阳",
+  Baishan: "白山",
+  Baotou: "包头",
+  Beihai: "北海",
+  Beijing: "北京",
+  Bengbu: "蚌埠",
+  Bijie: "毕节",
+  Bozhou: "亳州",
+  Changchun: "长春",
+  Changde: "常德",
+  Changsha: "长沙",
+  Changshu: "常熟",
+  Changzhou: "常州",
+  Chaozhou: "潮州",
+  Chengdu: "成都",
+  Chenzhou: "郴州",
+  Chifeng: "赤峰",
+  Chizhou: "池州",
+  Chongqing: "重庆",
+  Dali: "大理",
+  Dalian: "大连",
+  Daqing: "大庆",
+  Dazhou: "达州",
+  Datong: "大同",
+  Deqing: "德清",
+  Diqing: "迪庆",
+  Dongtai: "东台",
+  Dongguan: "东莞",
+  Dujiangyan: "都江堰",
+  Emeishan: "峨眉山",
+  Enshi: "恩施",
+  Foshan: "佛山",
+  Fuzhou: "福州",
+  Ganzhou: "赣州",
+  Golmud: "格尔木",
+  Guangzhou: "广州",
+  Guilin: "桂林",
+  Guiyang: "贵阳",
+  Guanyunxian: "灌云",
+  Haikou: "海口",
+  Haimen: "海门",
+  Hainan: "海南",
+  Haining: "海宁",
+  Handan: "邯郸",
+  Hangzhou: "杭州",
+  Harbin: "哈尔滨",
+  Hefei: "合肥",
+  Hohhot: "呼和浩特",
+  "Hong Kong": "香港",
+  "Huai'an": "淮安",
+  Huangshan: "黄山",
+  Huayin: "华阴",
+  Huizhou: "惠州",
+  Huzhou: "湖州",
+  Jinghong: "景洪",
+  Jingjiang: "靖江",
+  Jinhua: "金华",
+  Jinjiang: "晋江",
+  Jining: "济宁",
+  Jinan: "济南",
+  Jilin: "吉林",
+  Kaifeng: "开封",
+  Kangding: "康定",
+  Kashgar: "喀什",
+  Korla: "库尔勒",
+  Kunming: "昆明",
+  Kunshan: "昆山",
+  Kuitun: "奎屯",
+  Jiayuguan: "嘉峪关",
+  Jiuquan: "酒泉",
+  Lanzhou: "兰州",
+  Lijiang: "丽江",
+  Lianyungang: "连云港",
+  Linfen: "临汾",
+  Linyi: "临沂",
+  Lushan: "庐山",
+  Luoyang: "洛阳",
+  Macau: "澳门",
+  Nanchang: "南昌",
+  Nanjing: "南京",
+  Nanning: "南宁",
+  Nantong: "南通",
+  Neijiang: "内江",
+  Ningbo: "宁波",
+  Ordos: "鄂尔多斯",
+  Panjin: "盘锦",
+  Pingyao: "平遥",
+  Pingliang: "平凉",
+  Qidong: "启东",
+  Qiannan: "黔南",
+  Qingdao: "青岛",
+  Qinhuangdao: "秦皇岛",
+  Qionghai: "琼海",
+  Qiongzhong: "琼中",
+  Quanzhou: "泉州",
+  Rizhao: "日照",
+  Rugao: "如皋",
+  Sanya: "三亚",
+  Shaoguan: "韶关",
+  Shaoxing: "绍兴",
+  Shangqiu: "商丘",
+  Shanghai: "上海",
+  Shangrao: "上饶",
+  Shigatse: "日喀则",
+  Shenyang: "沈阳",
+  Shenzhen: "深圳",
+  Shijiazhuang: "石家庄",
+  Shishi: "石狮",
+  Suqian: "宿迁",
+  Suzhou: "苏州",
+  Taipei: "台北",
+  Taicang: "太仓",
+  "Tai'an": "泰安",
+  Taizhou: "台州",
+  Taiyuan: "太原",
+  Tangshan: "唐山",
+  Tengchong: "腾冲",
+  Tianjin: "天津",
+  Tiantai: "天台",
+  Tianshui: "天水",
+  Tonghua: "通化",
+  Tongliao: "通辽",
+  Turpan: "吐鲁番",
+  Urumqi: "乌鲁木齐",
+  Wanning: "万宁",
+  Weinan: "渭南",
+  Weifang: "潍坊",
+  Wenzhou: "温州",
+  Wuhan: "武汉",
+  Wuhu: "芜湖",
+  Wuxi: "无锡",
+  Xiamen: "厦门",
+  Xichang: "西昌",
+  "Xi'an": "西安",
+  Xianyang: "咸阳",
+  Xinzhou: "忻州",
+  Xining: "西宁",
+  Xinyang: "信阳",
+  Xishuangbanna: "西双版纳",
+  Xuzhou: "徐州",
+  "Ya'an": "雅安",
+  Yancheng: "盐城",
+  Yangzhou: "扬州",
+  Yangquan: "阳泉",
+  Yangshuo: "阳朔",
+  "Yan'an": "延安",
+  Yantai: "烟台",
+  Yueyang: "岳阳",
+  Yichang: "宜昌",
+  Yinchuan: "银川",
+  Yining: "伊宁",
+  Yiwu: "义乌",
+  Yongdeng: "永登",
+  Zhangjiajie: "张家界",
+  Zhangbei: "张北",
+  Zhengzhou: "郑州",
+  Zhenjiang: "镇江",
+  Zhoukou: "周口",
+  Zhoushan: "舟山",
+  Zhuhai: "珠海",
+  Zibo: "淄博",
+  Zunyi: "遵义",
+};
+
+const cityProvinceZhByEn = {
+  Aba: "四川",
+  Anji: "浙江",
+  Ankang: "陕西",
+  Anqing: "安徽",
+  Anshan: "辽宁",
+  Anshun: "贵州",
+  Anxi: "福建",
+  Anyang: "河南",
+  Baishan: "吉林",
+  Baotou: "内蒙古",
+  Beihai: "广西",
+  Beijing: "北京",
+  Bengbu: "安徽",
+  Bijie: "贵州",
+  Bozhou: "安徽",
+  Changchun: "吉林",
+  Changde: "湖南",
+  Changsha: "湖南",
+  Changshu: "江苏",
+  Changzhou: "江苏",
+  Chaozhou: "广东",
+  Chengdu: "四川",
+  Chenzhou: "湖南",
+  Chifeng: "内蒙古",
+  Chizhou: "安徽",
+  Chongqing: "重庆",
+  Dali: "云南",
+  Dalian: "辽宁",
+  Daqing: "黑龙江",
+  Dazhou: "四川",
+  Datong: "山西",
+  Deqing: "浙江",
+  Diqing: "云南",
+  Dongtai: "江苏",
+  Dongguan: "广东",
+  Dujiangyan: "四川",
+  Emeishan: "四川",
+  Enshi: "湖北",
+  Foshan: "广东",
+  Fuzhou: "福建",
+  Ganzhou: "江西",
+  Golmud: "青海",
+  Guangzhou: "广东",
+  Guilin: "广西",
+  Guiyang: "贵州",
+  Guanyunxian: "江苏",
+  Haikou: "海南",
+  Haimen: "江苏",
+  Hainan: "海南",
+  Haining: "浙江",
+  Handan: "河北",
+  Hangzhou: "浙江",
+  Harbin: "黑龙江",
+  Hefei: "安徽",
+  Hohhot: "内蒙古",
+  "Huai'an": "江苏",
+  Huangshan: "安徽",
+  Huayin: "陕西",
+  Huizhou: "广东",
+  Huzhou: "浙江",
+  Jinghong: "云南",
+  Jingjiang: "江苏",
+  Jinhua: "浙江",
+  Jinjiang: "福建",
+  Jining: "山东",
+  Jinan: "山东",
+  Jilin: "吉林",
+  Kaifeng: "河南",
+  Kangding: "四川",
+  Kashgar: "新疆",
+  Korla: "新疆",
+  Kunming: "云南",
+  Kunshan: "江苏",
+  Kuitun: "新疆",
+  Jiayuguan: "甘肃",
+  Jiuquan: "甘肃",
+  Lanzhou: "甘肃",
+  Lijiang: "云南",
+  Lianyungang: "江苏",
+  Linfen: "山西",
+  Linyi: "山东",
+  Lushan: "江西",
+  Luoyang: "河南",
+  Nanchang: "江西",
+  Nanjing: "江苏",
+  Nanning: "广西",
+  Nantong: "江苏",
+  Neijiang: "四川",
+  Ningbo: "浙江",
+  Ordos: "内蒙古",
+  Panjin: "辽宁",
+  Pingyao: "山西",
+  Pingliang: "甘肃",
+  Qidong: "江苏",
+  Qiannan: "贵州",
+  Qingdao: "山东",
+  Qinhuangdao: "河北",
+  Qionghai: "海南",
+  Qiongzhong: "海南",
+  Quanzhou: "福建",
+  Rizhao: "山东",
+  Rugao: "江苏",
+  Sanya: "海南",
+  Shaoguan: "广东",
+  Shaoxing: "浙江",
+  Shangqiu: "河南",
+  Shanghai: "上海",
+  Shangrao: "江西",
+  Shigatse: "西藏",
+  Shenyang: "辽宁",
+  Shenzhen: "广东",
+  Shijiazhuang: "河北",
+  Shishi: "福建",
+  Suqian: "江苏",
+  Suzhou: "江苏",
+  Taicang: "江苏",
+  "Tai'an": "山东",
+  Taizhou: "浙江",
+  Taiyuan: "山西",
+  Tangshan: "河北",
+  Tengchong: "云南",
+  Tianjin: "天津",
+  Tiantai: "浙江",
+  Tianshui: "甘肃",
+  Tonghua: "吉林",
+  Tongliao: "内蒙古",
+  Turpan: "新疆",
+  Urumqi: "新疆",
+  Wanning: "海南",
+  Weinan: "陕西",
+  Weifang: "山东",
+  Wenzhou: "浙江",
+  Wuhan: "湖北",
+  Wuhu: "安徽",
+  Wuxi: "江苏",
+  Xiamen: "福建",
+  Xichang: "四川",
+  "Xi'an": "陕西",
+  Xianyang: "陕西",
+  Xinzhou: "山西",
+  Xining: "青海",
+  Xinyang: "河南",
+  Xishuangbanna: "云南",
+  Xuzhou: "江苏",
+  "Ya'an": "四川",
+  Yancheng: "江苏",
+  Yangzhou: "江苏",
+  Yangquan: "山西",
+  Yangshuo: "广西",
+  "Yan'an": "陕西",
+  Yantai: "山东",
+  Yueyang: "湖南",
+  Yichang: "湖北",
+  Yinchuan: "宁夏",
+  Yining: "新疆",
+  Yiwu: "浙江",
+  Yongdeng: "甘肃",
+  Zhangjiajie: "湖南",
+  Zhangbei: "河北",
+  Zhengzhou: "河南",
+  Zhenjiang: "江苏",
+  Zhoukou: "河南",
+  Zhoushan: "浙江",
+  Zhuhai: "广东",
+  Zibo: "山东",
+  Zunyi: "贵州",
+};
 
 function regionForCountryCode(countryCode) {
   if (countryCode === "HK") {
@@ -468,8 +655,6 @@ function regionForCountryCode(countryCode) {
       region_zh: "中国香港",
       regionCode: "HK",
       province_en: "Hong Kong",
-      province_zh: "香港",
-      city_zh: "香港",
       country_en: "Hong Kong SAR, China",
       country_zh: "中国香港",
       countryDisplay_en: "Hong Kong SAR, China",
@@ -483,8 +668,6 @@ function regionForCountryCode(countryCode) {
       region_zh: "中国澳门",
       regionCode: "MO",
       province_en: "Macau",
-      province_zh: "澳门",
-      city_zh: "澳门",
       country_en: "Macau SAR, China",
       country_zh: "中国澳门",
       countryDisplay_en: "Macau SAR, China",
@@ -498,8 +681,6 @@ function regionForCountryCode(countryCode) {
       region_zh: "中国台湾",
       regionCode: "TW",
       province_en: "Taiwan",
-      province_zh: "台湾",
-      city_zh: "台湾",
       country_en: "Taiwan, China",
       country_zh: "中国台湾",
       countryDisplay_en: "Taiwan, China",
@@ -512,13 +693,26 @@ function regionForCountryCode(countryCode) {
     region_zh: "中国大陆",
     regionCode: "MAINLAND_CN",
     province_en: "",
-    province_zh: "",
-    city_zh: "",
     country_en: "China",
     country_zh: "中国",
     countryDisplay_en: "China",
     countryDisplay_zh: "中国",
   };
+}
+
+function isTestHotel(hotel) {
+  return /TEST|DO NOT TOUCH/i.test(`${hotel.hotelName} ${hotel.brandName}`);
+}
+
+function cleanText(value) {
+  if (typeof value !== "string") return "";
+  return value.replace(/\s+/g, " ").trim();
+}
+
+function numberOrNull(value) {
+  if (value === null || value === undefined || value === "") return null;
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
 }
 
 function slugify(value) {
@@ -528,8 +722,8 @@ function slugify(value) {
     .replace(/^-+|-+$/g, "");
 }
 
-function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
+function hasHan(value) {
+  return /[\u3400-\u9fff]/u.test(String(value ?? ""));
 }
+
+await main();

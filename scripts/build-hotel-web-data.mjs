@@ -860,6 +860,8 @@ function chineseDescriptorFromEnglishName(nameEn, hotel, suffix) {
     .replace(/\s+an SLH Hotel$/i, "")
     .trim();
 
+  if (cityEn && descriptor.toLocaleLowerCase() === cityEn.toLocaleLowerCase()) return "";
+
   descriptor = descriptor
     .replace(/\bHong Kong\b/gi, "香港")
     .replace(/\bMacau\b|\bMacao\b/gi, "澳门")

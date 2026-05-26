@@ -404,7 +404,7 @@ private struct NativeHotelPinBadge: View {
         case "Hilton":
             return 0.80
         case "Hyatt":
-            return 0.70
+            return 0.72
         case "Marriott":
             return 0.76
         default:
