@@ -8,7 +8,7 @@ const ECCENTRICITY = 0.006693421622965943;
 export function wgs84ToGcj02(position: [number, number]): [number, number] {
   const [longitude, latitude] = position;
 
-  if (!isInMainlandChina(longitude, latitude)) {
+  if (!isInChinaCoordinateBounds(longitude, latitude)) {
     return position;
   }
 
@@ -25,29 +25,13 @@ export function wgs84ToGcj02(position: [number, number]): [number, number] {
   return [longitude + dLng, latitude + dLat];
 }
 
-export function isInMainlandChina(longitude: number, latitude: number) {
-  if (
+export function isInChinaCoordinateBounds(longitude: number, latitude: number) {
+  return !(
     longitude < CHINA_MIN_LNG ||
     longitude > CHINA_MAX_LNG ||
     latitude < CHINA_MIN_LAT ||
     latitude > CHINA_MAX_LAT
-  ) {
-    return false;
-  }
-
-  return !isInHongKong(longitude, latitude) && !isInMacau(longitude, latitude) && !isInTaiwan(longitude, latitude);
-}
-
-function isInHongKong(longitude: number, latitude: number) {
-  return longitude >= 113.76 && longitude <= 114.45 && latitude >= 22.13 && latitude <= 22.57;
-}
-
-function isInMacau(longitude: number, latitude: number) {
-  return longitude >= 113.52 && longitude <= 113.65 && latitude >= 22.1 && latitude <= 22.24;
-}
-
-function isInTaiwan(longitude: number, latitude: number) {
-  return longitude >= 119.3 && longitude <= 124.6 && latitude >= 21.7 && latitude <= 25.6;
+  );
 }
 
 function transformLatitude(x: number, y: number) {

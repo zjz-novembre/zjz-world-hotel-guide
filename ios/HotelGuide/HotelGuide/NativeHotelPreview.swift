@@ -5,149 +5,184 @@ struct NativeHotelPreview: View {
     let hotel: HotelPreviewPayload
     let onDismiss: () -> Void
 
+    @Environment(\.openURL) private var openURL
     @Namespace private var glassNamespace
-    @State private var actionsEnabled = false
     @State private var appeared = false
+
+    private var sourceURL: URL? {
+        guard let sourceUrl = hotel.sourceUrl else { return nil }
+        return URL(string: sourceUrl)
+    }
 
     var body: some View {
         GeometryReader { proxy in
             ZStack {
-                Color.black
-                    .opacity(appeared ? 0.22 : 0)
-                    .background(.thinMaterial)
+                Rectangle()
+                    .fill(.regularMaterial)
+                    .opacity(appeared ? 0.84 : 0)
                     .ignoresSafeArea()
                     .onTapGesture {
                         dismiss()
                     }
 
-                previewChrome(maxWidth: maxPreviewWidth(in: proxy.size))
-                    .scaleEffect(appeared ? 1 : 0.92)
+                appleMusicStack(maxWidth: maxPreviewWidth(in: proxy.size))
+                    .scaleEffect(appeared ? 1 : 0.96)
                     .opacity(appeared ? 1 : 0)
                     .position(x: proxy.size.width / 2, y: preferredY(in: proxy))
             }
             .onAppear {
-                withAnimation(.spring(response: 0.38, dampingFraction: 0.82)) {
+                withAnimation(.spring(response: 0.34, dampingFraction: 0.86)) {
                     appeared = true
-                }
-
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.46) {
-                    actionsEnabled = true
                 }
             }
         }
     }
 
     @ViewBuilder
-    private func previewChrome(maxWidth: CGFloat) -> some View {
+    private func appleMusicStack(maxWidth: CGFloat) -> some View {
         if #available(iOS 26.0, *) {
-            GlassEffectContainer(spacing: HotelPreviewToken.glassSpacing) {
+            GlassEffectContainer(spacing: HotelPreviewToken.stackSpacing) {
                 VStack(spacing: HotelPreviewToken.stackSpacing) {
-                    previewCard(maxWidth: maxWidth)
-                        .glassEffectID("hotel-card-\(hotel.id)", in: glassNamespace)
-                    actionBar(maxWidth: maxWidth)
-                        .glassEffectID("hotel-actions-\(hotel.id)", in: glassNamespace)
+                    previewHeader(maxWidth: maxWidth)
+                        .glassEffectID("hotel-preview-header-\(hotel.id)", in: glassNamespace)
+                    menuPanel(maxWidth: maxWidth)
+                        .glassEffectID("hotel-preview-menu-\(hotel.id)", in: glassNamespace)
                 }
             }
         } else {
             VStack(spacing: HotelPreviewToken.stackSpacing) {
-                previewCard(maxWidth: maxWidth)
-                actionBar(maxWidth: maxWidth)
+                previewHeader(maxWidth: maxWidth)
+                menuPanel(maxWidth: maxWidth)
             }
         }
     }
 
-    private func previewCard(maxWidth: CGFloat) -> some View {
-        VStack(alignment: .leading, spacing: HotelPreviewToken.cardGap) {
-            ZStack(alignment: .bottomLeading) {
-                HotelPreviewImage(source: hotel.hotelImageUrl, fallbackText: hotel.nameZh)
-                    .frame(height: HotelPreviewToken.heroHeight)
-                    .clipShape(RoundedRectangle(cornerRadius: HotelPreviewToken.heroRadius, style: .continuous))
-
-                if !hotel.priceText.isEmpty {
-                    Text(hotel.priceText)
-                        .font(.system(size: 16, weight: .semibold, design: .rounded))
-                        .foregroundStyle(.primary)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                        .glassSurface(cornerRadius: HotelPreviewToken.pillRadius, tint: .white.opacity(0.08), interactive: false)
-                        .padding(12)
-                }
+    private func previewHeader(maxWidth: CGFloat) -> some View {
+        Button {
+            if let sourceURL {
+                openURL(sourceURL)
             }
+        } label: {
+            HStack(spacing: 14) {
+                HotelPreviewImage(source: hotel.hotelImageUrl, fallbackText: hotel.nameZh)
+                    .frame(width: 84, height: 84)
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
 
-            VStack(alignment: .leading, spacing: 8) {
-                Text(hotel.nameZh)
-                    .font(.system(size: 24, weight: .semibold, design: .rounded))
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                if hotel.nameEn != hotel.nameZh {
-                    Text(hotel.nameEn)
-                        .font(.system(size: 13, weight: .medium, design: .rounded))
-                        .foregroundStyle(.secondary)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(hotel.nameZh)
+                        .font(.system(size: 17, weight: .semibold))
+                        .foregroundStyle(.primary)
                         .lineLimit(2)
-                }
 
-                if !hotel.brand.isEmpty || !hotel.city.isEmpty {
-                    Text([hotel.brand, hotel.city].filter { !$0.isEmpty }.joined(separator: " · "))
-                        .font(.system(size: 13, weight: .medium, design: .rounded))
+                    if hotel.nameEn != hotel.nameZh {
+                        Text(hotel.nameEn)
+                            .font(.system(size: 13, weight: .medium))
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                    }
+
+                    Text(headerMeta)
+                        .font(.system(size: 13, weight: .regular))
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundStyle(.secondary)
+            }
+            .padding(12)
+            .frame(width: maxWidth)
+            .contentShape(.rect)
+        }
+        .buttonStyle(.plain)
+        .disabled(sourceURL == nil)
+        .hotelGlass(cornerRadius: 30, interactive: sourceURL != nil)
+    }
+
+    private func menuPanel(maxWidth: CGFloat) -> some View {
+        VStack(spacing: 0) {
+            actionStrip
+                .padding(.horizontal, 14)
+                .padding(.top, 14)
+                .padding(.bottom, 12)
+
+            HotelPreviewDivider()
+
+            ForEach(roomItems) { room in
+                HotelPreviewMenuRow(
+                    title: room.title,
+                    subtitle: room.subtitle,
+                    systemImage: room.systemImage,
+                    imageUrl: room.imageUrl
+                )
+                HotelPreviewDivider()
             }
 
             if !hotel.description.isEmpty {
-                Text(hotel.description)
-                    .font(.system(size: 14, weight: .regular, design: .rounded))
-                    .foregroundStyle(Color.primary.opacity(0.76))
-                    .lineLimit(4)
-                    .fixedSize(horizontal: false, vertical: true)
+                HotelPreviewMenuRow(
+                    title: "酒店介绍",
+                    subtitle: hotel.description,
+                    systemImage: "info.circle",
+                    imageUrl: nil
+                )
+                HotelPreviewDivider()
             }
 
-            if !roomItems.isEmpty {
-                HStack(spacing: 10) {
-                    ForEach(roomItems) { room in
-                        HotelRoomTile(room: room)
-                    }
+            if let sourceURL {
+                Button {
+                    openURL(sourceURL)
+                } label: {
+                    HotelPreviewMenuRow(
+                        title: "官网",
+                        subtitle: sourceURL.host ?? "",
+                        systemImage: "safari",
+                        imageUrl: nil,
+                        showsChevron: true
+                    )
                 }
+                .buttonStyle(.plain)
             }
         }
-        .padding(HotelPreviewToken.cardPadding)
         .frame(width: maxWidth)
-        .glassSurface(cornerRadius: HotelPreviewToken.cardRadius, tint: .white.opacity(0.08), interactive: false)
-        .shadow(color: .black.opacity(0.18), radius: 34, y: 22)
+        .hotelGlass(cornerRadius: 30, interactive: true)
+        .shadow(color: .black.opacity(0.15), radius: 24, y: 18)
     }
 
-    @ViewBuilder
-    private func actionBar(maxWidth: CGFloat) -> some View {
-        if #available(iOS 26.0, *) {
-            HStack(spacing: 10) {
-                Button {
-                    dismiss()
-                } label: {
-                    Label("关闭", systemImage: "xmark")
+    private var actionStrip: some View {
+        HStack(spacing: 10) {
+            Button {
+                if let sourceURL {
+                    openURL(sourceURL)
                 }
+            } label: {
+                HotelPreviewActionLabel(title: "官网", systemImage: "safari")
             }
-            .buttonStyle(.glass)
-            .font(.system(size: 16, weight: .semibold, design: .rounded))
-            .padding(8)
-            .frame(width: maxWidth)
-            .glassSurface(cornerRadius: HotelPreviewToken.actionRadius, tint: .white.opacity(0.05), interactive: true)
-            .allowsHitTesting(actionsEnabled)
-        } else {
-            HStack(spacing: 10) {
-                Button {
-                    dismiss()
-                } label: {
-                    Label("关闭", systemImage: "xmark")
+            .disabled(sourceURL == nil)
+
+            Button {
+                dismiss()
+            } label: {
+                HotelPreviewActionLabel(title: "关闭", systemImage: "xmark")
+            }
+
+            if let sourceURL {
+                ShareLink(item: sourceURL) {
+                    HotelPreviewActionLabel(title: "分享", systemImage: "square.and.arrow.up")
                 }
+            } else {
+                HotelPreviewActionLabel(title: "分享", systemImage: "square.and.arrow.up")
+                    .opacity(0.36)
             }
-            .buttonStyle(.bordered)
-            .font(.system(size: 16, weight: .semibold, design: .rounded))
-            .padding(10)
-            .frame(width: maxWidth)
-            .glassSurface(cornerRadius: HotelPreviewToken.actionRadius, tint: .white.opacity(0.05), interactive: true)
-            .allowsHitTesting(actionsEnabled)
         }
+        .hotelGlassButtonStyle()
+    }
+
+    private var headerMeta: String {
+        [hotel.brand, hotel.city, hotel.priceText]
+            .filter { !$0.isEmpty }
+            .joined(separator: " · ")
     }
 
     private var roomItems: [HotelPreviewRoom] {
@@ -156,27 +191,31 @@ struct NativeHotelPreview: View {
                 id: "standard",
                 title: roomTitle(hotel.standardRoomName, fallback: "客房", imageUrl: hotel.standardRoomImageUrl, areaSqm: hotel.standardRoomAreaSqm),
                 imageUrl: hotel.standardRoomImageUrl,
-                areaSqm: hotel.standardRoomAreaSqm
+                areaSqm: hotel.standardRoomAreaSqm,
+                systemImage: "bed.double"
             ),
             HotelPreviewRoom(
                 id: "standardBathroom",
                 title: roomTitle(hotel.standardBathroomName, fallback: "客房浴室", imageUrl: hotel.standardBathroomImageUrl, areaSqm: nil),
                 imageUrl: hotel.standardBathroomImageUrl,
-                areaSqm: nil
+                areaSqm: nil,
+                systemImage: "shower"
             ),
             HotelPreviewRoom(
                 id: "suite",
                 title: roomTitle(hotel.suiteRoomName, fallback: "套房", imageUrl: hotel.suiteRoomImageUrl, areaSqm: hotel.suiteRoomAreaSqm),
                 imageUrl: hotel.suiteRoomImageUrl,
-                areaSqm: hotel.suiteRoomAreaSqm
+                areaSqm: hotel.suiteRoomAreaSqm,
+                systemImage: "sofa"
             ),
             HotelPreviewRoom(
                 id: "suiteBathroom",
                 title: roomTitle(hotel.suiteBathroomName, fallback: "套房浴室", imageUrl: hotel.suiteBathroomImageUrl, areaSqm: nil),
                 imageUrl: hotel.suiteBathroomImageUrl,
-                areaSqm: nil
+                areaSqm: nil,
+                systemImage: "bathtub"
             ),
-        ].filter { $0.imageUrl != nil || $0.areaSqm != nil || !$0.title.isEmpty }
+        ].filter { !$0.title.isEmpty }
     }
 
     private func roomTitle(_ title: String?, fallback: String, imageUrl: String?, areaSqm: Double?) -> String {
@@ -185,12 +224,11 @@ struct NativeHotelPreview: View {
     }
 
     private func dismiss() {
-        withAnimation(.spring(response: 0.26, dampingFraction: 0.9)) {
-            actionsEnabled = false
+        withAnimation(.spring(response: 0.24, dampingFraction: 0.9)) {
             appeared = false
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.16) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.14) {
             onDismiss()
         }
     }
@@ -200,21 +238,22 @@ struct NativeHotelPreview: View {
     }
 
     private func preferredY(in proxy: GeometryProxy) -> CGFloat {
-        let safeArea = proxy.safeAreaInsets
         let size = proxy.size
-        let defaultY = size.height * 0.53
+        let safeArea = proxy.safeAreaInsets
+        let panelHeight: CGFloat = roomItems.isEmpty ? 310 : 430
+        let defaultY = size.height * 0.5
         let anchoredY: CGFloat
 
         if let anchor = hotel.anchor {
             anchoredY = anchor.midY < size.height * 0.5
-                ? anchor.midY + HotelPreviewToken.anchorOffset
-                : anchor.midY - HotelPreviewToken.anchorOffset
+                ? anchor.midY + panelHeight * 0.34
+                : anchor.midY - panelHeight * 0.34
         } else {
             anchoredY = defaultY
         }
 
-        let minY = safeArea.top + HotelPreviewToken.verticalClamp
-        let maxY = size.height - safeArea.bottom - HotelPreviewToken.verticalClamp
+        let minY = safeArea.top + panelHeight * 0.5 + 10
+        let maxY = size.height - safeArea.bottom - panelHeight * 0.5 - 10
         return min(max(anchoredY, minY), maxY)
     }
 }
@@ -224,32 +263,83 @@ private struct HotelPreviewRoom: Identifiable {
     let title: String
     let imageUrl: String?
     let areaSqm: Double?
+    let systemImage: String
+
+    var subtitle: String {
+        guard let areaSqm else { return "" }
+        return "\(Int(areaSqm.rounded())) sqm"
+    }
 }
 
-private struct HotelRoomTile: View {
-    let room: HotelPreviewRoom
+private struct HotelPreviewActionLabel: View {
+    let title: String
+    let systemImage: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HotelPreviewImage(source: room.imageUrl, fallbackText: room.title)
-                .frame(height: HotelPreviewToken.roomImageHeight)
-                .clipShape(RoundedRectangle(cornerRadius: HotelPreviewToken.roomRadius, style: .continuous))
+        VStack(spacing: 5) {
+            Image(systemName: systemImage)
+                .font(.system(size: 19, weight: .semibold))
+            Text(title)
+                .font(.system(size: 12, weight: .medium))
+        }
+        .frame(maxWidth: .infinity, minHeight: 56)
+        .contentShape(.rect)
+    }
+}
 
-            VStack(alignment: .leading, spacing: 3) {
-                Text(room.title)
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+private struct HotelPreviewMenuRow: View {
+    let title: String
+    let subtitle: String
+    let systemImage: String
+    let imageUrl: String?
+    var showsChevron = false
+
+    var body: some View {
+        HStack(spacing: 14) {
+            if imageUrl != nil {
+                HotelPreviewImage(source: imageUrl, fallbackText: title)
+                    .frame(width: 44, height: 38)
+                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+            } else {
+                Image(systemName: systemImage)
+                    .font(.system(size: 19, weight: .regular))
+                    .foregroundStyle(.primary)
+                    .frame(width: 44, height: 38)
+            }
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.system(size: 16, weight: .regular))
+                    .foregroundStyle(.primary)
                     .lineLimit(1)
 
-                if let area = room.areaSqm {
-                    Text("\(Int(area.rounded())) sqm")
-                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                if !subtitle.isEmpty {
+                    Text(subtitle)
+                        .font(.system(size: 12, weight: .regular))
                         .foregroundStyle(.secondary)
+                        .lineLimit(2)
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            if showsChevron {
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(.secondary)
+            }
         }
-        .padding(8)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.primary.opacity(0.055), in: RoundedRectangle(cornerRadius: HotelPreviewToken.roomContainerRadius, style: .continuous))
+        .padding(.horizontal, 18)
+        .padding(.vertical, 12)
+        .contentShape(.rect)
+    }
+}
+
+private struct HotelPreviewDivider: View {
+    var body: some View {
+        Rectangle()
+            .fill(.primary.opacity(0.08))
+            .frame(height: 0.5)
+            .padding(.leading, 76)
     }
 }
 
@@ -283,19 +373,12 @@ private struct HotelPreviewImage: View {
 
     private var placeholder: some View {
         ZStack {
-            LinearGradient(
-                colors: [
-                    Color(red: 0.92, green: 0.91, blue: 0.88),
-                    Color(red: 0.74, green: 0.77, blue: 0.74),
-                    Color(red: 0.36, green: 0.42, blue: 0.40),
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
+            Rectangle()
+                .fill(Color.secondary.opacity(0.14))
 
             Text(String(fallbackText.prefix(2)))
-                .font(.system(size: 26, weight: .semibold, design: .rounded))
-                .foregroundStyle(.white.opacity(0.86))
+                .font(.system(size: 22, weight: .semibold))
+                .foregroundStyle(.secondary)
         }
     }
 }
@@ -370,34 +453,30 @@ private enum HotelPreviewImageLoader {
 }
 
 private enum HotelPreviewToken {
-    static let actionRadius: CGFloat = 24
-    static let anchorOffset: CGFloat = 236
-    static let cardGap: CGFloat = 14
-    static let cardPadding: CGFloat = 12
-    static let cardRadius: CGFloat = 30
-    static let glassSpacing: CGFloat = 18
-    static let heroHeight: CGFloat = 204
-    static let heroRadius: CGFloat = 24
-    static let maxWidth: CGFloat = 372
-    static let pillRadius: CGFloat = 18
-    static let roomContainerRadius: CGFloat = 18
-    static let roomImageHeight: CGFloat = 76
-    static let roomRadius: CGFloat = 14
-    static let screenInset: CGFloat = 18
-    static let stackSpacing: CGFloat = 14
-    static let verticalClamp: CGFloat = 286
+    static let maxWidth: CGFloat = 336
+    static let screenInset: CGFloat = 28
+    static let stackSpacing: CGFloat = 12
 }
 
 private extension View {
     @ViewBuilder
-    func glassSurface(cornerRadius: CGFloat, tint: Color, interactive: Bool) -> some View {
+    func hotelGlass(cornerRadius: CGFloat, interactive: Bool) -> some View {
         if #available(iOS 26.0, *) {
             glassEffect(
-                interactive ? Glass.regular.tint(tint).interactive() : Glass.regular.tint(tint),
+                interactive ? Glass.regular.tint(.white.opacity(0.06)).interactive() : Glass.regular.tint(.white.opacity(0.06)),
                 in: .rect(cornerRadius: cornerRadius)
             )
         } else {
             background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: cornerRadius, style: .continuous))
+        }
+    }
+
+    @ViewBuilder
+    func hotelGlassButtonStyle() -> some View {
+        if #available(iOS 26.0, *) {
+            buttonStyle(.glass)
+        } else {
+            buttonStyle(.borderless)
         }
     }
 }

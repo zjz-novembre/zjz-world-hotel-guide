@@ -3,3 +3,22 @@ platform :ios, '17.0'
 target 'HotelGuide' do
   pod 'AMap3DMap', '~> 11.1'
 end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '17.0'
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = ''
+    end
+  end
+
+  Dir.glob(File.join(__dir__, 'Pods', 'Target Support Files', '**', '*.xcconfig')).each do |config_path|
+    config = File.read(config_path)
+    config = config.gsub(/^EXCLUDED_ARCHS\[sdk=iphonesimulator\*\].*\n/, '')
+    config = config.gsub(/^IPHONEOS_DEPLOYMENT_TARGET = 9\.0\n/, "IPHONEOS_DEPLOYMENT_TARGET = 17.0\n")
+    if File.basename(config_path).start_with?('Pods-HotelGuide')
+      config += "\nOTHER_LDFLAGS[sdk=iphonesimulator*] = $(inherited)\n"
+    end
+    File.write(config_path, config)
+  end
+end

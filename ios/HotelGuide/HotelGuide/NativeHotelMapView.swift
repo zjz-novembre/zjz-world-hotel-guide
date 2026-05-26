@@ -1,3 +1,4 @@
+#if !targetEnvironment(simulator)
 import CoreLocation
 import MAMapKit
 import SwiftUI
@@ -39,7 +40,7 @@ struct NativeHotelMapView: UIViewRepresentable {
         if let styleURL = Bundle.main.url(
             forResource: "style",
             withExtension: "data",
-            subdirectory: "WebAssets/amap-map-style"
+            subdirectory: "MapStyle"
         ),
            let styleData = try? Data(contentsOf: styleURL) {
             options.styleData = styleData
@@ -48,7 +49,7 @@ struct NativeHotelMapView: UIViewRepresentable {
         if let extraURL = Bundle.main.url(
             forResource: "style_extra",
             withExtension: "data",
-            subdirectory: "WebAssets/amap-map-style"
+            subdirectory: "MapStyle"
         ),
            let extraData = try? Data(contentsOf: extraURL) {
             options.styleExtraData = extraData
@@ -518,3 +519,4 @@ private final class NativeHotelLogoCache {
         return image
     }
 }
+#endif

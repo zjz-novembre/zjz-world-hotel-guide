@@ -63,8 +63,10 @@
   --radius-3: 0.5rem;
   --shadow-hairline: 0 0 0 0.0625rem var(--color-line);
   --shadow-panel: 0 1rem 3rem rgb(36 36 36 / 0.08);
-  --filter-map-whitesmoke: saturate(0.34) contrast(0.86) brightness(1.08);
-  --overlay-map-whitesmoke: rgb(255 255 255 / 0.24);
+  --glass-fill: rgb(255 255 255 / 0.62);
+  --glass-fill-strong: rgb(255 255 255 / 0.76);
+  --glass-line: rgb(255 255 255 / 0.64);
+  --glass-shadow: 0 1rem 2.8rem rgb(33 34 33 / 0.14), inset 0 0.0625rem 0 rgb(255 255 255 / 0.78);
   --layout-edge: var(--space-5);
   --layout-chrome-width: 58%;
   --layout-list-width: 40%;
@@ -410,19 +412,6 @@ button {
   opacity: 0.85;
   pointer-events: none;
   position: absolute;
-}
-
-.amap-surface canvas {
-  filter: var(--filter-map-whitesmoke);
-}
-
-.amap-surface--ready::after {
-  background: var(--overlay-map-whitesmoke);
-  content: "";
-  inset: 0;
-  pointer-events: none;
-  position: absolute;
-  z-index: 1;
 }
 
 .amap-surface .amap-marker {

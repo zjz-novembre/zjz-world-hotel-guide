@@ -1,13 +1,17 @@
+import SwiftUI
+#if !targetEnvironment(simulator)
 import AMapFoundationKit
 import MAMapKit
-import SwiftUI
+#endif
 
 @main
 struct HotelGuideApp: App {
     init() {
+        #if !targetEnvironment(simulator)
         MAMapView.updatePrivacyShow(.didShow, privacyInfo: .didContain)
         MAMapView.updatePrivacyAgree(.didAgree)
         AMapServices.shared().apiKey = "8924dbb00daef3035dc6a5872f425efb"
+        #endif
     }
 
     var body: some Scene {
@@ -23,8 +27,10 @@ struct HotelGuideRootView: View {
 
     var body: some View {
         ZStack {
+            #if !targetEnvironment(simulator)
             NativeHotelMapView(mapStore: mapStore)
                 .ignoresSafeArea()
+            #endif
 
             HotelGuideWebView(mapStore: mapStore, previewStore: previewStore)
                 .ignoresSafeArea()

@@ -1,4 +1,3 @@
-import { wgs84ToGcj02 } from "./coordinates";
 import type { HotelsPayload } from "../types";
 
 export async function loadHotels() {
@@ -19,18 +18,7 @@ export async function loadHotels() {
 
   return {
     ...payload,
-    hotels: payload.hotels.map((hotel) => ({
-      ...hotel,
-      position: hotel.position ? wgs84ToGcj02(hotel.position) : undefined,
-    })),
-    provinces: payload.provinces.map((province) => ({
-      ...province,
-      center: wgs84ToGcj02(province.center),
-    })),
-    cities: (payload.cities ?? payload.provinces).map((city) => ({
-      ...city,
-      center: wgs84ToGcj02(city.center),
-    })),
+    cities: payload.cities ?? payload.provinces,
   };
 }
 

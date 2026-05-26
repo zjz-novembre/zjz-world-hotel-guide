@@ -1,0 +1,729 @@
+{
+  "source": "official_property_pages",
+  "generatedAt": "2026-05-26T04:52:03.195Z",
+  "count": 70,
+  "failureCount": 20,
+  "overrides": {
+    "Shangri-La:SHANGRI-LA-hong-kong-www-shangri-la-com-cn-hongkong-kowloonshangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-hong-kong-www-shangri-la-com-cn-hongkong-kowloonshangrila",
+      "longitude": 114.1884521364,
+      "latitude": 22.3000370315,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/hongkong/kowloonshangrila/",
+      "address1_zh": "中国香港特别行政区九龙尖沙咀东部么地道64号"
+    },
+    "Shangri-La:SHANGRI-LA-hong-kong-www-shangri-la-com-cn-hongkong-islandshangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-hong-kong-www-shangri-la-com-cn-hongkong-islandshangrila",
+      "longitude": 114.1758509001,
+      "latitude": 22.280183756,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/hongkong/islandshangrila/",
+      "address1_zh": "中国香港特别行政区中区法院道太古广场"
+    },
+    "Shangri-La:SHANGRI-LA-hong-kong-www-shangri-la-com-cn-hongkong-kerry": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-hong-kong-www-shangri-la-com-cn-hongkong-kerry",
+      "longitude": 114.2002343217,
+      "latitude": 22.304426965,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/hongkong/kerry/",
+      "address1_zh": "中国香港特别行政区九龙红磡湾红鸾道38号"
+    },
+    "Shangri-La:SHANGRI-LA-baotou-www-shangri-la-com-cn-baotou-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-baotou-www-shangri-la-com-cn-baotou-shangrila",
+      "longitude": 109.8573710617,
+      "latitude": 40.6662666259,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/baotou/shangrila/",
+      "address1_zh": "中国内蒙古自治区包头市青山区民族东路66号 邮政编码 014030"
+    },
+    "Shangri-La:SHANGRI-LA-beihai-www-shangri-la-com-cn-beihai-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-beihai-www-shangri-la-com-cn-beihai-shangrila",
+      "longitude": 109.1408923406,
+      "latitude": 21.4960564247,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/beihai/shangrila/",
+      "address1_zh": "中国广西北海市茶亭路33号 邮政编码 536007"
+    },
+    "Shangri-La:SHANGRI-LA-beijing-www-shangri-la-com-cn-beijing-chinaworld": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-beijing-www-shangri-la-com-cn-beijing-chinaworld",
+      "longitude": 116.4660540761,
+      "latitude": 39.9155479605,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/beijing/chinaworld/",
+      "address1_zh": "中国北京建国门外大街1号 邮政编码 100004"
+    },
+    "Shangri-La:SHANGRI-LA-beijing-www-shangri-la-com-cn-beijing-kerry": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-beijing-www-shangri-la-com-cn-beijing-kerry",
+      "longitude": 116.4648170761,
+      "latitude": 39.9197239605,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/beijing/kerry/",
+      "address1_zh": "中国北京朝阳区光华路1号 邮政编码 100020"
+    },
+    "Shangri-La:SHANGRI-LA-beijing-www-shangri-la-com-cn-beijing-chinaworldsummitwing": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-beijing-www-shangri-la-com-cn-beijing-chinaworldsummitwing",
+      "longitude": 116.4650300761,
+      "latitude": 39.9179769605,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/beijing/chinaworldsummitwing/",
+      "address1_zh": "中国北京建国门外大街1号 邮政编码 100004"
+    },
+    "Shangri-La:SHANGRI-LA-beijing-www-shangri-la-com-cn-beijing-shangrilashougangpark": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-beijing-www-shangri-la-com-cn-beijing-shangrilashougangpark",
+      "longitude": 116.156159,
+      "latitude": 39.921909,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/beijing/shangrilashougangpark/",
+      "address1_zh": "中国北京市石景山区石景山路68号院群明湖西街 邮政编码 100041"
+    },
+    "Shangri-La:SHANGRI-LA-beijing-www-shangri-la-com-cn-beijing-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-beijing-www-shangri-la-com-cn-beijing-shangrila",
+      "longitude": 116.3145228537,
+      "latitude": 39.9504103809,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/beijing/shangrila/",
+      "address1_zh": "中国北京紫竹院路29号 邮政编码 100089"
+    },
+    "Shangri-La:SHANGRI-LA-chengdu-www-shangri-la-com-cn-chengdu-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-chengdu-www-shangri-la-com-cn-chengdu-shangrila",
+      "longitude": 104.0927599286,
+      "latitude": 30.6487952799,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/chengdu/shangrila/",
+      "address1_zh": "中国成都市滨江东路9号 邮政编码 610021"
+    },
+    "Shangri-La:SHANGRI-LA-dalian-www-shangri-la-com-cn-dalian-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-dalian-www-shangri-la-com-cn-dalian-shangrila",
+      "longitude": 121.6601628231,
+      "latitude": 38.9313850728,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/dalian/shangrila/",
+      "address1_zh": "中国大连市人民路66号 邮政编码 116001"
+    },
+    "Shangri-La:SHANGRI-LA-fuzhou-www-shangri-la-com-cn-fuzhou-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-fuzhou-www-shangri-la-com-cn-fuzhou-shangrila",
+      "longitude": 119.3123035278,
+      "latitude": 26.0805135052,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/fuzhou/shangrila/",
+      "address1_zh": "中国福建省福州市新权南路9号 邮政编码 350005"
+    },
+    "Shangri-La:SHANGRI-LA-guangzhou-www-shangri-la-com-cn-guangzhou-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-guangzhou-www-shangri-la-com-cn-guangzhou-shangrila",
+      "longitude": 113.3766471572,
+      "latitude": 23.1086664509,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/guangzhou/shangrila/",
+      "address1_zh": "中国广州市海珠区会展东路1号 邮政编码 510308"
+    },
+    "Shangri-La:SHANGRI-LA-guilin-www-shangri-la-com-cn-guilin-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-guilin-www-shangri-la-com-cn-guilin-shangrila",
+      "longitude": 110.3138290098,
+      "latitude": 25.3013680548,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/guilin/shangrila/",
+      "address1_zh": "中国广西桂林市环城北二路111号 邮政编码 541004"
+    },
+    "Shangri-La:SHANGRI-LA-hangzhou-www-shangri-la-com-cn-hangzhou-midtownshangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-hangzhou-www-shangri-la-com-cn-hangzhou-midtownshangrila",
+      "longitude": 120.1682828306,
+      "latitude": 30.2657248748,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/hangzhou/midtownshangrila/",
+      "address1_zh": "中国杭州长寿路6号 延安路杭州嘉里中心 邮政编码 310006"
+    },
+    "Shangri-La:SHANGRI-LA-hangzhou-www-shangri-la-com-cn-hangzhou-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-hangzhou-www-shangri-la-com-cn-hangzhou-shangrila",
+      "longitude": 120.143321539,
+      "latitude": 30.2586082179,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/hangzhou/shangrila/",
+      "address1_zh": "中国杭州市北山路78号 邮政编码 310007"
+    },
+    "Shangri-La:SHANGRI-LA-hefei-www-shangri-la-com-cn-hefei-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-hefei-www-shangri-la-com-cn-hefei-shangrila",
+      "longitude": 117.2750405125,
+      "latitude": 31.886022605,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/hefei/shangrila/",
+      "address1_zh": "中国安徽省 合肥市 庐阳区 濉溪路256号 邮政编码 230041"
+    },
+    "Shangri-La:SHANGRI-LA-huhhot-www-shangri-la-com-cn-huhhot-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-huhhot-www-shangri-la-com-cn-huhhot-shangrila",
+      "longitude": 111.679154312,
+      "latitude": 40.8158916925,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/huhhot/shangrila/",
+      "address1_zh": "中国内蒙古呼和浩特市锡林郭勒南路5号 邮政编码 010020"
+    },
+    "Shangri-La:SHANGRI-LA-jinan-www-shangri-la-com-cn-jinan-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-jinan-www-shangri-la-com-cn-jinan-shangrila",
+      "longitude": 117.0288077248,
+      "latitude": 36.6656909966,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/jinan/shangrila/",
+      "address1_zh": "中国山东省济南市历下区泺源大街106号 邮政编码 250011"
+    },
+    "Shangri-La:SHANGRI-LA-kunming-www-shangri-la-com-cn-kunming-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-kunming-www-shangri-la-com-cn-kunming-shangrila",
+      "longitude": 102.734369,
+      "latitude": 25.044773,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/kunming/shangrila/",
+      "address1_zh": "中国昆明市盘龙区东风东路88-1号 邮政编码 650051"
+    },
+    "Shangri-La:SHANGRI-LA-lhasa-www-shangri-la-com-cn-lhasa-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-lhasa-www-shangri-la-com-cn-lhasa-shangrila",
+      "longitude": 91.1082407886,
+      "latitude": 29.6564278306,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/lhasa/shangrila/",
+      "address1_zh": "中国西藏自治区拉萨市罗布林卡路19号 邮政编码 850000"
+    },
+    "Shangri-La:SHANGRI-LA-manzhouli-www-shangri-la-com-cn-manzhouli-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-manzhouli-www-shangri-la-com-cn-manzhouli-shangrila",
+      "longitude": 117.4633300854,
+      "latitude": 49.600193857,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/manzhouli/shangrila/",
+      "address1_zh": "中国内蒙古满洲里市六道街99号 邮政编码 021400"
+    },
+    "Shangri-La:SHANGRI-LA-nanchang-www-shangri-la-com-cn-nanchang-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-nanchang-www-shangri-la-com-cn-nanchang-shangrila",
+      "longitude": 115.8654548847,
+      "latitude": 28.6861004562,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/nanchang/shangrila/",
+      "address1_zh": "中国江西省南昌市红谷滩区翠林路669号 邮政编码 330038"
+    },
+    "Shangri-La:SHANGRI-LA-nanjing-www-shangri-la-com-cn-nanjing-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-nanjing-www-shangri-la-com-cn-nanjing-shangrila",
+      "longitude": 118.7892876969,
+      "latitude": 32.0845658463,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/nanjing/shangrila/",
+      "address1_zh": "中国江苏省南京市鼓楼区中央路329号 邮政编码 210037"
+    },
+    "Shangri-La:SHANGRI-LA-nanning-www-shangri-la-com-cn-nanning-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-nanning-www-shangri-la-com-cn-nanning-shangrila",
+      "longitude": 108.401626,
+      "latitude": 22.818431,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/nanning/shangrila/",
+      "address1_zh": "中国广西壮族自治区南宁市青秀区民族大道136-1号 邮政编码 530029"
+    },
+    "Shangri-La:SHANGRI-LA-ningbo-www-shangri-la-com-cn-ningbo-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-ningbo-www-shangri-la-com-cn-ningbo-shangrila",
+      "longitude": 121.5680754067,
+      "latitude": 29.8737357698,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/ningbo/shangrila/",
+      "address1_zh": "中国浙江省宁波市 豫源街88号 邮政编码 315040"
+    },
+    "Shangri-La:SHANGRI-LA-putian-www-shangri-la-com-cn-putian-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-putian-www-shangri-la-com-cn-putian-shangrila",
+      "longitude": 119.029474,
+      "latitude": 25.47708,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/putian/shangrila/",
+      "address1_zh": "中国福建省莆田市城厢区龙桥街道九华西大道88号 邮政编码 351100"
+    },
+    "Shangri-La:SHANGRI-LA-qingdao-www-shangri-la-com-cn-qingdao-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-qingdao-www-shangri-la-com-cn-qingdao-shangrila",
+      "longitude": 120.3850998721,
+      "latitude": 36.0710718474,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/qingdao/shangrila/",
+      "address1_zh": "中国青岛市香港中路9号 邮政编码 266071"
+    },
+    "Shangri-La:SHANGRI-LA-qinhuangdao-www-shangri-la-com-cn-qinhuangdao-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-qinhuangdao-www-shangri-la-com-cn-qinhuangdao-shangrila",
+      "longitude": 119.5627474957,
+      "latitude": 39.9090682362,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/qinhuangdao/shangrila/",
+      "address1_zh": "中国河北省秦皇岛市海港区河滨路123号 邮政编码 066000"
+    },
+    "Shangri-La:SHANGRI-LA-qufu-www-shangri-la-com-cn-qufu-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-qufu-www-shangri-la-com-cn-qufu-shangrila",
+      "longitude": 116.9967812449,
+      "latitude": 35.5876095912,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/qufu/shangrila/",
+      "address1_zh": "中国山东省曲阜市春秋中路3号 邮政编码 273100"
+    },
+    "Shangri-La:SHANGRI-LA-sanya-www-shangri-la-com-cn-sanya-shangrilasanya": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-sanya-www-shangri-la-com-cn-sanya-shangrilasanya",
+      "longitude": 109.7489358448,
+      "latitude": 18.3561579853,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/sanya/shangrilasanya/",
+      "address1_zh": "中国海南省三亚市海棠北路88号 邮政编码 572000"
+    },
+    "Shangri-La:SHANGRI-LA-shanghai-www-shangri-la-com-cn-shanghai-qiantanshangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-shanghai-www-shangri-la-com-cn-shanghai-qiantanshangrila",
+      "longitude": 121.487842,
+      "latitude": 31.15723,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/shanghai/qiantanshangrila/",
+      "address1_zh": "中国上海市浦东新区海阳西路551号 邮政编码 200124"
+    },
+    "Shangri-La:SHANGRI-LA-shanghai-www-shangri-la-com-cn-shanghai-kerryhotelpudong": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-shanghai-www-shangri-la-com-cn-shanghai-kerryhotelpudong",
+      "longitude": 121.5702494615,
+      "latitude": 31.2194486183,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/shanghai/kerryhotelpudong/",
+      "address1_zh": "中国上海浦东花木路1388号 邮政编码 201204"
+    },
+    "Shangri-La:SHANGRI-LA-shanghai-www-shangri-la-com-cn-shanghai-pudongshangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-shanghai-www-shangri-la-com-cn-shanghai-pudongshangrila",
+      "longitude": 121.5062319346,
+      "latitude": 31.241499569,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/shanghai/pudongshangrila/",
+      "address1_zh": "中国上海浦东富城路33号 邮政编码 200120"
+    },
+    "Shangri-La:SHANGRI-LA-shanghai-www-shangri-la-com-cn-shanghai-tradershongqiaoairport": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-shanghai-www-shangri-la-com-cn-shanghai-tradershongqiaoairport",
+      "longitude": 121.334255,
+      "latitude": 31.202355,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/shanghai/tradershongqiaoairport/",
+      "address1_zh": "中国上海市闵行区申达一路77号"
+    },
+    "Shangri-La:SHANGRI-LA-shanghai-www-shangri-la-com-cn-shanghai-shangrilahongqiaoairport": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-shanghai-www-shangri-la-com-cn-shanghai-shangrilahongqiaoairport",
+      "longitude": 121.334367,
+      "latitude": 31.202328,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/shanghai/shangrilahongqiaoairport/",
+      "address1_zh": "中国上海市闵行区申达一路77，79号"
+    },
+    "Shangri-La:SHANGRI-LA-shanghai-www-shangri-la-com-cn-shanghai-jinganshangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-shanghai-www-shangri-la-com-cn-shanghai-jinganshangrila",
+      "longitude": 121.4568942691,
+      "latitude": 31.2294022887,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/shanghai/jinganshangrila/",
+      "address1_zh": "中国上海延安中路1218号 南京西路静安嘉里中心 邮政编码 200040"
+    },
+    "Shangri-La:SHANGRI-LA-shangrila-www-shangri-la-com-cn-yunnan-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-shangrila-www-shangri-la-com-cn-yunnan-shangrila",
+      "longitude": 99.7123935478,
+      "latitude": 27.8293785494,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/yunnan/shangrila/",
+      "address1_zh": "中国云南省迪庆藏族自治州香格里拉市建塘镇池慈卡1号 邮政编码 674499"
+    },
+    "Shangri-La:SHANGRI-LA-shenyang-www-shangri-la-com-cn-shenyang-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-shenyang-www-shangri-la-com-cn-shenyang-shangrila",
+      "longitude": 123.4433940621,
+      "latitude": 41.7833806328,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/shenyang/shangrila/",
+      "address1_zh": "中国辽宁省沈阳市沈河区青年大街115号 邮政编码 110016"
+    },
+    "Shangri-La:SHANGRI-LA-shenzhen-www-shangri-la-com-cn-shenzhen-nanshanshangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-shenzhen-www-shangri-la-com-cn-shenzhen-nanshanshangrila",
+      "longitude": 113.977011,
+      "latitude": 22.530327,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/shenzhen/nanshanshangrila/",
+      "address1_zh": "中国深圳市南山区白石三道深湾汇云中心五期J座"
+    },
+    "Shangri-La:SHANGRI-LA-shenzhen-www-shangri-la-com-cn-shenzhen-futianshangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-shenzhen-www-shangri-la-com-cn-shenzhen-futianshangrila",
+      "longitude": 114.0642035267,
+      "latitude": 22.5419654122,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/shenzhen/futianshangrila/",
+      "address1_zh": "中国深圳福田区 益田路4088号 邮政编码 518048"
+    },
+    "Shangri-La:SHANGRI-LA-shenzhen-www-shangri-la-com-cn-shenzhen-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-shenzhen-www-shangri-la-com-cn-shenzhen-shangrila",
+      "longitude": 114.124759588,
+      "latitude": 22.539926282,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/shenzhen/shangrila/",
+      "address1_zh": "中国深圳市建设路1002号火车站东侧 邮政编码 518001"
+    },
+    "Shangri-La:SHANGRI-LA-suzhou-www-shangri-la-com-cn-suzhou-jinjilakeshangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-suzhou-www-shangri-la-com-cn-suzhou-jinjilakeshangrila",
+      "longitude": 120.721864447,
+      "latitude": 31.3307523942,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/suzhou/jinjilakeshangrila/",
+      "address1_zh": "中国江苏省苏州工业园区思安街 99号 协鑫广场 邮政编码 215028"
+    },
+    "Shangri-La:SHANGRI-LA-suzhou-www-shangri-la-com-cn-suzhou-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-suzhou-www-shangri-la-com-cn-suzhou-shangrila",
+      "longitude": 120.5653404652,
+      "latitude": 31.2982432033,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/suzhou/shangrila/",
+      "address1_zh": "中国江苏省苏州新区塔园路168号 邮政编码 215011"
+    },
+    "Shangri-La:SHANGRI-LA-tangshan-www-shangri-la-com-cn-tangshan-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-tangshan-www-shangri-la-com-cn-tangshan-shangrila",
+      "longitude": 118.1538492096,
+      "latitude": 39.65611814,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/tangshan/shangrila/",
+      "address1_zh": "中国河北省唐山市路北区长虹西道889及887号 邮政编码 063000"
+    },
+    "Shangri-La:SHANGRI-LA-tianjin-www-shangri-la-com-cn-tianjin-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-tianjin-www-shangri-la-com-cn-tianjin-shangrila",
+      "longitude": 117.2224118364,
+      "latitude": 39.132367868,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/tianjin/shangrila/",
+      "address1_zh": "中国天津市河东区海河东路328号 邮政编码 300019"
+    },
+    "Shangri-La:SHANGRI-LA-wenzhou-www-shangri-la-com-cn-wenzhou-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-wenzhou-www-shangri-la-com-cn-wenzhou-shangrila",
+      "longitude": 120.7298799198,
+      "latitude": 28.0210632992,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/wenzhou/shangrila/",
+      "address1_zh": "中国温州市香源路1号 邮政编码 325000"
+    },
+    "Shangri-La:SHANGRI-LA-wuhan-www-shangri-la-com-cn-wuhan-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-wuhan-www-shangri-la-com-cn-wuhan-shangrila",
+      "longitude": 114.2896481958,
+      "latitude": 30.6085219541,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/wuhan/shangrila/",
+      "address1_zh": "中国武汉市汉口建设大道700号 邮政编码 430015"
+    },
+    "Shangri-La:SHANGRI-LA-xiamen-www-shangri-la-com-cn-xiamen-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-xiamen-www-shangri-la-com-cn-xiamen-shangrila",
+      "longitude": 118.196093,
+      "latitude": 24.490492,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/xiamen/shangrila/",
+      "address1_zh": "中国福建省厦门市思明区台东路168号观音山国际商务中心"
+    },
+    "Shangri-La:SHANGRI-LA-xian-www-shangri-la-com-cn-xian-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-xian-www-shangri-la-com-cn-xian-shangrila",
+      "longitude": 108.9040732432,
+      "latitude": 34.2389802331,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/xian/shangrila/",
+      "address1_zh": "中国西安市科技路38号乙 邮政编码 710075"
+    },
+    "Shangri-La:SHANGRI-LA-yangzhou-www-shangri-la-com-cn-yangzhou-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-yangzhou-www-shangri-la-com-cn-yangzhou-shangrila",
+      "longitude": 119.3752321406,
+      "latitude": 32.3966024877,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/yangzhou/shangrila/",
+      "address1_zh": "中国江苏省扬州市邗江区文昌西路472号 邮政编码 225009"
+    },
+    "Shangri-La:SHANGRI-LA-yiwu-www-shangri-la-com-cn-yiwu-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-yiwu-www-shangri-la-com-cn-yiwu-shangrila",
+      "longitude": 120.113062115,
+      "latitude": 29.3317404091,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/yiwu/shangrila/",
+      "address1_zh": "中国浙江省义乌市福田路6号、8号 邮政编码 322000"
+    },
+    "Shangri-La:SHANGRI-LA-zhoushan-www-shangri-la-com-cn-zhoushan-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-zhoushan-www-shangri-la-com-cn-zhoushan-shangrila",
+      "longitude": 122.2091935274,
+      "latitude": 29.985737308,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/zhoushan/shangrila/",
+      "address1_zh": "中国浙江省舟山市定海区千岛路18号 邮政编码 316000"
+    },
+    "Shangri-La:SHANGRI-LA-tainan-www-shangri-la-com-cn-tainan-fareasternplazashangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-tainan-www-shangri-la-com-cn-tainan-fareasternplazashangrila",
+      "longitude": 120.2143657,
+      "latitude": 22.99646157,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/tainan/fareasternplazashangrila/",
+      "address1_zh": "台南市东区<br />大学路西段89号 邮政编码 70146"
+    },
+    "Shangri-La:SHANGRI-LA-taipei-www-shangri-la-com-cn-taipei-fareasternplazashangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-taipei-www-shangri-la-com-cn-taipei-fareasternplazashangrila",
+      "longitude": 121.54956,
+      "latitude": 25.026265,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/taipei/fareasternplazashangrila/",
+      "address1_zh": "台北市敦化南路二段201号<br />(交观宿字第1534号) 邮政编码 10675"
+    },
+    "Four Seasons:FS-hongkong": {
+      "hotelKey": "Four Seasons:FS-hongkong",
+      "longitude": 114.156543,
+      "latitude": 22.286793,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.fourseasons.com/hongkong/getting-here/"
+    },
+    "Four Seasons:FS-beijing": {
+      "hotelKey": "Four Seasons:FS-beijing",
+      "longitude": 116.466447,
+      "latitude": 39.950395,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.fourseasons.com/beijing/getting-here/"
+    },
+    "Four Seasons:FS-dalian": {
+      "hotelKey": "Four Seasons:FS-dalian",
+      "longitude": 121.66489,
+      "latitude": 38.92613,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.fourseasons.com/dalian/getting-here/"
+    },
+    "Four Seasons:FS-guangzhou": {
+      "hotelKey": "Four Seasons:FS-guangzhou",
+      "longitude": 113.3235293627,
+      "latitude": 23.1176226783,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.fourseasons.com/guangzhou/getting-here/"
+    },
+    "Four Seasons:FS-hangzhoucentre": {
+      "hotelKey": "Four Seasons:FS-hangzhoucentre",
+      "longitude": 120.16615,
+      "latitude": 30.273287,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.fourseasons.com/hangzhoucentre/getting-here/"
+    },
+    "Four Seasons:FS-hangzhou": {
+      "hotelKey": "Four Seasons:FS-hangzhou",
+      "longitude": 120.127713,
+      "latitude": 30.251194,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.fourseasons.com/hangzhou/getting-here/"
+    },
+    "Four Seasons:FS-shenzhen": {
+      "hotelKey": "Four Seasons:FS-shenzhen",
+      "longitude": 114.058079,
+      "latitude": 22.534296,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.fourseasons.com/shenzhen/getting-here/"
+    },
+    "Four Seasons:FS-suzhou": {
+      "hotelKey": "Four Seasons:FS-suzhou",
+      "longitude": 120.7013654417,
+      "latitude": 31.3033158379,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.fourseasons.com/suzhou/getting-here/"
+    },
+    "Four Seasons:FS-tianjin": {
+      "hotelKey": "Four Seasons:FS-tianjin",
+      "longitude": 117.198773,
+      "latitude": 39.119938,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.fourseasons.com/tianjin/getting-here/"
+    },
+    "Four Seasons:FS-macao": {
+      "hotelKey": "Four Seasons:FS-macao",
+      "longitude": 113.562538,
+      "latitude": 22.146426,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.fourseasons.com/macao/getting-here/"
+    },
+    "Four Seasons:FS-grandsuitesmacau": {
+      "hotelKey": "Four Seasons:FS-grandsuitesmacau",
+      "longitude": 113.561871,
+      "latitude": 22.146001,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.fourseasons.com/grandsuitesmacau/getting-here/"
+    },
+    "Shangri-La:SHANGRI-LA-changchun-www-shangri-la-com-cn-changchun-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-changchun-www-shangri-la-com-cn-changchun-shangrila",
+      "longitude": 125.3250049397,
+      "latitude": 43.8955277362,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/changchun/shangrila/",
+      "address1_zh": "中国长春市西安大路569号 邮政编码 130061"
+    },
+    "Shangri-La:SHANGRI-LA-harbin-www-shangri-la-com-cn-harbin-songbeishangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-harbin-www-shangri-la-com-cn-harbin-songbeishangrila",
+      "longitude": 126.5615928144,
+      "latitude": 45.8080619086,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/harbin/songbeishangrila/",
+      "address1_zh": "中国哈尔滨松北区松北大道1号 邮政编码 150028"
+    },
+    "Shangri-La:SHANGRI-LA-harbin-www-shangri-la-com-cn-harbin-shangrila": {
+      "hotelKey": "Shangri-La:SHANGRI-LA-harbin-www-shangri-la-com-cn-harbin-shangrila",
+      "longitude": 126.601540725,
+      "latitude": 45.7708271741,
+      "coordinate_system": "wgs84",
+      "position_source": "official_page_geo",
+      "sourceUrl": "https://www.shangri-la.com/cn/harbin/shangrila/",
+      "address1_zh": "中国哈尔滨道里区友谊路555号 邮政编码 150018"
+    }
+  },
+  "failures": [
+    {
+      "hotelKey": "Aman:AMAN-aman-summer-palace",
+      "sourceUrl": "https://www.aman.com/resorts/aman-summer-palace",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Aman:AMAN-amanfayun",
+      "sourceUrl": "https://www.aman.com/resorts/amanfayun",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Aman:AMAN-amandayan",
+      "sourceUrl": "https://www.aman.com/resorts/amandayan",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Aman:AMAN-amanyangyun",
+      "sourceUrl": "https://www.aman.com/resorts/amanyangyun",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Shangri-La:SHANGRI-LA-hong-kong-www-hoteljen-com-cn-hongkong-westerndistrict",
+      "sourceUrl": "https://www.hoteljen.com/cn/hongkong/westerndistrict",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Shangri-La:SHANGRI-LA-beijing-www-hoteljen-com-cn-beijing-centraldistrict",
+      "sourceUrl": "https://www.hoteljen.com/cn/beijing/centraldistrict",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Shangri-La:SHANGRI-LA-hangzhou-www-shangri-la-com-cn-hangzhou-gongshudistrict-pre-opening",
+      "sourceUrl": "https://www.shangri-la.com/cn/hangzhou/gongshudistrict/pre-opening",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Shangri-La:CNHGH004",
+      "sourceUrl": "https://www.shangri-la.com/cn/hangzhou/shangrila/thesilklakehouse/?hotelCode=CNHGH004&hotel=The%20Silk%20Lakehouse%2C%20Shangri-La%20Hangzhou&city=Hangzhou&cityEn=Hangzhou",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Shangri-La:SHANGRI-LA-kunming-www-hoteljen-com-cn-kunming-panlongdistrict",
+      "sourceUrl": "https://www.hoteljen.com/cn/kunming/panlongdistrict",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Shangri-La:SHANGRI-LA-shenyang-www-hoteljen-com-cn-shenyang-hepingdistrict",
+      "sourceUrl": "https://www.hoteljen.com/cn/shenyang/hepingdistrict",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Shangri-La:SHANGRI-LA-shenzhen-www-hoteljen-com-cn-shenzhen-qianhai",
+      "sourceUrl": "https://www.hoteljen.com/cn/shenzhen/qianhai",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Rosewood:ROSEWOOD-rosewood-hong-kong",
+      "sourceUrl": "https://www.rosewoodhotels.com/en/hong-kong",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Rosewood:ROSEWOOD-rosewood-beijing",
+      "sourceUrl": "https://www.rosewoodhotels.com/en/beijing",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Rosewood:ROSEWOOD-rosewood-guangzhou",
+      "sourceUrl": "https://www.rosewoodhotels.com/en/guangzhou",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Rosewood:ROSEWOOD-rosewood-ningbo",
+      "sourceUrl": "https://www.rosewoodhotels.com/en/ningbo",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Rosewood:ROSEWOOD-rosewood-sanya",
+      "sourceUrl": "https://www.rosewoodhotels.com/en/sanya",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "Rosewood:ROSEWOOD-rosewood-shenzhen",
+      "sourceUrl": "https://www.rosewoodhotels.com/en/shenzhen",
+      "reason": "geo_not_found"
+    },
+    {
+      "hotelKey": "The Peninsula:the-peninsula-the-peninsula-hong-kong",
+      "sourceUrl": "https://www.peninsula.com/en/hong-kong/5-star-luxury-hotel-kowloon",
+      "reason": "http_403"
+    },
+    {
+      "hotelKey": "The Peninsula:the-peninsula-the-peninsula-beijing",
+      "sourceUrl": "https://www.peninsula.com/en/beijing/5-star-luxury-hotel-wangfujing",
+      "reason": "http_403"
+    },
+    {
+      "hotelKey": "The Peninsula:the-peninsula-the-peninsula-shanghai",
+      "sourceUrl": "https://www.peninsula.com/en/shanghai/5-star-luxury-hotel-bund",
+      "reason": "http_403"
+    }
+  ]
+}

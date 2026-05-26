@@ -61,7 +61,7 @@ type NativeHotelMapPayload = {
   } | null;
 };
 
-const DEFAULT_AMAP_STYLE = "amap://styles/whitesmoke";
+const DEFAULT_AMAP_STYLE = "amap://styles/653152ed110317541d8e1dabfa110aae";
 const AMAP_FEATURES = ["bg", "road", "point"];
 const MOBILE_MAX_WIDTH = 760;
 const MOBILE_LANDSCAPE_MAX_WIDTH = 960;

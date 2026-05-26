@@ -13,6 +13,8 @@
     "data:hotel-names": "node scripts/enrich-hotel-names.mjs",
     "data:lhw-images": "node scripts/fetch-lhw-official-images.mjs",
     "data:hotel-media": "node scripts/fetch-hotel-official-media.mjs",
+    "data:urcove": "node scripts/fetch-urcove-hyatt-china-data.mjs",
+    "data:geo": "node scripts/fetch-luxury-official-geo.mjs",
     "data:hotel-web": "node scripts/build-hotel-web-data.mjs",
     "lint": "tsc --noEmit"
   },

@@ -10,10 +10,12 @@
 		033D230A69A6C07E8806BA57 /* NativeHotelMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D29D726EC77FE51C2E0635E /* NativeHotelMapView.swift */; };
 		1FDB9AF4B59A2D6FEFDE3170 /* HotelPreviewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 977A313E5F8E9B3BA2310A69 /* HotelPreviewStore.swift */; };
 		384B7A7562EB8E9477FA568D /* HotelGuideApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB47EAC13372EB080DA6B8B /* HotelGuideApp.swift */; };
+		51BF08A2876C38C9BC97DC1A /* style_extra.data in Resources */ = {isa = PBXBuildFile; fileRef = 84DBD264F397649C16A34AC7 /* style_extra.data */; };
+		5D8FDE4D71E5A76ABECE8DB1 /* libPods-HotelGuide.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5798CD4B443CCDDF75C2D2 /* libPods-HotelGuide.a */; };
 		62C0BBD91B6C5F4E76E67434 /* WebAssets in Resources */ = {isa = PBXBuildFile; fileRef = 68DEDD4894328EC0E5399EF9 /* WebAssets */; };
 		89D1F404E2B2D2D6D8B3C7EB /* NativeHotelPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3E08F61BB35A58E84BFC4D /* NativeHotelPreview.swift */; };
 		89D292A98D8E1ECC65A1A789 /* HotelGuideWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F31DD07525399D5D0532D1 /* HotelGuideWebView.swift */; };
-		A089F413D8E0684C9BB4DB6F /* libPods-HotelGuide.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 74078739F966129EC56BB1EF /* libPods-HotelGuide.a */; };
+		A7EF9F63E6461CEBC9967500 /* style.data in Resources */ = {isa = PBXBuildFile; fileRef = 68D8BF8AA55FD4C9D2D6A5CB /* style.data */; };
 		D6F06398B5105414DF49B121 /* NativeHotelMapStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 108E8931716D0F6D8C896328 /* NativeHotelMapStore.swift */; };
 		E393F86DC712D49A27CC2F52 /* HotelGuideSchemeHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614089A0C6EBFE4A36562C7F /* HotelGuideSchemeHandler.swift */; };
 /* End PBXBuildFile section */
@@ -21,25 +23,27 @@
 /* Begin PBXFileReference section */
 		108E8931716D0F6D8C896328 /* NativeHotelMapStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeHotelMapStore.swift; sourceTree = "<group>"; };
 		24C63EBACC2CF55060092CD0 /* HotelGuide.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = HotelGuide.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		317FDB6699469525563592AE /* Pods-HotelGuide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotelGuide.debug.xcconfig"; path = "Target Support Files/Pods-HotelGuide/Pods-HotelGuide.debug.xcconfig"; sourceTree = "<group>"; };
-		39A34E25EA16BBD2D22D66BA /* Pods-HotelGuide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotelGuide.release.xcconfig"; path = "Target Support Files/Pods-HotelGuide/Pods-HotelGuide.release.xcconfig"; sourceTree = "<group>"; };
+		3A5798CD4B443CCDDF75C2D2 /* libPods-HotelGuide.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HotelGuide.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D29D726EC77FE51C2E0635E /* NativeHotelMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeHotelMapView.swift; sourceTree = "<group>"; };
 		614089A0C6EBFE4A36562C7F /* HotelGuideSchemeHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelGuideSchemeHandler.swift; sourceTree = "<group>"; };
+		68D8BF8AA55FD4C9D2D6A5CB /* style.data */ = {isa = PBXFileReference; path = style.data; sourceTree = "<group>"; };
 		68DEDD4894328EC0E5399EF9 /* WebAssets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = WebAssets; sourceTree = SOURCE_ROOT; };
-		74078739F966129EC56BB1EF /* libPods-HotelGuide.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HotelGuide.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		84DBD264F397649C16A34AC7 /* style_extra.data */ = {isa = PBXFileReference; path = style_extra.data; sourceTree = "<group>"; };
 		8BB47EAC13372EB080DA6B8B /* HotelGuideApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelGuideApp.swift; sourceTree = "<group>"; };
+		955B6235A9169B78045B1045 /* Pods-HotelGuide.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotelGuide.release.xcconfig"; path = "Target Support Files/Pods-HotelGuide/Pods-HotelGuide.release.xcconfig"; sourceTree = "<group>"; };
 		977A313E5F8E9B3BA2310A69 /* HotelPreviewStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelPreviewStore.swift; sourceTree = "<group>"; };
+		A7207AEDBCC5066F1C552D12 /* Pods-HotelGuide.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HotelGuide.debug.xcconfig"; path = "Target Support Files/Pods-HotelGuide/Pods-HotelGuide.debug.xcconfig"; sourceTree = "<group>"; };
 		B9FF40EE939EE0B69607DFBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E2F31DD07525399D5D0532D1 /* HotelGuideWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelGuideWebView.swift; sourceTree = "<group>"; };
 		FE3E08F61BB35A58E84BFC4D /* NativeHotelPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeHotelPreview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		0ACD1F8E8A29349139EEE924 /* Frameworks */ = {
+		38BDC59C45D3CCE79C36B9D1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A089F413D8E0684C9BB4DB6F /* libPods-HotelGuide.a in Frameworks */,
+				5D8FDE4D71E5A76ABECE8DB1 /* libPods-HotelGuide.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,8 +61,27 @@
 				108E8931716D0F6D8C896328 /* NativeHotelMapStore.swift */,
 				4D29D726EC77FE51C2E0635E /* NativeHotelMapView.swift */,
 				FE3E08F61BB35A58E84BFC4D /* NativeHotelPreview.swift */,
+				C0311D515181B1D7899DD5D5 /* MapStyle */,
 			);
 			path = HotelGuide;
+			sourceTree = "<group>";
+		};
+		218B438EEDFDD4216B44D8B7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3A5798CD4B443CCDDF75C2D2 /* libPods-HotelGuide.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30275CA006F0E40F63AE769A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A7207AEDBCC5066F1C552D12 /* Pods-HotelGuide.debug.xcconfig */,
+				955B6235A9169B78045B1045 /* Pods-HotelGuide.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		509DDC2C560875EE46E1378C = {
@@ -67,8 +90,8 @@
 				68DEDD4894328EC0E5399EF9 /* WebAssets */,
 				00BB9848895F0A373CA54BBA /* HotelGuide */,
 				9FD7537DB1FA31809D472BE6 /* Products */,
-				E9D2BE9B7F4B00088F13F315 /* Pods */,
-				DBB7ABB49BF228820A0F1E20 /* Frameworks */,
+				30275CA006F0E40F63AE769A /* Pods */,
+				218B438EEDFDD4216B44D8B7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,22 +103,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DBB7ABB49BF228820A0F1E20 /* Frameworks */ = {
+		C0311D515181B1D7899DD5D5 /* MapStyle */ = {
 			isa = PBXGroup;
 			children = (
-				74078739F966129EC56BB1EF /* libPods-HotelGuide.a */,
+				84DBD264F397649C16A34AC7 /* style_extra.data */,
+				68D8BF8AA55FD4C9D2D6A5CB /* style.data */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E9D2BE9B7F4B00088F13F315 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				317FDB6699469525563592AE /* Pods-HotelGuide.debug.xcconfig */,
-				39A34E25EA16BBD2D22D66BA /* Pods-HotelGuide.release.xcconfig */,
-			);
-			name = Pods;
-			path = Pods;
+			path = MapStyle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,11 +119,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5502FB94A7FDAE5ACB7C185D /* Build configuration list for PBXNativeTarget "HotelGuide" */;
 			buildPhases = (
-				1B6AF2352089B8067446B998 /* [CP] Check Pods Manifest.lock */,
+				84DC8076ABC73379CDC634E8 /* [CP] Check Pods Manifest.lock */,
 				4C48EE5E4E360DA6FB61EF93 /* Sources */,
 				341DBD8F8EBB176CEDFA5CC1 /* Resources */,
-				0ACD1F8E8A29349139EEE924 /* Frameworks */,
-				106BDED21512044BF1E55964 /* [CP] Copy Pods Resources */,
+				38BDC59C45D3CCE79C36B9D1 /* Frameworks */,
+				0C793AE8F026362EFBED096D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -160,13 +174,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				62C0BBD91B6C5F4E76E67434 /* WebAssets in Resources */,
+				A7EF9F63E6461CEBC9967500 /* style.data in Resources */,
+				51BF08A2876C38C9BC97DC1A /* style_extra.data in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		106BDED21512044BF1E55964 /* [CP] Copy Pods Resources */ = {
+		0C793AE8F026362EFBED096D /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -183,7 +199,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HotelGuide/Pods-HotelGuide-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1B6AF2352089B8067446B998 /* [CP] Check Pods Manifest.lock */ = {
+		84DC8076ABC73379CDC634E8 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -284,7 +300,7 @@
 		};
 		739A620D79DFBFF169F7675C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 317FDB6699469525563592AE /* Pods-HotelGuide.debug.xcconfig */;
+			baseConfigurationReference = A7207AEDBCC5066F1C552D12 /* Pods-HotelGuide.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -294,6 +310,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = "";
+				"OTHER_MODULE_VERIFIER_FLAGS[sdk=iphonesimulator*]" = "";
 				PRODUCT_BUNDLE_IDENTIFIER = world.zjz.HotelGuide;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;
@@ -367,7 +385,7 @@
 		};
 		C0D3FCFAAF6D924DEF6CE1E9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 39A34E25EA16BBD2D22D66BA /* Pods-HotelGuide.release.xcconfig */;
+			baseConfigurationReference = 955B6235A9169B78045B1045 /* Pods-HotelGuide.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -377,6 +395,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = "";
+				"OTHER_MODULE_VERIFIER_FLAGS[sdk=iphonesimulator*]" = "";
 				PRODUCT_BUNDLE_IDENTIFIER = world.zjz.HotelGuide;
 				SDKROOT = iphoneos;
 				SUPPORTS_MACCATALYST = NO;

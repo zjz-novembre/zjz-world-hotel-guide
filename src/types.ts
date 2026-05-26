@@ -25,7 +25,8 @@ export type Hotel = {
   cityNameEn: string;
   countryCode: string;
   position?: [number, number];
-  positionSource: "official" | "missing";
+  positionSource: string;
+  positionCoordinateSystem?: "gcj02" | "wgs84";
   positionConfirmed: boolean;
   address?: string;
   addressZh: string;

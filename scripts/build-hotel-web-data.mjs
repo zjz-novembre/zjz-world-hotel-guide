@@ -9,10 +9,12 @@ const rateSnapshotPath = join(outputDir, "hotel-official-rate-window-snapshots.j
 const nameOverridesPath = join(outputDir, "hotel-name-overrides.json");
 const lhwImagesPath = join(outputDir, "lhw-official-images.json");
 const officialMediaPath = join(outputDir, "hotel-official-media.json");
+const officialGeoPath = join(outputDir, "hotel-official-geo-overrides.json");
 
 const hotelSourceFiles = [
   "marriott-china-hong-kong-macau-taiwan-official-hotels.json",
   "hyatt-mainland-china-official-hotels.json",
+  "urcove-hyatt-china-official-hotels.json",
   "ihg-hilton-greater-china-official-hotels.json",
   "luxury-hotel-groups-greater-china-official-hotels.json",
   "accor-china-official-hotels.json",
@@ -477,12 +479,19 @@ const cityProvince = {
 
 const genericProvinceNames = new Set(["CN", "MAINLAND_CN", "中国", "中国大陆", "Greater China", "Mainland China"]);
 const directCityProvinceNames = new Set(["上海", "北京", "天津", "重庆", "香港", "澳门"]);
+const CHINA_MIN_LNG = 72.004;
+const CHINA_MAX_LNG = 137.8347;
+const CHINA_MIN_LAT = 0.8293;
+const CHINA_MAX_LAT = 55.8271;
+const EARTH_AXIS = 6378245.0;
+const ECCENTRICITY = 0.006693421622965943;
 
 const rateSnapshot = JSON.parse(readFileSync(rateSnapshotPath, "utf8"));
 const ratesByKey = new Map((rateSnapshot.rates ?? []).map((row) => [row.hotelKey, row]));
 const nameOverrides = loadNameOverrides();
 const lhwImagesByKey = loadLhwImageRecords();
 const officialMediaByKey = loadOfficialMediaRecords();
+const officialGeoByKey = loadOfficialGeoRecords();
 const sourceHotels = loadSourceHotels();
 const hotels = sourceHotels.map(mapHotel).filter(Boolean).sort(compareHotels);
 assertCompleteHotelNames(hotels);
@@ -557,42 +566,48 @@ function loadOfficialMediaRecords() {
   return new Map(records.map((record) => [record.hotelKey, record]));
 }
 
+function loadOfficialGeoRecords() {
+  if (!existsSync(officialGeoPath)) return new Map();
+  const payload = JSON.parse(readFileSync(officialGeoPath, "utf8"));
+  return new Map(Object.entries(payload.overrides ?? {}));
+}
+
 function mapHotel(hotel) {
   const key = hotelKey(hotel);
+  const geo = officialGeoByKey.get(key);
+  const hydratedHotel = geo && !hasHotelCoordinates(hotel) ? { ...hotel, ...geo } : hotel;
   const nameOverride = nameOverrides.get(key) ?? {};
   const rate = ratesByKey.get(key);
-  const media = buildHotelMedia(hotel, lhwImagesByKey.get(key), officialMediaByKey.get(key));
-  const provinceName = resolveProvinceName(hotel);
+  const media = buildHotelMedia(hydratedHotel, lhwImagesByKey.get(key), officialMediaByKey.get(key));
+  const provinceName = resolveProvinceName(hydratedHotel);
   const provinceCode = provinceCodeByName[provinceName] ?? slugify(provinceName);
-  const cityName = cleanText(hotel.city_zh) || cleanText(hotel.city_en) || provinceName;
+  const cityName = cleanText(hydratedHotel.city_zh) || cleanText(hydratedHotel.city_en) || provinceName;
   const cityCode = cityCodeFor(provinceName, cityName);
-  const longitude = numberOrNull(hotel.longitude);
-  const latitude = numberOrNull(hotel.latitude);
-  const position = Number.isFinite(longitude) && Number.isFinite(latitude) ? [longitude, latitude] : undefined;
-  const chain = normalizeChainName(hotel.chain);
+  const position = amapPositionForHotel(hydratedHotel);
+  const chain = normalizeChainName(hydratedHotel.chain);
   const chainEn = chainLabels[chain]?.en ?? chain;
-  const chainZh = cleanText(hotel.chain_zh) || chainLabels[chain]?.zh || "";
-  const brandZh = cleanText(hotel.brand_zh);
-  const brandEn = cleanText(hotel.brand_en);
+  const chainZh = cleanText(hydratedHotel.chain_zh) || chainLabels[chain]?.zh || "";
+  const brandZh = cleanText(hydratedHotel.brand_zh);
+  const brandEn = cleanText(hydratedHotel.brand_en);
   const brand = brandZh || brandEn || chain;
-  const originalNameZh = cleanText(hotel.name_zh);
-  const originalNameEn = cleanText(hotel.name_en);
+  const originalNameZh = cleanText(hydratedHotel.name_zh);
+  const originalNameEn = cleanText(hydratedHotel.name_en);
   const resolvedNameZh = resolveChineseHotelName({
     brandEn,
     brandZh,
     chain,
     cityName,
-    hotel,
+    hotel: hydratedHotel,
     nameEn: originalNameEn,
     nameOverride,
     originalNameZh,
   });
-  const resolvedNameEn = resolveEnglishHotelName({ hotel, nameOverride, originalNameEn });
+  const resolvedNameEn = resolveEnglishHotelName({ hotel: hydratedHotel, nameOverride, originalNameEn });
   const nameZh = resolvedNameZh.value;
   const nameEn = resolvedNameEn.value;
   const displayName = nameZh || nameEn;
-  const addressZh = cleanText(hotel.address1_zh);
-  const addressEn = cleanText(hotel.address1_en);
+  const addressZh = cleanText(hydratedHotel.address1_zh);
+  const addressEn = cleanText(hydratedHotel.address1_en);
   const taxInclusiveAverageRate = numberOrNull(
     rate?.taxInclusiveAverageRateLocal ?? rate?.windowAverageRateLocal,
   );
@@ -608,7 +623,7 @@ function mapHotel(hotel) {
   return stripUndefined({
     id: key,
     hotelKey: key,
-    spiritCode: hotel.spiritCode,
+    spiritCode: hydratedHotel.spiritCode,
     name: displayName,
     nameZh,
     nameEn,
@@ -619,20 +634,21 @@ function mapHotel(hotel) {
     chainZh,
     chainEn,
     brand,
-    brandValue: brandValueFor(chain, hotel.brandKey, brandZh || brandEn || brand),
+    brandValue: brandValueFor(chain, hydratedHotel.brandKey, brandZh || brandEn || brand),
     brandZh,
     brandEn,
     city: cityCode,
     province: provinceCode,
     provinceName,
     provinceNameZh: provinceName,
-    provinceNameEn: cleanText(hotel.province_en) || provinceEnglishByName[provinceName] || "",
+    provinceNameEn: cleanText(hydratedHotel.province_en) || provinceEnglishByName[provinceName] || "",
     cityName,
-    cityNameZh: cleanText(hotel.city_zh) || cityName,
-    cityNameEn: cleanText(hotel.city_en),
-    countryCode: hotel.countryCode,
+    cityNameZh: cleanText(hydratedHotel.city_zh) || cityName,
+    cityNameEn: cleanText(hydratedHotel.city_en),
+    countryCode: hydratedHotel.countryCode,
     position,
-    positionSource: position ? "official" : "missing",
+    positionSource: position ? cleanText(hydratedHotel.position_source) || "official_gcj02" : "missing",
+    positionCoordinateSystem: position ? outputCoordinateSystemForHotel(hydratedHotel) : undefined,
     positionConfirmed: Boolean(position),
     address: addressZh || addressEn || undefined,
     addressZh,
@@ -669,7 +685,7 @@ function mapHotel(hotel) {
     suiteBathroomName: media.suiteBathroomName,
     suiteBathroomImageUrl: media.suiteBathroomImageUrl,
     suiteBathroomSourceUrl: media.suiteBathroomSourceUrl,
-    sourceUrl: resolveSourceUrl(hotel),
+    sourceUrl: resolveSourceUrl(hydratedHotel),
   });
 }
 
@@ -1004,7 +1020,7 @@ function buildProvinceOptions(hotels) {
       value: provinceCodeByName[name] ?? slugify(name),
       label: name,
       provinceName: name,
-      center: provinceCenters[name] ?? provinceCenters["中国大陆"],
+      center: amapCenterForProvince(name),
       mapZoom: name === "上海" ? 12.45 : 7.4,
       offlineScale: name === "上海" ? 1450 : 420,
       count,
@@ -1039,7 +1055,7 @@ function buildCityOptions(hotels) {
     .map((city) => {
       const center = city.positions.length
         ? averageCoordinate(city.positions)
-        : provinceCenters[city.provinceName] ?? provinceCenters["中国大陆"];
+        : amapCenterForProvince(city.provinceName);
 
       return {
         value: city.value,
@@ -1129,6 +1145,39 @@ function numberOrNull(value) {
   return Number.isFinite(number) ? number : null;
 }
 
+function amapPositionForHotel(hotel) {
+  const longitude = numberOrNull(hotel.longitude);
+  const latitude = numberOrNull(hotel.latitude);
+  if (!Number.isFinite(longitude) || !Number.isFinite(latitude)) return undefined;
+
+  const sourcePosition = [longitude, latitude];
+  const inputSystem = cleanText(hotel.coordinate_system || hotel.positionCoordinateSystem).toLowerCase();
+  if (inputSystem === "gcj02" || inputSystem === "amap_gcj02") return sourcePosition;
+  if (!shouldConvertHotelToGcj02(hotel, longitude, latitude)) return sourcePosition;
+  return wgs84ToGcj02(sourcePosition);
+}
+
+function hasHotelCoordinates(hotel) {
+  return Number.isFinite(numberOrNull(hotel.longitude)) && Number.isFinite(numberOrNull(hotel.latitude));
+}
+
+function outputCoordinateSystemForHotel(hotel) {
+  const countryCode = cleanText(hotel.countryCode);
+  return countryCode === "HK" || countryCode === "MO" || countryCode === "TW" ? "wgs84" : "gcj02";
+}
+
+function shouldConvertHotelToGcj02(hotel, longitude, latitude) {
+  const countryCode = cleanText(hotel.countryCode);
+  if (countryCode === "HK" || countryCode === "MO" || countryCode === "TW") return false;
+  return isInChinaCoordinateBounds(longitude, latitude);
+}
+
+function amapCenterForProvince(name) {
+  const center = provinceCenters[name] ?? provinceCenters["中国大陆"];
+  if (name === "香港" || name === "澳门" || name === "台湾") return center;
+  return wgs84ToGcj02(center);
+}
+
 function cityCodeFor(provinceName, cityName) {
   const provinceCode = provinceCodeByName[provinceName] ?? slugify(provinceName);
   if (directCityProvinceNames.has(provinceName)) return provinceCode;
@@ -1154,6 +1203,63 @@ function averageCoordinate(positions) {
   );
 
   return [lngSum / positions.length, latSum / positions.length];
+}
+
+function wgs84ToGcj02(position) {
+  const [longitude, latitude] = position;
+
+  if (!isInChinaCoordinateBounds(longitude, latitude)) {
+    return position;
+  }
+
+  let dLat = transformLatitude(longitude - 105.0, latitude - 35.0);
+  let dLng = transformLongitude(longitude - 105.0, latitude - 35.0);
+  const radLat = (latitude / 180.0) * Math.PI;
+  let magic = Math.sin(radLat);
+  magic = 1 - ECCENTRICITY * magic * magic;
+  const sqrtMagic = Math.sqrt(magic);
+
+  dLat = (dLat * 180.0) / (((EARTH_AXIS * (1 - ECCENTRICITY)) / (magic * sqrtMagic)) * Math.PI);
+  dLng = (dLng * 180.0) / ((EARTH_AXIS / sqrtMagic) * Math.cos(radLat) * Math.PI);
+
+  return [longitude + dLng, latitude + dLat];
+}
+
+function isInChinaCoordinateBounds(longitude, latitude) {
+  return !(
+    longitude < CHINA_MIN_LNG ||
+    longitude > CHINA_MAX_LNG ||
+    latitude < CHINA_MIN_LAT ||
+    latitude > CHINA_MAX_LAT
+  );
+}
+
+function transformLatitude(x, y) {
+  let result =
+    -100.0 +
+    2.0 * x +
+    3.0 * y +
+    0.2 * y * y +
+    0.1 * x * y +
+    0.2 * Math.sqrt(Math.abs(x));
+  result += ((20.0 * Math.sin(6.0 * x * Math.PI) + 20.0 * Math.sin(2.0 * x * Math.PI)) * 2.0) / 3.0;
+  result += ((20.0 * Math.sin(y * Math.PI) + 40.0 * Math.sin((y / 3.0) * Math.PI)) * 2.0) / 3.0;
+  result += ((160.0 * Math.sin((y / 12.0) * Math.PI) + 320 * Math.sin((y * Math.PI) / 30.0)) * 2.0) / 3.0;
+  return result;
+}
+
+function transformLongitude(x, y) {
+  let result =
+    300.0 +
+    x +
+    2.0 * y +
+    0.1 * x * x +
+    0.1 * x * y +
+    0.1 * Math.sqrt(Math.abs(x));
+  result += ((20.0 * Math.sin(6.0 * x * Math.PI) + 20.0 * Math.sin(2.0 * x * Math.PI)) * 2.0) / 3.0;
+  result += ((20.0 * Math.sin(x * Math.PI) + 40.0 * Math.sin((x / 3.0) * Math.PI)) * 2.0) / 3.0;
+  result += ((150.0 * Math.sin((x / 12.0) * Math.PI) + 300.0 * Math.sin((x / 30.0) * Math.PI)) * 2.0) / 3.0;
+  return result;
 }
 
 function cleanText(value) {

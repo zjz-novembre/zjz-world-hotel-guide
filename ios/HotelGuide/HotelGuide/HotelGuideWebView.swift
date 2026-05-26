@@ -18,11 +18,17 @@ struct HotelGuideWebView: UIViewRepresentable {
         let userContentController = WKUserContentController()
         userContentController.add(context.coordinator, name: "hotelMap")
         userContentController.add(context.coordinator, name: "hotelPreview")
+        let nativeMapEnabled: String
+        #if targetEnvironment(simulator)
+        nativeMapEnabled = "false"
+        #else
+        nativeMapEnabled = "true"
+        #endif
         userContentController.addUserScript(
             WKUserScript(
                 source: """
                 window.__HOTEL_GUIDE_NATIVE_PREVIEW__ = true;
-                window.__HOTEL_GUIDE_NATIVE_MAP__ = true;
+                window.__HOTEL_GUIDE_NATIVE_MAP__ = \(nativeMapEnabled);
                 """,
                 injectionTime: .atDocumentStart,
                 forMainFrameOnly: true
