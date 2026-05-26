@@ -73,8 +73,16 @@ const hotelGroupLogoFileByChain: Record<string, string> = {
   Accor: "accor.svg",
   "Four Seasons": "four-seasons.svg",
   Hilton: "hilton.svg",
+  Hyatt: "hyatt-3.png",
   "IHG Hotels & Resorts": "ihg-2.svg",
+  Marriott: "marriott-2.png",
   "The Leading Hotels of the World": "lhw.svg",
+};
+
+const hotelGroupMarkerClassByChain: Record<string, string> = {
+  Hilton: "hotel-marker-group--hilton",
+  "IHG Hotels & Resorts": "hotel-marker-group--ihg",
+  "The Leading Hotels of the World": "hotel-marker-group--lhw",
 };
 
 const IHG_CHAIN_NAME = "IHG Hotels & Resorts";
@@ -709,6 +717,8 @@ function createHotelMarkerContent(hotel: Hotel, onClick: () => void) {
   const logoSrc = getHotelGroupLogoSrc(hotel.chain);
   const marker = document.createElement("div");
   marker.className = logoSrc ? "hotel-map-marker hotel-map-marker--has-logo" : "hotel-map-marker";
+  const groupMarkerClass = getHotelGroupMarkerClass(hotel.chain);
+  if (groupMarkerClass) marker.classList.add(groupMarkerClass);
   marker.classList.toggle("hotel-map-marker--ihg", hotel.chain === IHG_CHAIN_NAME);
   marker.dataset.hotelId = hotel.id;
   marker.role = "button";
@@ -749,6 +759,10 @@ function createHotelMarkerContent(hotel: Hotel, onClick: () => void) {
 function getHotelGroupLogoSrc(chain: string) {
   const fileName = hotelGroupLogoFileByChain[chain];
   return fileName ? `${import.meta.env.BASE_URL}logos/hotel-groups/${fileName}` : null;
+}
+
+function getHotelGroupMarkerClass(chain: string) {
+  return hotelGroupMarkerClassByChain[chain] ?? "";
 }
 
 function normalizeHeading(heading: number | null) {
@@ -806,6 +820,7 @@ function OfflineHotelMap({
             hotel.id === selectedId ? "offline-hotel-map__marker--active" : "",
             logoSrc ? "offline-hotel-map__marker--has-logo" : "",
             hotel.chain === IHG_CHAIN_NAME ? "offline-hotel-map__marker--ihg" : "",
+            getHotelGroupMarkerClass(hotel.chain),
           ]
             .filter(Boolean)
             .join(" ");

@@ -385,8 +385,8 @@ private struct NativeHotelPinBadge: View {
                 Image(uiImage: logo)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: pinSize * 0.64, height: pinSize * 0.64)
-                    .offset(x: hotel.chain == "IHG Hotels & Resorts" ? pinSize * 0.07 : 0)
+                    .frame(width: pinSize * logoScale, height: pinSize * logoScale)
+                    .offset(x: pinSize * logoOffsetX)
             } else {
                 Circle()
                     .fill(Color.white)
@@ -395,6 +395,21 @@ private struct NativeHotelPinBadge: View {
         }
         .scaleEffect(selected ? 1.08 : 1, anchor: .bottom)
         .accessibilityLabel(hotel.displayName)
+    }
+
+    private var logoScale: CGFloat {
+        switch hotel.chain {
+        case "The Leading Hotels of the World":
+            return 0.82
+        case "Hilton":
+            return 0.72
+        default:
+            return 0.64
+        }
+    }
+
+    private var logoOffsetX: CGFloat {
+        hotel.chain == "IHG Hotels & Resorts" ? 0.035 : 0
     }
 }
 

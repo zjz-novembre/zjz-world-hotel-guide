@@ -76,6 +76,8 @@
 }
 
 .hotel-map-marker {
+  --hotel-logo-offset-x: 0rem;
+  --hotel-logo-scale: 1;
   align-items: center;
   cursor: pointer;
   display: inline-flex;
@@ -127,18 +129,26 @@
 
 .hotel-map-marker__logo {
   display: block;
-  height: var(--size-hotel-pin-logo);
+  height: calc(var(--size-hotel-pin-logo) * var(--hotel-logo-scale));
   left: 50%;
-  max-width: var(--size-hotel-pin-logo);
+  max-width: calc(var(--size-hotel-pin-logo) * var(--hotel-logo-scale));
   object-fit: contain;
   position: absolute;
   top: 50%;
-  transform: translate(-50%, -50%);
-  width: var(--size-hotel-pin-logo);
+  transform: translate(calc(-50% + var(--hotel-logo-offset-x)), -50%);
+  width: calc(var(--size-hotel-pin-logo) * var(--hotel-logo-scale));
 }
 
-.hotel-map-marker--ihg .hotel-map-marker__logo {
-  transform: translate(calc(-50% + 0.08rem), -50%);
+.hotel-marker-group--ihg {
+  --hotel-logo-offset-x: 0.04rem;
+}
+
+.hotel-marker-group--lhw {
+  --hotel-logo-scale: 1.2;
+}
+
+.hotel-marker-group--hilton {
+  --hotel-logo-scale: 1.1;
 }
 
 .hotel-map-marker__tag {
@@ -519,6 +529,8 @@
 }
 
 .offline-hotel-map__marker {
+  --hotel-logo-offset-x: 0rem;
+  --hotel-logo-scale: 1;
   appearance: none;
   background: transparent;
   border: 0;
@@ -575,18 +587,14 @@
 
 .offline-hotel-map__logo {
   display: block;
-  height: var(--size-hotel-pin-logo);
+  height: calc(var(--size-hotel-pin-logo) * var(--hotel-logo-scale));
   left: 50%;
-  max-width: var(--size-hotel-pin-logo);
+  max-width: calc(var(--size-hotel-pin-logo) * var(--hotel-logo-scale));
   object-fit: contain;
   position: absolute;
   top: 50%;
-  transform: translate(-50%, -50%);
-  width: var(--size-hotel-pin-logo);
-}
-
-.offline-hotel-map__marker--ihg .offline-hotel-map__logo {
-  transform: translate(calc(-50% + 0.08rem), -50%);
+  transform: translate(calc(-50% + var(--hotel-logo-offset-x)), -50%);
+  width: calc(var(--size-hotel-pin-logo) * var(--hotel-logo-scale));
 }
 
 .offline-hotel-map__label {
