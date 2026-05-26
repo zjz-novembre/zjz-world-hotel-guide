@@ -32,7 +32,7 @@ const hotelGroupLogoFileByChain: Record<string, string> = {
   Accor: "accor.svg",
   "Four Seasons": "four-seasons.svg",
   Hilton: "hilton.svg",
-  "IHG Hotels & Resorts": "ihg.svg",
+  "IHG Hotels & Resorts": "ihg-2.svg",
   "The Leading Hotels of the World": "lhw.svg",
 };
 
